@@ -1,0 +1,503 @@
+** TOP MENU HORIZONTAL CSS  ** 
+nav > button {
+    color: rgb(216, 233, 255);
+    background-color: rgba(32, 32, 32, 0.096);
+    font-size: 1.5rem;
+    padding: 0 10%;
+    height: 100%;
+    border: none;
+    
+}
+
+.plus {
+    /* position: absolute; */
+    background-color: hsl(180, 100%, 16%);
+    color: #ccc;
+    display: flex;
+    display: flex;
+    overflow: hidden;
+    transition: 500ms;
+    z-index: 2;
+    font-size: 1rem;
+    width: 100%;
+    column-gap: 3%;
+    justify-content: center;
+    align-items: center;
+    height: 3rem;
+}
+
+.plus > section {
+
+display: flex;
+column-gap: 2%;
+flex-grow: 1;
+align-items: center;
+justify-content: center;
+}
+.plus section.dates {
+    /* justify-content: space-evenly; */
+}
+.plus section.dates span  {
+padding: 0 .25rem;
+}
+
+.plus section.dates span:first-of-type  {
+    font-weight: 600;
+    }
+
+.close {
+    height: 0;
+}
+.ig>input[type=number] {
+    border: none;
+    height: 1.5rem;
+    text-align: center;
+    font-size: 1.25rem;
+    border-radius: 5px;
+    width: 20%;
+
+}
+
+.iu  {
+    font-size: 1.5rem;
+    width: 5rem;
+    overflow: hidden;
+}
+
+
+input:checked+label {
+    color: rgb(155, 255, 255);
+}
+
+** TOP MENU HORIZONTAL CSS  ** END
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const addDay = (gunSayisi) => {
+//   let dd =   new Date(Date.now() + 86400000 * gunSayisi)
+//   return dd.getDate() + " " + ["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık"][dd.getMonth()] 
+// };
+
+
+
+const showVacDates = (e) => {
+
+    let [d1, d2, d3, d41, d42] = [addDay(0), addDay(3), addDay(7), addDay(14), addDay(28),]
+    e.target.remove()
+    let code = `
+    <div>
+        <span> ${ "1.Doz :" + d1}</span>
+        <span> ${ "2.Doz :" + d2}</span>
+        <span> ${ "3.Doz :" + d3}</span>
+        <span> ${ "4.Doz :" + d41 + " - " + d42}</span>
+
+
+    </div>`
+
+    pg.btnCont.insertAdjacentHTML("afterbegin",code)
+}
+
+
+const arraysMatch = (arr1, arr2) => {
+    for (let i = 0; i < arr1.length; i++) { if (arr1[i] !== arr2[i]) { return false } }
+    return true
+}
+
+
+
+
+const findArray = (vipArr, ...arrs) => {
+    for (let i = 0; i < arrs.length; i++) {
+        let arr = arrs[i]
+        let isMatch = arraysMatch(vipArr, arr)
+        if (isMatch) { return i }
+    }
+    return -1
+}
+
+// pkkt : Provoke Kanamasız Kedi Tırmalaması
+// kepek: KEdi veya köPEK
+
+// kedi veya köpek tarafından yaralanma haricinde bir olay mı?
+// kedikopek +/- ?
+
+// ozelDurum: bas-boyun yarası mı, imm. yet. var mı, aşılı(bağışıklı) insan mı, pkkt mi, standart mi ?
+// bas yetmez bagisik pkkt standart ?
+
+// hafifYara bir yara mı(kat. 2)?
+// hafifYara +/- ?
+
+// gözlem imkanı var mı?
+// imkan +/- ?
+
+// hayvan son 1 sene içinde kuduz aşısı olmuş mu?
+//  hayvanAsi +/- ?
+
+// gözlem sorunsuz mu gidiyor?
+// sorunsuz +/- ?
+
+// ilk aşı yapılalı yedi günden az mı oldu
+// yedidenAz +/- ?
+
+
+// sonuçlar: asi-noasi, ig-noig, gozlem-nogozlem, asi2doz,asivegozlem, hicbirsey
+
+
+// let [isPet, rare, isSmall, canwatch, isPetVac, petgood, isLt7,] = [null];
+// let ozelDurumlar = ["bas", "yetmez", "bagisik", "tirmik"];
+
+/* <section class="cont">
+            <p class="title">Lorem Ipsum</p>
+            <p class="par">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit vitae necessitatibus?</p>
+            <div class="choiceCont"> */
+
+/*         isPet: null,
+rare: null,
+isSmall: null,
+canwatch: null,
+isPetVac: null,
+petgood: null,
+isLt7: null, */
+
+const page = {
+    cont: document.querySelector("section.cont"),
+    title: document.querySelector("p.title"),
+    par: document.querySelector("p.par"),
+    choiceCont: document.querySelector("div.choiceCont"),
+}
+
+class Choice {
+    static instances = []
+    constructor(choiceID, choiceNum, choiceValue, choiceLabel) {
+        this.id = choiceID
+        this.num = choiceNum
+        this.value = choiceValue
+        this.label = choiceLabel
+        this.selected = false
+        Choice.instances.push(this)
+    }
+    select() {
+        this.selected = true
+    }
+}
+
+class Step {
+    static str = {
+        isPet: { title: "Temas Türü", par: "Kedi veya Köpek yarası mı?", },
+        rare: { title: "Özel Durum", par: "Nadir durumlardan hangisi var?", },
+        isSmall: { title: "Yara Tanımı", par: "Yara hangi tarife uyuyor?", },
+        canwatch: { title: "Gözlem İmkanı", par: "Kedi/Köpek'i gözlem altında tutma imkanı var mı?", },
+        isPetVac: { title: "Kedi/Köpek Aşı", par: "Kedi/Köpek'in son bir yıl içinde kuduz aşısı var mı?", },
+        isPetOk: { title: "Gözlem Sonucu", par: "Gözlem sürecinde sorunla karşılaşılmadı?", },
+        isLt7: { title: "Yedi Gün", par: "İlk aşıdan itibaren 7 gün geçti mi?", },
+    }
+
+    static curState = {
+
+    }
+    static instances = []
+
+
+    constructor(stepID, stepNum) {
+        this.id = stepID
+        this.num = stepNum
+        this.title = Step.str[this.id].title
+        this.par = Step.str[this.id].par
+        this.sets = {}
+        this.choices = [ /* {id:xxx, num: nnn ,value:zzz label: yyy,} */]
+        this.selectedChoice = null
+        Step.instances.push(this)
+    }
+    setChoice(newChoice) {
+        this.selectedChoice = newChoice
+        Step.curState[this.id] = this.selectedChoice.value
+        newChoice.select()
+    }
+    determ() {
+        // Step.curState
+        // if this do that
+        // Object.values(Step.curState)
+
+        someArrays.forEach((arr) => {
+            arraysMatch(mainArr, arr)
+        })
+
+    }
+}
+
+const isPet = new Step("isPet", 10)
+isPet.choices.push(
+    new Choice("ispetT", 1, true, "Evet"),
+    new Choice("ispetF", 2, false, "Hayır"),
+)
+
+const rare = new Step("rare", 11)
+rare.choices.push(
+    new Choice("rareEnt", 1, "ig", "Baş-boyun Yarası"),
+    new Choice("rareImdef", 2, "ig", "İmmün Yetmezlik"),
+    new Choice("ptVac", 3, "d2", "Daha önce aşılanmış"),
+    new Choice("rareF", 4, "none", "Hiçbiri"),
+)
+
+const isSmall = new Step("isSmall", 12)
+isSmall.choices.push(
+    new Choice("isSmallT1", 1, true, "Çıplak derinin hafifçe sıyrılması (deri altına geçmeyen yaralanmalar)"),
+    new Choice("isSmallT2", 2, true, "Kanama olmadan küçük tırmalama veya zedeleme"),
+    new Choice("isSmallF1", 3, false, "Deriyi zedeleyen tek veya çok sayıda ısırma ve tırmalamalar"),
+    new Choice("isSmallF2", 4, false, "Mukozaların, açık cilt yaralarının hayvanın salyası ile temas etmesi"),
+    new Choice("isSmallF3", 5, false, "Lezyonun kafa, boyun, parmak uçları gibi sinir uçlarının yoğun olduğu bölgelerde olması"),
+)
+
+const canwatch = new Step("canwatch", 13)
+canwatch.choices.push(
+    new Choice("canwatchT", 1, true, "Gözlem yapılacak"),
+    new Choice("canwatchF", 2, false, "Gözlem yapılamayacak")
+)
+
+const isPetVac = new Step("isPetVac", 14)
+isPetVac.choices.push(
+    new Choice("petVacT", 1, true, "1 yıl içinde aşısı var"),
+    new Choice("petVacF", 2, false, "1 yıl içinde aşısı yok"),
+)
+
+const isPetOk = new Step("isPetOk", 15)
+isPetOk.choices.push(
+    new Choice("petokT", 1, true, "Kedi/Köpek'in sağlıklı olduğu 10 gün gözlendi."),
+    new Choice("petokF", 2, false, "Kedi/Köpek kaçtı, kayboldu, hastalandı, öldü..."),
+)
+
+const isLt7 = new Step("isLt7", 16)
+isLt7.choices.push(
+    new Choice("lt7T", 1, true, "7 günden az süre geçti."),
+    new Choice("lt7T", 2, false, "7 günden fazla süre geçti."),
+)
+
+
+
+
+
+const getStep = (stepNumORstepID) => {
+    let instances = Step.instances
+    let numRes = instances.filter((instance) => instance.num == stepNumORstepID)
+    if (numRes) {
+        if (numRes.length > 1) { console.warn("Multiple res for num>> " + numRes) }
+        return numRes[0]
+    }
+    let idRes = instances.filter((instance) => instance.id == stepNumORstepID)
+    if (idRes) {
+        if (idRes.length > 1) { console.warn("Multiple res for num>> " + idRes) }
+        return idRes[0]
+    }
+    console.warn("No result for>> " + stepNumORstepID)
+}
+
+
+
+
+
+
+const formPage = (numOrID) => {
+
+    let step = getStep(numOrID)
+    console.log(step);
+    page.title.innerText = step.title
+    page.par.innerText = step.par
+
+    step.choices.forEach((choice) => {
+        let btn = document.createElement("button")
+        btn.innerText = choice.label
+        btn.addEventListener("click", (e) => {
+            step.setChoice(choice)
+            // choice.select()
+            console.log('step :>> ', step);
+            console.log('Step.state :>> ', Step.curState);
+        })
+        page.choiceCont.append(btn)
+    })
+}
+
+formPage(10)
+
+
+
+
+const steps = [
+    {
+        id: "ispet",
+        num: 10,
+        sets: {},
+        title: "Temas Türü",
+        text: "Kedi veya Köpek yarası mı?",
+        choices: {
+            isPetT: {},
+            isPetF: {}
+        },
+    },
+    {
+        id: "rare",
+        num: 11,
+        sets: {},
+        title: "Nadir Durum",
+        text: "Nadir durumlardan hangisi var?",
+        choices: {
+            rareF: {},
+            comp: {},
+            ent: {},
+            vacb4: {},
+            catscr: {},
+        },
+    },
+    {
+        id: "unimp",
+        num: 12,
+        title: "Yara Tarifi",
+        sets: {},
+        text: "Yara hangi tarife uyuyor??",
+        choices: {
+            ctg2_1: {},
+            ctg2_2: {},
+            ctg3_1: {},
+            ctg3_2: {},
+            ctg3_3: {},
+        },
+    },
+    {
+        id: "canwatch",
+        num: 13,
+        title: "Gözlem İmkanı",
+        sets: {},
+        text: "Kedi/Köpek'i gözlem altında tutma imkanı var mı?",
+        choices: {
+            canwatchT: {},
+            canwatchF: {},
+        },
+    },
+    {
+        id: petvac,
+        num: 14,
+        title: "Kedi/Köpek Aşı",
+        sets: {},
+        text: "Kedi/Köpek'in son bir yıl içinde kuduz aşısı var mı?",
+        choices: {
+            petvacT: {},
+            petvacF: {},
+        },
+    },
+
+]
+
+
+
+
+
+
+
+durum: kedi, kopek, diger
+diger: riskli, risksiz, bilinmez
+ozelDurum: insanAsili, bas, immun
+
+if diger+ >> diger
+    else if kedi
+if kedi
+    if kücük+ >> null
+    else (kucuk-) >> yara...
+else kopek >> yara..    
+yara
+    if hafif+>> asi...
+    else (hafif-)
+    if hayvanAsi+>> gozlem, if sorunsuz->> asi, if <7+ Ig else null
+                            else (sorunsuz+) null
+    else (hayvanAsi-)
+        aşı
+        if gozlem+>> if sorunsuz+>> null
+                    else (sorunsuz-) >> if seven >> Ig, else(seven-) >> null
+        else(gozlem-) >> Ig
+
+
+
+        
+function kdz() {
+
+    kedikopek = confirm("kedikopek ?");
+    if (!kedikopek) {
+        alert("developing");
+    } else {
+        ozelDurum = prompt(ozelDurumlar.join(", ") + "?");
+        if (ozelDurum == "bas" || ozelDurum == "yetmez") {
+            // exit2
+            alert("asi,ig");
+        } else if (ozelDurum == "bagisik") {
+            // exit3
+            alert("asi2doz");
+        } else if (ozelDurum == "tirmik") {
+            // exit4
+            alert("hicbirsey");
+        } else {
+            hafifYara = prompt("hafifYara?");
+            if (hafifYara) {
+                imkan = prompt("gözlem imkanı?");
+                if (imkan) {
+                    alert("gozlem");
+                    sorunsuz = prompt("sorunsuz?");
+                    if (sorunsuz) {
+                        // exit4
+                        alert("noasi,noig");
+                    } else {
+                        // exit5
+                        alert("asi,noig");
+                    }
+                } else {
+                    // exit6
+                    alert("asi,noig");
+                }
+            } else {
+                hayvanAsi = prompt("hayvanAsi?");
+                if (hayvanAsi) {
+                    imkan = true; // öyle varsayılıyor
+                    alert("noasi,noig,gozlem");
+                    sorunsuz == confirm("sorunsuz?");
+                    if (sorunsuz) {
+                        // exit7
+                        alert("hicbirsey");
+                    } else {
+                        // exit8
+                        alert("asi,ig");
+                    }
+                } else {
+                    imkan = confirm("imkan?");
+                    if (imkan) {
+                        alert("asi,gozlem");
+                        sorunsuz = confirm("sorunsuz?");
+                        if (sorunsuz) {
+                            // exit9
+                            alert("hicbirsey");
+                        } else {
+                            yedidenAz = prompt("yedidenAz?");
+                            if (yedidenAz) {
+                                // exit10
+                                alert("ig");
+                            } else {
+                                // exit11
+                                alert("hicbirsey");
+                            }
+                        }
+                    } else {
+                        // exit12
+                        alert("asi,ig");
+                    }
+
+                }
+            }
+        }
+    }
+}
