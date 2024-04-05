@@ -1,3 +1,57 @@
+** TOP MENU 2 COLUMNS **
+.plus {
+display: flex;
+justify-content: space-around;
+height: 40%;
+background-color: teal;
+}
+
+.plus > section {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.plus .dates {
+    justify-content: space-evenly;
+}
+.plus .ig {
+    justify-content: space-evenly;
+}
+
+.plus > section div {
+    display: flex;
+    flex-direction: column;
+}
+
+.plus input[type = number] {
+    width: 60%;
+    height: 12%;
+    margin: 0 auto;
+    border-radius: 0.5rem;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1rem;
+
+}
+.plus .iu {
+    font-size: 1.1rem;
+}
+
+/* .plus > .dates > div {
+    margin: 1vh 0;
+    
+}
+.plus > .ig > div{
+    margin: 1vh 0;
+
+} */
+
+
+section.dates {
+}
+
+
 ** TOP MENU HORIZONTAL CSS  ** 
 nav > button {
     color: rgb(216, 233, 255);

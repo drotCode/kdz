@@ -8,76 +8,104 @@
     <title>Kuduz Profilaksi Algoritma</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 48
+        }
+    </style>
 </head>
 
 <body>
 
     <nav>
-        <!-- ◄↕‼¶§▬↨↑↓→←∟↔▲ -->
-        <button class="plusBtn b1">▼</button>
-        <button class="plusBtn b2">▼</button>
-        <button class="plusBtn b3">▼</button>
-        <button class="plusBtn b4">▼</button>
-        <!-- <button class="plusBtn b5">▼</button>
-        <button class="plusBtn b6">▼</button> -->
-        <!-- <button class="btnA">▬</button> -->
+
+        <button class="leftBar plusBtn b1">
+            <span class="material-symbols-outlined">menu</span>
+        </button>
+        <button class="plusBtn b3">
+            <span class="material-symbols-outlined">info</span>
+        </button>
+        <button class="dates b4">
+            <span class="material-symbols-outlined">help</span>
+        </button>
+        <button class="igCalc">
+            <span class="material-symbols-outlined">calendar_month</span>
+        </button>
     </nav>
 
-
-    <article class="plus close">
-
-        <section class="dates">
-
-            <div class="doseDate"><span>1.Doz</span><span class="dose d1">00.00</span></div>
-            <div class="doseDate"><span>2.Doz</span><span class="dose d2">00.00</span></div>
-            <div class="doseDate"><span>3.Doz</span><span class="dose d3">00.00</span></div>
-            <div class="doseDate"><span>4.Doz</span><span class="dose d4">00.00</span></div>
-
-        </section>
+    <main>
 
 
+        <article class="slide">
 
-        <section class="ig">
+            <!-- ----- ---------- ----------* DATES *---------- ---------- ----- -->
+            <section class="dates">
 
-            <div class="labRa">
-                <input id="human" type="radio" name="ig">
-                <label for="human">İnsan Kaynaklı</label>
-            </div>
+                <div class="doseDate"><span>1.Doz</span><span class="dose d1">00.00</span></div>
+                <div class="doseDate"><span>2.Doz</span><span class="dose d2">00.00</span></div>
+                <div class="doseDate"><span>3.Doz</span><span class="dose d3">00.00</span></div>
+                <div class="doseDate"><span>4.Doz</span><span class="dose d4">00.00</span></div>
 
-
-            <div class="labRa">
-                <input id="horse" type="radio" name="ig" checked>
-                <label for="horse">At Kaynaklı</label>
-            </div>
+            </section>
 
 
-            <input type="number" name="kg" id="kg" max="200" min ="0" step="5">
-            <span class="iu">0</span><span class=""> IU</span>
+            <!-- ----- ---------- ----------* IG *---------- ---------- ----- -->
+            <section class="ig ">
 
-        </section>
+                <h3>Kuduz Ig Hesap</h3>
+
+                <div>
+
+                    <input name="kg" id="kg" type="number" max="200" min="0" step="5" placeholder="kg">
+                    <input class="iu" type="number" readonly title="test" placeholder="IU">
+
+                </div>
+
+                <div>
+
+                    <label for="human">
+                        <input id="horse" type="radio" name="ig" checked>
+                        İnsan Kaynaklı
+                    </label>
+
+                    <label for="horse">
+                        <input id="horse" type="radio" name="ig" checked>
+                        At Kaynaklı
+                    </label>
+
+                </div>
+
+            </section>
 
         </article>
 
 
 
-    <main>
 
-
-        <section class="cont algo">
+        <!-- ----- ---------- ----------* ALGO *---------- ---------- ----- -->
+        <article class="algo cont">
             <p class="title">Lorem Ipsum</p>
             <p class="par">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit vitae necessitatibus?</p>
             <div class="btnCont col">
                 <button>Button</button>
             </div>
-        </section>
+        </article>
 
 
 
     </main>
 
 
+    <footer>
 
-    <footer></footer>
+
+    </footer>
 
 </body>
 
