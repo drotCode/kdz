@@ -46,10 +46,92 @@ igFunc()
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 
 
+/* ---------- ----------> ANIMATIONS <---------- ---------- */
+
+/* ----- ---------- ----------* hide with anim */
+
+let hideAtStart = () => {
+    document.querySelectorAll(".hideWanim").forEach((el) => {
+        el.animate([{ display: "none" }], { fill: "forwards" })
+    })
+}
+
+
+
+let getAnim = (tar, fr, tm) => new Animation(new KeyframeEffect(tar, fr, tm))
+
+/* ---------- ----------> Slider */
+let sliderKf = [[{ height: "3rem" }, { height: 0 }], { duration: 500, fill: "both", easing: "ease" }]
+
+const ig = {
+    button: document.querySelector("button.ig"),
+    pop: document.querySelector("section.ig"),
+    anim: null,
+    init() {
+        this.anim = getAnim(this.pop,
+            [{ height: "30vh" }, { height: 0 }], { duration: 100, fill: "both", easing: "ease" })
+
+        ig.button.addEventListener("click", (e) => {
+            algo.audio.play()
+            this.anim.play(); this.anim.reverse()
+        })
+    }
+}
+ig.init()
+
+
+const dates = {
+    button: document.querySelector("button.dates"),
+    pop: document.querySelector("section.dates"),
+    anim: null,
+    init() {
+        this.anim = getAnim(this.pop,
+            [{ height: "28vh" }, { height: 0 }], { duration: 100, fill: "both", easing: "ease" })
+
+        dates.button.addEventListener("click", (e) => {
+            algo.audio.play()
+            this.anim.play(); this.anim.reverse()
+        })
+    }
+}
+dates.init()
+
+
+const info = {
+    button: document.querySelector("button.info"),
+    pop: document.querySelector("section.info"),
+    anim: null,
+    init() {
+        this.anim =  getAnim(this.pop,
+            [{ height: "72vh" }, { height: 0 }], { duration: 100, fill: "both", easing: "ease" })
+        
+        this.button.addEventListener("click", (e) => {
+            algo.audio.play()
+            this.anim.play(); this.anim.reverse()
+        })
+    }
+}
+info.init()
+
+
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 /* ---------- ----------> PAGE GENERATOR <---------- ---------- */
 
-
+// let mainAnim =  getAnim(document.querySelector("main"),
+//     [
+//         { offset: "3%", translate:"100%" },
+//         { offset: "5%", translate:"100%" },
+//         { offset: "95%", translate:"100%" },
+//         { offset: "95.001%", translate:"-100%" },
+//         { offset: "100%", translate:"" },
+//     ], { duration: 1500, fill: "both", easing: "ease" })
+let mainAnim =  getAnim(document.querySelector("main"),
+    [
+        { offset: "0%", filter: "blur(10px)" },
+        { offset: "2%", height:"0%", filter: "blur(10px)", },
+        { offset: "95%", height:"0%" },
+        { offset: "100%", height:"" },
+    ], { duration: 2000, fill: "both", easing: "ease" })
 
 
 /* pack: [val,func, ...labels]
@@ -78,6 +160,7 @@ const adjust = {
     },
     s0: {
         extras(e) {
+            mainAnim.play()
             algo.audio.play()
             logger.log(e)
         }
@@ -163,7 +246,7 @@ const noVacDead = genFx(["7 Gün?", "İlk aşıdan itibaren 7 gün geçti mi?", 
 
 const noVacAlive = genFx(["Bitti", text.nothing,])
 
-const noVacCanWatch = genFx(["Aşı + Gözlem", "Aşılamaya başla ve Kedi/Köpek'i gözlem altında tut", [
+const noVacCanWatch = genFx(["Aşı + Gözlem", "Aşılamaya başla ve kedi/köpek'i gözlem altında tut", [
     ["good", noVacAlive, "Kedi/Köpek gözlem altında ve sağlıklı veya gözlem tamamlandı",],
     ["bad", noVacDead, "Gözlemde Sorun Mevcut",],
     respck]])
@@ -178,12 +261,12 @@ const vacDead = genFx(["Aşı + Ig", "Aşılamaya başla ve Ig uygula",])
 
 const vacAlive = genFx(["Bitti", text.nothing,])
 
-const vac = genFx(["Gözlem", "Kedi/Köpek'i 10 gün gözlem altında tut. Aşı veye Ig yapma.",
+const vac = genFx(["Gözlem", "Kedi/Köpek'i 10 gün gözlem altında tut. Aşı veya Ig yapma",
     [["good", vacAlive, "Kedi/Köpek gözlem altında ve sağlıklı veya gözlem tamamlandı",],
     ["bad", vacDead, "Gözlemde Sorun Mevcut",]]])
 /* ---------- ----------> VAC <---------- ---------- */
 
-const woundBad = genFx(["Hayvan Aşı", "Kedi/Köpek'in 1 sene içinde Kuduz Aşısı var?", [
+const woundBad = genFx(["Hayvan Aşı", "Kedi/Köpek'in 1 sene içinde Kuduz Aşısı var mı?", [
     ["good", vac, "Kuduz Aşısı var",],
     ["bad", noVac, "Kuduz Aşısı yok",]]])
 /* ---------- ----------> WOUND BAD <---------- ---------- */
@@ -258,7 +341,7 @@ const otherExposure = genFx(["Diğer Temaslar", "Temas Türünü Seçiniz", [
 
 
 
-const exposure = genFx(["Temas Türü", "Temas Türü Seç", [
+const exposure = genFx(["Temas Türü", "Temas Türü Seçiniz", [
     ["catDogWound", isSpecial, "Kedi/Köpek Yaralanması"],
     ["other", otherExposure, "Başka bir temas"],
 ]])
@@ -270,72 +353,7 @@ exposure()
 
 
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
-/* ---------- ----------> ANIMATIONS <---------- ---------- */
 
-/* ----- ---------- ----------* hide with anim */
-
-let hideAtStart = () => {
-    document.querySelectorAll(".hideWanim").forEach((el) => {
-        el.animate([{ display: "none" }], { fill: "forwards" })
-    })
-}
-
-
-
-let getAnim = (tar, fr, tm) => new Animation(new KeyframeEffect(tar, fr, tm))
-
-/* ---------- ----------> Slider */
-let sliderKf = [[{ height: "3rem" }, { height: 0 }], { duration: 500, fill: "both", easing: "ease" }]
-
-const ig = {
-    button: document.querySelector("button.ig"),
-    pop: document.querySelector("section.ig"),
-    anim: null,
-    init() {
-        this.anim = getAnim(this.pop,
-            [{ height: "30vh" }, { height: 0 }], { duration: 100, fill: "both", easing: "ease" })
-
-        ig.button.addEventListener("click", (e) => {
-            algo.audio.play()
-            this.anim.play(); this.anim.reverse()
-        })
-    }
-}
-ig.init()
-
-
-const dates = {
-    button: document.querySelector("button.dates"),
-    pop: document.querySelector("section.dates"),
-    anim: null,
-    init() {
-        this.anim = getAnim(this.pop,
-            [{ height: "28vh" }, { height: 0 }], { duration: 100, fill: "both", easing: "ease" })
-
-        dates.button.addEventListener("click", (e) => {
-            algo.audio.play()
-            this.anim.play(); this.anim.reverse()
-        })
-    }
-}
-dates.init()
-
-
-const info = {
-    button: document.querySelector("button.info"),
-    pop: document.querySelector("section.info"),
-    anim: null,
-    init() {
-        this.anim =  getAnim(this.pop,
-            [{ height: "72vh" }, { height: 0 }], { duration: 100, fill: "both", easing: "ease" })
-        
-        this.button.addEventListener("click", (e) => {
-            algo.audio.play()
-            this.anim.play(); this.anim.reverse()
-        })
-    }
-}
-info.init()
 
 
 
