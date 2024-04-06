@@ -1,3 +1,66 @@
+  <article class="notCd">
+
+            <section class="exposure">
+                <p>Temas Türü Seçiniz</p>
+                <input type="list" list="exposure">
+                <datalist id="exposure">
+
+                    <option data-animal="good" value="Sağlam derinin yalanması, hayvana dokunma veya besleme"></option>
+                    <option data-animal="good" value="Hayvanın etini,sütünü besin olarak tüketmek"></option>
+                    <option data-animal="bad" value="Mukozaların, açık cilt yaralarının hayvanın salyası ile temas etmesi"></option>
+                </datalist>
+
+            </section>
+            
+            <section class="animal">
+
+                <p>Hayvan Seçiniz</p>
+
+                <input type="list" list="animal"  >
+                <datalist id="animal">
+
+                    <option data-animal="other" value="diğer"></option>
+                    <option data-animal="other" value="yarasa"></option>
+                    <option data-animal="bad" value="köpek"></option>
+                    <option data-animal="bad" value="kedi"></option>
+                    <option data-animal="bad" value="sığır"></option>
+                    <option data-animal="bad" value="koyun"></option>
+                    <option data-animal="bad" value="keçi"></option>
+                    <option data-animal="bad" value="at"></option>
+                    <option data-animal="bad" value="eşek"></option>
+                    <option data-animal="bad" value="kurt"></option>
+                    <option data-animal="bad" value="tilki"></option>
+                    <option data-animal="bad" value="çakal"></option>
+                    <option data-animal="bad" value="domuz"></option>
+                    <option data-animal="bad" value="ayı"></option>
+                    <option data-animal="bad" value="sansar"></option>
+                    <option data-animal="bad" value="kokarca"></option>
+                    <option data-animal="bad" value="gelincik"></option>
+                    <option data-animal="bad" value="maymun"></option>
+                    <option data-animal="good" value="fare"></option>
+                    <option data-animal="good" value="kirpi"></option>
+                    <option data-animal="good" value="köstebek"></option>
+                    <option data-animal="good" value="kuş"></option>
+                    <option data-animal="good" value="sıçan"></option>
+                    <option data-animal="good" value="sincap"></option>
+                    <option data-animal="good" value="hamster"></option>
+                    <option data-animal="good" value="kobay"></option>
+                    <option data-animal="good" value="gerbil"></option>
+                    <option data-animal="good" value="tavşan"></option>
+                    <option data-animal="good" value="yılan"></option>
+                    <option data-animal="good" value="kaplumbağa"></option>
+                    <option data-animal="good" value="kertenkele"></option>
+                    <option data-animal="good" value="tavuk"></option>
+                    <option data-animal="good" value="horoz"></option>
+                    <option data-animal="good" value="hindi"></option>
+                </datalist>
+
+            </section>
+
+            <button>Gönder</button>
+
+        </article>
+
 ** TOP MENU 2 COLUMNS **
 .plus {
 display: flex;

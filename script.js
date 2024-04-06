@@ -4,7 +4,15 @@ const algo = {
     title: document.querySelector(".title"),
     par: document.querySelector(".par"),
     btnCont: document.querySelector(".btnCont"),
+    audio: document.querySelector(".audio")
 }
+
+let logger = {
+    logs: [],
+    log(e) { this.logs.push([algo.par.innerText, e.target.innerText]) },
+}
+
+const btnSound = () => { algo.audio.play() }
 
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 /* ---------- ----------> ADDITIONS <---------- ---------- */
@@ -16,7 +24,8 @@ const addDay = (gunSayisi) => new Date(Date.now() + 86400000 * gunSayisi).toLoca
 const showVacDates = (e) => {
     let map = [0, 3, 7, 14, 28].map((x) => addDay(x))
     map = [...map.slice(0, 3), map.slice(3).join(" - ")]
-    document.querySelectorAll(".dose").forEach((el, idx) => {
+
+    document.querySelectorAll(".doseDate").forEach((el, idx) => {
         el.innerText = map[idx]
     })
 }
@@ -40,11 +49,46 @@ igFunc()
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 /* ---------- ----------> PAGE GENERATOR <---------- ---------- */
 
-let respck = ["restart", () => location.reload(), "restart"]
+
+
 
 /* pack: [val,func, ...labels]
 choices : [pack1,pack2]   */
-function genFx([title, par, choices = [respck]]) {
+
+const adjust = {
+    s2: {
+        gridIfNeed() {
+            
+            if (            algo.btnCont.children.length >10) {
+                algo.btnCont.style.display = "grid"
+                algo.btnCont.style.alignItems = "unset"
+                algo.btnCont.style.gridTemplateColumns = "repeat(3,1fr)"
+            } else {
+                algo.btnCont.style.display = "flex"
+                algo.btnCont.style.alignItems = "unset"
+                algo.btnCont.style.gridTemplateColumns = "repeat(4,1fr)"
+
+            }
+        }
+    }, s1: {
+        fontSize(label,button) {
+            if (label.length > 50) { button.style.fontSize = "1rem" }
+
+        }
+    },
+    s0: {
+        extras(e) {
+            algo.audio.play()
+            logger.log(e)
+        }
+    }
+}
+
+
+
+function genFx([title, par, choices = [respck, reportpck]]) {
+
+
     return function () {
         while (algo.btnCont.children.length) { algo.btnCont.children[0].remove() }
 
@@ -52,16 +96,19 @@ function genFx([title, par, choices = [respck]]) {
         algo.par.innerText = par
 
         for (const [val, func, ...labels] of choices) {
+            adjust.s2.gridIfNeed()
+
             for (const label of labels) {
-
-
+                
+                
                 let btn = document.createElement("button")
-                if (label.length > 50) { btn.style.fontSize = "1rem" }
-                btn.setAttribute("alt", "test")
-
+                adjust.s1.fontSize(label,btn)
                 btn.innerText = label
                 btn.value = val
-                btn.addEventListener("click", (e) => func(e))
+                btn.addEventListener("click", (e) => {
+                    adjust.s0.extras(e)
+                    func()
+                })
                 algo.btnCont.append(btn)
             }
         }
@@ -71,10 +118,40 @@ function genFx([title, par, choices = [respck]]) {
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 /* ---------- ----------> PAGE CONTENTS <---------- ---------- */
 
+let respck = ["restart", () => location.reload(), "restart"]
 
 const text = {
-    nothing: "Başka kuduz profilaksi işlemi yok",
+    nothing: "Ek profilaksiye gerek yok",
 }
+
+const report = () => {
+    while (algo.btnCont.children.length) { algo.btnCont.children[0].remove() }
+
+    algo.title = "Rapor"
+    algo.par = "Sorular ve verilen cevaplar"
+    logger.logs.forEach((arr) => {
+        let q = document.createElement("p")
+        q.innerText = "Soru: " + arr[0]
+        let a = document.createElement("p")
+        a.innerText = "Cavap: " + arr[1]
+        let qa = document.createElement("div")
+        qa.append(q, a)
+        algo.btnCont.append(qa)
+    })
+    let r = document.createElement("button")
+    r.innerText = "restart"
+    r.addEventListener("click", () => {
+        location.reload()
+    })
+    algo.btnCont.append(r)
+
+}
+let reportpck = ["report", report, "report"]
+
+
+/* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
+/* ---------- ----------> MAIN <---------- ---------- */
+
 
 const ltSeven = genFx(["Ig", "Ig uygula",])
 
@@ -136,22 +213,61 @@ const wound = genFx(["Temas Kategorisi", "Yara hangi tarife uyuyor?", [
 
 
 const resNoNeed = genFx(["Bitti", text.nothing,])
-const res2d = genFx(["2 doz", "Toplam 2 doz aşı uygula (0. ve 3. günlerde)",])
 const resIg = genFx(["Aşı + Ig", "Aşılamaya başla ve Ig uygula",])
 
-const spec = genFx(["Özel Durum", "Hangi durum var?", [
+const gt6months = genFx("2 doz aşı", "Toplam 2 doz aşı uygula (0. ve 3. günlerde)",)
+
+const vacced = genFx(["6 Ay", "Son 6 ay içinde mi aşılanmış?", [
+    ["can<6", resNoNeed, "6 ay içinde"], [">6", gt6months, "6 aydan fazla olmuş"]]])
+
+
+
+
+const isSpecial = genFx(["Özel Durum", "Hangi durum var?", [
     ["normal", wound, "Hiçbiri"],
-    ["bad", resIg, "İmmün Yetmezlik", "Baş-boyun Yarası"],
-    ["good", res2d, "Hasta daha önce de kuduza karşı aşılanmış"],
+    ["bad", resIg, "İmmün Yetmezlik",],
+    ["good", vacced, "Hasta daha önce de kuduza karşı aşılanmış"],
     ["best", resNoNeed, "Provoke, küçük, kanamasız kedi tırmalaması"],
 ]])
 
-const exposure = genFx(["Temas Türü", "Temas Türü Seç", [
-    ["kk", spec, "Kedi/Köpek Yaralanması"],
+
+
+
+const unknown  = genFx("Bilmiyorum", "Cevabı Bilmiyorum :(")
+
+
+
+const animal = genFx(["Hayvanlar", "Hayvan seçiniz", [
+    ["good", resNoNeed,
+        "fare", "kirpi", "köstebek", "kuş", "sıçan", "sincap", "hamster", "kobay", "gerbil", "tavşan", "yılan", "kaplumbağa", "kertenkele", "tavuk", "horoz", "hindi",],
+    ["bad", resIg,
+        "köpek", "kedi", "sığır", "koyun", "keçi", "at", "eşek", "kurt", "tilki", "çakal", "domuz", "ayı", "sansar", "kokarca", "gelincik", "maymun",],
+        ["unknown",unknown,"diğer"]
 ]])
 
-//   IGNITION    
+
+
+
+
+
+
+const otherExposure = genFx(["Diğer Temaslar", "Temas Türünü Seçiniz", [
+    ["bad", animal, "Açık yaraya temas", "Mukozaya temas"],
+    ["good", resNoNeed, "Sağlam derinin yalanması, hayvana dokunma veya besleme", "Hayvanın etini, sütünü besin olarak tüketmek"],
+]])
+
+
+
+const exposure = genFx(["Temas Türü", "Temas Türü Seç", [
+    ["catDogWound", isSpecial, "Kedi/Köpek Yaralanması"],
+    ["other", otherExposure, "Başka bir temas"],
+]])
+
+
+//   APP INIT    
 exposure()
+// animal()
+
 
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 /* ---------- ----------> ANIMATIONS <---------- ---------- */
@@ -164,42 +280,79 @@ let hideAtStart = () => {
     })
 }
 
+
+
 let getAnim = (tar, fr, tm) => new Animation(new KeyframeEffect(tar, fr, tm))
 
+/* ---------- ----------> Slider */
 let sliderKf = [[{ height: "3rem" }, { height: 0 }], { duration: 500, fill: "both", easing: "ease" }]
 
 const ig = {
-    button: document.querySelector("button.igCalc"),
+    button: document.querySelector("button.ig"),
     pop: document.querySelector("section.ig"),
+    anim: null,
+    init() {
+        this.anim = getAnim(this.pop,
+            [{ height: "30vh" }, { height: 0 }], { duration: 100, fill: "both", easing: "ease" })
+
+        ig.button.addEventListener("click", (e) => {
+            algo.audio.play()
+            this.anim.play(); this.anim.reverse()
+        })
+    }
 }
+ig.init()
+
+
 const dates = {
     button: document.querySelector("button.dates"),
     pop: document.querySelector("section.dates"),
+    anim: null,
+    init() {
+        this.anim = getAnim(this.pop,
+            [{ height: "28vh" }, { height: 0 }], { duration: 100, fill: "both", easing: "ease" })
+
+        dates.button.addEventListener("click", (e) => {
+            algo.audio.play()
+            this.anim.play(); this.anim.reverse()
+        })
+    }
 }
-
-let sliderDates = getAnim(dates.pop, [{ height: "30vh" }, { height: 0 }], { duration: 500, fill: "both", easing: "ease" })
-
-let sliderIg = getAnim(ig.pop, [{ height: "30vh" }, { height: 0 }], { duration: 500, fill: "both", easing: "ease" })
-
-ig.button.addEventListener("click", (e) => {
-    sliderIg.play(); sliderIg.reverse()
-    sliderDates.play(); sliderDates.reverse()
-})
+dates.init()
 
 
-
-let linGrad1 = getAnim(algo.par,
-[
-        {backgroundImage: "linear-gradient(green, #ccc 10%)"},
-        {backgroundImage: "linear-gradient(green, #ccc 90%)"},
-],{duration:1000})
-
-algo.par.addEventListener("click", (e) => {
-    linGrad1.play()
-})
+const info = {
+    button: document.querySelector("button.info"),
+    pop: document.querySelector("section.info"),
+    anim: null,
+    init() {
+        this.anim =  getAnim(this.pop,
+            [{ height: "72vh" }, { height: 0 }], { duration: 100, fill: "both", easing: "ease" })
+        
+        this.button.addEventListener("click", (e) => {
+            algo.audio.play()
+            this.anim.play(); this.anim.reverse()
+        })
+    }
+}
+info.init()
 
 
 
+
+
+/* ---------- ----------> Title */
+
+
+
+
+
+
+
+/* ---------- ----------> My Notes <---------- ---------- */
+/*
+
+*/
 
 
 
