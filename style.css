@@ -37,9 +37,7 @@ nav {
     display: flex;
     justify-content: space-evenly;
     vertical-align: middle;
-
 }
-
 
 nav>button {
     background-color: rgb(0, 71, 71);
@@ -50,7 +48,6 @@ nav>button {
     cursor: pointer;
     flex-grow: 1;
     transition: 250ms;
-
 }
 
 nav>button:hover {
@@ -92,7 +89,6 @@ article.algo {
     color: hsl(35, 100%, 64%);
 }
 
-
 .algo .btnCont {
     height: 68%;
     display: flex;
@@ -124,9 +120,6 @@ article.algo {
 .algo button:hover {
     background-color: #03b3aa87;
 }
-
-
-
 
 /* ---------- ----------> SLIDE <---------- ---------- */
 
@@ -210,15 +203,8 @@ section.dates>div span:first-of-type {
     color: rgb(255, 136, 0);
 }
 
-
-
-
-
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
-
-
-
 
 .hide {
     display: none;

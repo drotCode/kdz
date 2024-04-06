@@ -1,3 +1,47 @@
+
+let upDownAnim = getAnim(document.querySelector("main"),
+    [
+        { offset: "0%", filter: "blur(10px)" },
+        { offset: "2%", height: "0%", filter: "blur(10px)", },
+        { offset: "95%", height: "0%" },
+        { offset: "100%", height: "" },
+    ], { duration: 1000, fill: "both", easing: "ease" })
+
+
+
+// const report = () => {
+//     while (el.btnCont.children.length) { el.btnCont.children[0].remove() }
+
+//     el.title = "Rapor"
+//     el.par = "Sorular ve verilen cevaplar"
+//     logger.logs.forEach((arr) => {
+//         let q = document.createElement("p")
+//         q.innerText = "Soru: " + arr[0]
+//         let a = document.createElement("p")
+//         a.innerText = "Cavap: " + arr[1]
+//         let qa = document.createElement("div")
+//         qa.append(q, a)
+//         el.btnCont.append(qa)
+//     })
+//     let r = document.createElement("button")
+//     r.innerText = "restart"
+//     r.addEventListener("click", () => {
+//         location.reload()
+//     })
+//     el.btnCont.append(r)
+
+// }
+
+
+
+
+ let hideAtStart = () => {
+    document.querySelectorAll(".hideWanim").forEach((el) => {
+        el.animate([{ display: "none" }], { fill: "forwards" })
+    })
+}
+
+ 
   <article class="notCd">
 
             <section class="exposure">
