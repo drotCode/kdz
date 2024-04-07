@@ -23,11 +23,8 @@ html {
 }
 
 body {
-    /* height: 100vh;
-    margin-bottom: 40vh; */
     background-color: hsl(190, 50%, 10%);
-    background-color: #ddd;
-    /* overflow: hidden; */
+    height: 95dvh;
 }
 
 body * {
@@ -72,26 +69,20 @@ nav>section>button {
     width: 100%;
     border: none;
     color: rgb(0, 120, 120);
-    /* border-left: 5px solid #808080; */
     background-color: hsl(190, 100%, 5%);
 
 }
 
 nav>section>button:hover {
-    /* filter: brightness(1.2); */
     color: hsl(180, 100%, 35%);
 
 }
 
-/* ----- ---------- ----------* Hover */
 
 nav>section>div {
-    /* background-color: #fffc; */
-    /* color: #000; */
     padding: 2vh 4vw;
     flex-direction: column;
     position: absolute;
-    /* display: none; */
     display: flex;
 }
 
@@ -192,7 +183,6 @@ article {
     font-size: 1.5rem;
     background-color: teal;
     align-content: center;
-    color: cornsilk;
     color: hsl(35, 100%, 64%);
     background-image: linear-gradient( 270deg, hsl(190, 50%, 5%),hsl(190, 50%, 10%));
     border-bottom: 3px solid black;
@@ -233,8 +223,8 @@ article {
     color: #01eb01;
     text-shadow: #00ee00 0 0 1px;
     box-shadow: 4px 2px 5px 2px  #00d800;
-
     background-image: linear-gradient( 270deg, hsl(190, 50%, 5%),hsl(190, 50%, 10%));
+
 }
 
 
