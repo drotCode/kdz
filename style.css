@@ -188,15 +188,12 @@ input[readonly] {
 .dates {
     display: flex;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     justify-content: space-evenly;
     align-items: center;
     position: relative;
-    
-
+    z-index: 1;
 }
-
-
 
 .dates.hvr {
     /* display: flex; */
@@ -204,6 +201,8 @@ input[readonly] {
     flex-direction: column;
     position: absolute;
     top: 150%;
+    background-color: #40404080;
+    padding: 1rem;
 }
 .dates.hvr div:last-of-type {
     color: red;
