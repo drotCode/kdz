@@ -4,7 +4,8 @@ const step = {
     title: document.querySelector(".stepTitle"),
     par: document.querySelector(".stepPar"),
     btnCont: document.querySelector(".stepSec"),
-    audio: document.querySelector(".audio")
+    audio: document.querySelector(".audio"),
+    audio2: document.querySelector(".audio2"),
 }
 
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
@@ -97,6 +98,13 @@ for (const propName in nav) {
     // btn.addEventListener("blur", (e) => { toggleHideClass(div) })
 }
 
+document.querySelectorAll("nav>section>button").forEach((el) => {
+    el.addEventListener("click", (e) => {
+        step.audio2.play()
+    })
+})
+
+console.log(document.querySelectorAll("nav>section>button"));
 
 /* ---------- ----------> ANIMATIONS END <---------- ---------- */
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */

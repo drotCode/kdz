@@ -13,7 +13,7 @@ input::-webkit-inner-spin-button {
 /* -------------------------------------------------------------------------- */
 /* -------------------------------------------------------------------------- */
 html {
-    background-color: hsl(275, 100%, 50%);
+    background-color: hsl(275, 100%, 14%);
     text-align: center;
     vertical-align: middle;
     overflow: hidden;
@@ -143,8 +143,9 @@ nav>section:hover>div {
     right: 0.25rem;
     text-align: right;
     padding: 0;
-    color: pink;
-    & span+span {
+    color: rgb(255, 96, 160);
+    text-shadow: rgb(255, 57, 123) -2px -0px 15px;
+    & div:not(:last-of-type) {
         font-weight: 600;
     }
     & div {
@@ -176,7 +177,7 @@ article {
     vertical-align: middle;
     height: 10vh;
     background-color: hsl(195, 74%, 12%);
-    background-image: linear-gradient( 270deg, hsl(190, 50%, 10%),hsl(190, 50%, 30%));
+    background-image: linear-gradient( 270deg, hsl(190, 50%, 5%),hsl(190, 50%, 10%));
     text-transform: capitalize;
     font-size: 1.75rem;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -193,9 +194,9 @@ article {
     align-content: center;
     color: cornsilk;
     color: hsl(35, 100%, 64%);
-    background-image: linear-gradient( 270deg, hsl(190, 50%, 10%),hsl(190, 50%, 30%));
-    border-bottom: 1px solid hsl(40, 100%, 50%);
-
+    background-image: linear-gradient( 270deg, hsl(190, 50%, 5%),hsl(190, 50%, 10%));
+    border-bottom: 3px solid black;
+    
 }
 
 .stepSec {
@@ -204,34 +205,36 @@ article {
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    background-color: #ccc;
+    background-color: #fff;
+    padding-bottom: 0.5px;
 }
 
 .stepSec>button {
 
     color: #404040;
     border: none;
-    border-bottom: teal 3px solid;
     cursor: pointer;
 
     width: 100%;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     padding: 0.25rem 0.5rem;
     align-items: center;
     flex-grow: 1;
 
     /* transition: 1500ms; */
-    background-color: #ccc;
-    background-color: #ccc;
-    color: #ccc;
-    background-image: linear-gradient( 90deg, hsl(190, 50%, 10%),hsl(190, 50%, 30%));
     border-bottom: 3px solid black;
-    
+    color: #00bf00;
+    background-image: linear-gradient( 270deg, hsl(190, 50%, 5%),hsl(190, 50%, 10%));
+    box-shadow: 4px 2px 5px 1.25px  #00ee00;
+    margin-bottom: 0px;
 }
 
 .stepSec>button:hover {
-    background-image: linear-gradient( 90deg, hsl(190, 50%, 5%),hsl(190, 50%, 20%));
-    background-color: #03b3aa87;
+    color: #01eb01;
+    text-shadow: #00ee00 0 0 1px;
+    box-shadow: 4px 2px 5px 2px  #00d800;
+
+    background-image: linear-gradient( 270deg, hsl(190, 50%, 5%),hsl(190, 50%, 10%));
 }
 
 
