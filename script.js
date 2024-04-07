@@ -116,7 +116,6 @@ const addDay = (gunSayisi) => new Date(Date.now() + 86400000 * gunSayisi).toLoca
 
 const showVacDates = (e) => {
     let map = [0, 3, 7, 14, 28].map((x) => addDay(x))
-    // map = [...map.slice(0, 3), map.slice(3).join(" - ")]
 
     document.querySelectorAll(".doseDate").forEach((el, idx) => {
         el.innerText = map[idx]
