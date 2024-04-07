@@ -1,9 +1,9 @@
 
-const el = {
-    cont: document.querySelector(".algo.cont"),
-    title: document.querySelector(".title"),
-    par: document.querySelector(".par"),
-    btnCont: document.querySelector(".btnCont"),
+const step = {
+    cont: document.querySelector(".stepArt"),
+    title: document.querySelector(".stepTitle"),
+    par: document.querySelector(".stepPar"),
+    btnCont: document.querySelector(".stepSec"),
     audio: document.querySelector(".audio")
 }
 
@@ -13,10 +13,10 @@ const genFx = ([title, par, choices = [respck]]) => {
 
 
     return () => {
-        while (el.btnCont.children.length) { el.btnCont.children[0].remove() }
+        while (step.btnCont.children.length) { step.btnCont.children[0].remove() }
 
-        el.title.innerText = title
-        el.par.innerText = par
+        step.title.innerText = title
+        step.par.innerText = par
 
         for (const [val, func, ...labels] of choices) {
             adjust.gridIfNeed()
@@ -33,7 +33,7 @@ const genFx = ([title, par, choices = [respck]]) => {
                     adjust.extras(e)
                 })
 
-                el.btnCont.append(btn)
+                step.btnCont.append(btn)
             }
         }
     }
@@ -43,18 +43,18 @@ const genFx = ([title, par, choices = [respck]]) => {
 
 const adjust = {
     gridIfNeed() {
-        if (el.btnCont.children.length > 10) {
-            el.btnCont.style.display = "grid"
-            el.btnCont.style.alignItems = "unset"
-            el.btnCont.style.gridTemplateColumns = "repeat(3,1fr)"
+        if (step.btnCont.children.length > 10) {
+            step.btnCont.style.display = "grid"
+            step.btnCont.style.alignItems = "unset"
+            step.btnCont.style.gridTemplateColumns = "repeat(3,1fr)"
         } else {
-            el.btnCont.style.display = "flex"
-            el.btnCont.style.alignItems = "unset"
-            el.btnCont.style.gridTemplateColumns = "repeat(4,1fr)"
+            step.btnCont.style.display = "flex"
+            step.btnCont.style.alignItems = "unset"
+            step.btnCont.style.gridTemplateColumns = "repeat(4,1fr)"
         }
     },
     fontSize(label, button) { if (label.length > 50) { button.style.fontSize = "1rem" } },
-    extras(e) { mainAnim.play(), el.audio.play() },
+    extras(e) { mainAnim.play(), step.audio.play() },
 }
 
 
@@ -65,65 +65,39 @@ let getAnim = (tar, fr, tm) => new Animation(new KeyframeEffect(tar, fr, tm))
 const mainAnim = {
     bool: true,
     play() {
-        let buttons = document.querySelectorAll(".btnCont > button");
-        let targets = [el.title, el.par, ...buttons]
+        let buttons = document.querySelectorAll(".stepSec > button");
+        let targets = [step.title, step.par, ...buttons]
 
         targets.forEach((el) => {
             el.animate([
-                { offset: "0%", translate: (this.bool = !this.bool) ? "100%" : "-100%", filter: "blur(10px)" },
+                { offset: "0%", translate: (this.bool = !this.bool) ? "100%" : "-100%", filter: "blur(3px)" },
                 { offset: "100%", translate: "", filter: "", },
-            ], { duration: 750, fill: "both", easing: "ease" })
+            ], { duration: 300, fill: "both", easing: "ease" })
         })
     }
 }
 
-const ig = {
-    button: document.querySelector("button.ig"),
-    pop: document.querySelector("section.ig"),
-    anim: null,
-    init() {
-        this.anim = getAnim(this.pop,
-            [{ height: "30vh" }, { height: 0 }], { duration: 100, fill: "both", easing: "ease" })
-
-        ig.button.addEventListener("click", (e) => {
-            el.audio.play()
-            this.anim.play(); this.anim.reverse()
-        })
-    }
+const toggleHideClass = (...els) => { els.forEach((el) => { el.classList.toggle("hide") }) }
+const toggleHideAttr = (...els) => {
+    els.forEach((el) => {
+        el.attributes.getNamedItem("hidden") ? el.attributes.removeNamedItem("hidden")
+            : el.attributes.setNamedItem("hidden")
+    })
 }
-// ig.init()
 
-const dates = {
-    button: document.querySelector("button.dates"),
-    pop: document.querySelector("section.dates"),
-    anim: null,
-    init() {
-        this.anim = getAnim(this.pop,
-            [{ height: "28vh" }, { height: 0 }], { duration: 100, fill: "both", easing: "ease" })
-
-        dates.button.addEventListener("click", (e) => {
-            el.audio.play()
-            this.anim.play(); this.anim.reverse()
-        })
-    }
+const nav = {
+    info: { btn: document.querySelector(".infoBtn"), div: document.querySelector(".infoDiv"), },
+    ig: { btn: document.querySelector(".igBtn"), div: document.querySelector(".igDiv"), },
+    date: { btn: document.querySelector(".dateBtn"), div: document.querySelector(".dateDiv"), },
 }
-// dates.init()
 
-const info = {
-    button: document.querySelector("button.info"),
-    pop: document.querySelector("section.info"),
-    anim: null,
-    init() {
-        this.anim = getAnim(this.pop,
-            [{ height: "72vh" }, { height: 0 }], { duration: 100, fill: "both", easing: "ease" })
-
-        this.button.addEventListener("click", (e) => {
-            el.audio.play()
-            this.anim.play(); this.anim.reverse()
-        })
-    }
+for (const propName in nav) {
+    let { btn, div } = nav[propName]
+    btn.addEventListener("click", (e) => { toggleHideClass(div) })
+    // btn.addEventListener("blur", (e) => { toggleHideClass(div) })
 }
-// info.init()
+
+
 /* ---------- ----------> ANIMATIONS END <---------- ---------- */
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 
@@ -143,9 +117,9 @@ const showVacDates = (e) => {
 showVacDates()
 
 const igFunc = () => {
-    let [kgEl, iuEl, humanEl, horseEl,] = document.querySelectorAll(".ig input")
+    let [kgEl, iuEl, humanEl,] = document.querySelectorAll(".igSec input")
     let iuEl2 = document.querySelector(".iu")
-    document.querySelectorAll(".ig input").forEach((inp) => {
+    document.querySelectorAll(".igSec").forEach((inp) => {
         inp.addEventListener("input", (e) => {
             iuEl.value = (humanEl.checked ? 20 : 40) * kgEl.value
         })

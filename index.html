@@ -25,74 +25,44 @@
 
     <nav>
 
-        <button class="plus0 test">
-            <span class="material-symbols-outlined">experiment</span>
-        </button>
+        <!-- <section class="menu ">
+            <button class="material-symbols-outlined">menu</button>
+        </section> -->
 
-        <button class="plus2 info">
-            <span class="material-symbols-outlined">info</span>
-        </button>
+        <!-- <section class="test " title="Test Butonu">
+            <button class="material-symbols-outlined">experiment</button>
+        </section> -->
 
-        <button class="plus3 ig ">
-            <span class="material-symbols-outlined">calculate</span>
-        </button>
+        <section class="infoSec ">
+            <button title="Bilgi" class="infoBtn material-symbols-outlined">info</button>
+            <div class="infoDiv hide">
+                <h2>Temel</h2>
 
-        <button class="plus1 menu">
-            <span class="material-symbols-outlined">menu</span>
-        </button>
+                <p>Aşı >> Kuduz aşısı</p>
+                <p>Ig>>> Kuduz Immunglobulini</p>
+                <p>...</p>
+                <p>* Aksi belirtilmedikçe terimler kuduz profilaksisi ile ilgilidr.</p>
 
-        <button class="plus4 dates">
-            <span class="material-symbols-outlined">calendar_month</span>
+                <h2>Tarihler</h2>
+                <p>Menüdeki tarihler 0. 3. 7. günlerde 1'er doz ve 14. - 28. günler arasında 1 doz - toplam 4 doz -
+                    şeklinde uygulanan aşı şemasının bugünden başlayan gg.aa şeklindeki tarihleridir.</p>
+                    <br><br>
+                    <p>Sorumluluk Reddi</p>
+                    <p>Bu sayfa eğitim ve eğlence amaçlıdır. Bu sayfadaki bilgiler Sağlık Bakanlığı Kuduz Rehberi baz alınarak hazırlanmışsa da bilgilerin doğruluğu garanti edilmemektedir. Tıbbı bilgi ve görüş niteliğinde değerlendirilmemelidir. Sağlık ile ilgili konularda doktorunuza ve resmi kaynaklara başvurunuz.</p>    
+                </details>
+                <details  >
+            </div>
+        </section>
 
-            <section class="dates hvr">
-
-                <div class="">
-                    <!-- <span>1.Doz</span> -->
-                    <span class="doseDate">00.00</span>
-                </div>
-                <div class="">
-                    <!-- <span>2.Doz</span> -->
-                    <span class="doseDate">00.00</span>
-                </div>
-                <div class="">
-                    <!-- <span>3.Doz</span> -->
-                    <span class="doseDate">00.00</span>
-                </div>
-                <div class="">
-                    <!-- <span>4.Doz</span> -->
-                    <span class="doseDate date4">00.00</span>
-                </div>
-                <div class="">
-                    <!-- <span>4.Doz</span> -->
-                    <span class="doseDate date4">00.00</span>
-                </div>
-
-            </section>
-        </button>
-                
-    </nav>
-
-    <main>
-
-
-        <article class="slide">
-
-
-            <!-- ----- ---------- ----------* DATES *---------- ---------- ----- -->
-
-
-
-            <!-- ----- ---------- ----------* IG *---------- ---------- ----- -->
-            <section class="ig hvr">
+        <section class="igSec">
+            <button title="Ig Doz Hesaplayıcı" class="igBtn material-symbols-outlined">calculate</button>
+            <div class="igDiv hide ">
 
                 <h3>Kuduz Ig Hesap</h3>
 
-                <div>
                     <input name="kg" id="kg" type="number" max="200" min="0" step="5" placeholder="kg">
                     <input class="iu" id="ui" type="number" readonly placeholder="IU">
-                </div>
 
-                <div>
                     <label for="human">
                         <input id="human" type="radio" name="ig" checked>
                         İnsan Kaynaklı
@@ -102,47 +72,53 @@
                         <input id="horse" type="radio" name="ig" checked>
                         At Kaynaklı
                     </label>
+
+            </div>
+        </section>
+
+        <section class="dateSec" title="Doz tarihleri">
+            <button class="dateBtn material-symbols-outlined">calendar_month</button>
+            <div class="dateDiv hide">
+
+                <div class="">
+                    <span>1.Doz</span>
+                    <span class="doseDate">00.00</span>
+                </div>
+                <div class="">
+                    <span>2.Doz</span>
+                    <span class="doseDate">00.00</span>
+                </div>
+                <div class="">
+                    <span>3.Doz</span>
+                    <span class="doseDate">00.00</span>
+                </div>
+                <div class="">
+                    <span>4.Doz</span>
+                    <span class="doseDate date4">00.00</span>
+                </div>
+                <div class="">
+                    <!-- <span>4.Doz</span> -->
+                    <span class="doseDate date4-2">00.00</span>
                 </div>
 
-            </section>
-
-
-            <section class="info hvr">
-                <h2>Aşı</h2>
-                <p>Aşılama için 4 defa 1'er doz aşı şeması kullanılmıştır.
-                    (0. 3. 7. günlerde 1'er doz ve 14.-28. günler arasında 1 doz)
-                    Rehbere göre 2.1.1 şeması da kullanılabilir
-                </p>
-            </section>
-
-        </article>
-
-
-
-
-        <!-- ----- ---------- ----------* ALGO *---------- ---------- ----- -->
-        <article class="algo cont">
-            <p class="title">Lorem Ipsum</p>
-            <p class="par">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit vitae necessitatibus?</p>
-            <div class="btnCont">
-                <button>Button</button>
             </div>
+        </section>
+
+    </nav>
+
+    <main>
+
+        <article class="stepArt">
+            <p class="stepTitle">Lorem Ipsum</p>
+            <p class="stepPar">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit vitae necessitatibus?</p>
+            <section class="stepSec">
+                <button>Button</button>
+            </section>
         </article>
-
-
-
-
-
-
-
 
     </main>
 
 
-    <footer>
-
-
-    </footer>
 
 </body>
 <audio class="audio" src="ds-7-map-select-2.mp3"></audio>

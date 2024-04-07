@@ -17,11 +17,17 @@ html {
     text-align: center;
     vertical-align: middle;
     overflow: hidden;
+    line-height: 1.5;
+    font-size: 16px;
+
 }
 
 body {
-    height: 100vh;
-    background-color: #bdbdbd;
+    /* height: 100vh;
+    margin-bottom: 40vh; */
+    background-color: hsl(190, 50%, 10%);
+    background-color: #ddd;
+    /* overflow: hidden; */
 }
 
 body * {
@@ -31,66 +37,169 @@ body * {
 
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 
+input:not([type="radio"]) {
+    text-align: center;
+    vertical-align: middle;
+    border: none;
+    border-radius: 0.75rem;
+    margin: 0.15rem 0.30rem;
+
+}
+
 nav {
-    height: 5%;
-    background-color: rgb(0, 71, 71);
+    height: 5vh;
+    background-color: rgb(255, 0, 217);
     display: flex;
     justify-content: space-evenly;
     vertical-align: middle;
+    font-family: 'Courier New', Courier, monospace;
+    color: hsl(180, 100%, 25%);
 }
 
-nav>button {
+nav>section {
     background-color: rgb(0, 71, 71);
+    width: 4rem;
     height: 100%;
     border: none;
-    text-align: center;
-    color: rgb(125, 255, 214);
-    cursor: pointer;
     flex-grow: 1;
-    transition: 250ms;
+    z-index: 1;
+    /* background-image: linear-gradient( 270deg, hsl(190, 50%, 10%),hsl(190, 50%, 30%)); */
+
 }
 
-nav>button:hover {
-    filter: brightness(1.2);
+nav>section>button {
+    height: 100%;
+    width: 100%;
+    border: none;
+    color: rgb(0, 120, 120);
+    /* border-left: 5px solid #808080; */
+    background-color: hsl(190, 100%, 5%);
+
 }
 
-nav>button>span {}
+nav>section>button:hover {
+    /* filter: brightness(1.2); */
+    color: hsl(180, 100%, 35%);
+
+}
+
+/* ----- ---------- ----------* Hover */
+
+nav>section>div {
+    /* background-color: #fffc; */
+    /* color: #000; */
+    padding: 2vh 4vw;
+    flex-direction: column;
+    position: absolute;
+    /* display: none; */
+    display: flex;
+}
+
+nav>section:hover>div {
+}
+
+.infoDiv {
+    height: 84vh;
+    width: 90vw;
+    max-width: 95vw;
+    max-height: 90%;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: teal #3f3f3f;
+    resize: both;
+    font-size: 1rem;
+    background-color: #000c;
+    color: hsl(180, 100%, 50%);
+    color: hsl(180, 100%, 25%);
+
+    color: hsl(180, 100%, 35%);
+    
+}
+
+.infoDiv p {
+    text-align: left;
+}
+
+.igDiv {
+    align-items: center;
+    /* height: 35vh; */
+    background-color: #000c;
+    right: 3.5rem;
+
+
+    & input:not([type="radio"]) {
+        width: 50%;
+        font-size: 1.25rem;
+        width: 40%;
+        height: 1.75rem;
+    }
+
+    & input:read-only {
+        background-color: rgb(211, 249, 255);
+    }
+}
+
+.dateDiv {
+    right: 0.25rem;
+    text-align: right;
+    padding: 0;
+    color: pink;
+    & span+span {
+        font-weight: 600;
+    }
+    & div {
+        flex-direction: column;
+        display: flex;
+    }
+
+}
+
+
+
+/* ----- ---------- ----------* NAV END *---------- ---------- ----- */
+/* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 
 main {
-    height: 90%;
+    height: 90vh;
     width: min(100%, 1200px);
     margin: auto;
     overflow: hidden;
 }
 
 /* ----- ---------- ----------* ALGO *---------- ---------- ----- */
-article.algo {
+article {
     margin: auto;
     height: 100%;
 }
 
-.algo .title {
+.stepTitle {
     vertical-align: middle;
-    height: 8%;
-    background-color: rgb(0, 104, 104);
+    height: 10vh;
+    background-color: hsl(195, 74%, 12%);
+    background-image: linear-gradient( 270deg, hsl(190, 50%, 10%),hsl(190, 50%, 30%));
     text-transform: capitalize;
     font-size: 1.75rem;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     align-content: center;
     color: hsl(9, 100%, 64%);
+    border-top: 3px solid black;
+    border-bottom: 3px solid black;
 }
 
-.algo .par {
-    height: 24%;
+.stepPar {
+    height: 30vh;
     font-size: 1.5rem;
     background-color: teal;
     align-content: center;
     color: cornsilk;
     color: hsl(35, 100%, 64%);
+    background-image: linear-gradient( 270deg, hsl(190, 50%, 10%),hsl(190, 50%, 30%));
+    border-bottom: 1px solid hsl(40, 100%, 50%);
+
 }
 
-.algo .btnCont {
-    height: 68%;
+.stepSec {
+    height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -98,10 +207,11 @@ article.algo {
     background-color: #ccc;
 }
 
-.algo button {
+.stepSec>button {
 
     color: #404040;
     border: none;
+    border-bottom: teal 3px solid;
     cursor: pointer;
 
     width: 100%;
@@ -110,135 +220,19 @@ article.algo {
     align-items: center;
     flex-grow: 1;
 
-    transition: 500ms;
-
+    /* transition: 1500ms; */
     background-color: #ccc;
-    background-image: linear-gradient(#ddd8, #9998);
-
+    background-color: #ccc;
+    color: #ccc;
+    background-image: linear-gradient( 90deg, hsl(190, 50%, 10%),hsl(190, 50%, 30%));
+    border-bottom: 3px solid black;
+    
 }
 
-.algo button:hover {
+.stepSec>button:hover {
+    background-image: linear-gradient( 90deg, hsl(190, 50%, 5%),hsl(190, 50%, 20%));
     background-color: #03b3aa87;
 }
-
-/* ---------- ----------> SLIDE <---------- ---------- */
-
-.slide {
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1rem;
-}
-
-.slide>section {
-    height: 0;
-    overflow: hidden;
-    background-image: linear-gradient(90deg,
-        hsl(180, 100%, 15%) 0%,
-        hsl(180, 100%, 30%) 100%
-
-        );
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    row-gap: 0.5rem;
-}
-
-.slide p {
-    padding: 0 5vw;
-}
-
-/* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
-
-section.ig {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 1rem;
-    text-align: center;
-}
-
-section.ig>div {
-    display: flex;
-    flex-direction: column;
-}
-
-section.ig>h3 {
-    font-size: 1.25rem;
-    text-decoration: underline;
-}
-
-section.ig input[type=number] {
-    border: none;
-    width: 8rem;
-    text-align: center;
-    font-size: 1rem;
-    border-radius: 0.5rem;
-    padding: 0.2rem;
-    margin: 0.25rem 0;
-}
-
-input[readonly] {
-    background-color: rgb(209, 255, 255);
-    color: rgb(0, 73, 73);
-    /* margin: 0.4rem 0; */
-
-}
-
-/* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
-
-.dates {
-    display: flex;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 1.5rem;
-    justify-content: space-evenly;
-    align-items: center;
-    position: relative;
-    z-index: 1;
-}
-
-.dates.hvr {
-    /* display: flex; */
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 150%;
-    background-color: #40404080;
-    padding: 1rem;
-}
-.dates.hvr div:last-of-type {
-    color: red;
-    color: hsl(161, 100%, 75%);
-    color: hsl(240, 100%, 75%);
-
-
-}
-
-.dates:hover .hvr {
-    display: flex;
-}
-
-
-
-/* section.dates>div {
-    color: rgb(0, 0, 0);
-    font-weight: 600;
-    display: flex;
-    flex-direction: column;
-}
-
-section.dates>div span:first-of-type {
-    font-weight: 800;
-    color: rgb(255, 136, 0);
-}
-
-
-.hvr.plus0:hover   {
-    height: auto;
-} */
-/* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
-/* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
-
-
-
 
 
 

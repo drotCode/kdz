@@ -1,3 +1,52 @@
+const ig = {
+    button: document.querySelector(".igBtn"),
+    sec: document.querySelector("igSec"),
+    anim: null,
+    init() {
+        this.anim = getAnim(this.sec,
+            [{ height: "30vh" }, { height: 0 }], { duration: 100, fill: "both", easing: "ease" })
+
+        ig.button.addEventListener("click", (e) => {
+            step.audio.play()
+            this.anim.play(); this.anim.reverse()
+        })
+    }
+}
+// ig.init()
+
+const dates = {
+    button: document.querySelector(".dateBtn"),
+    pop: document.querySelector("dateSec"),
+    anim: null,
+    init() {
+        this.anim = getAnim(this.pop,
+            [{ height: "28vh" }, { height: 0 }], { duration: 100, fill: "both", easing: "ease" })
+
+        dates.button.addEventListener("click", (e) => {
+            step.audio.play()
+            this.anim.play(); this.anim.reverse()
+        })
+    }
+}
+// dates.init()
+
+const info = {
+    button: document.querySelector("infoBtn"),
+    pop: document.querySelector("infoSec"),
+    anim: null,
+    init() {
+        this.anim = getAnim(this.pop,
+            [{ height: "72vh" }, { height: 0 }], { duration: 100, fill: "both", easing: "ease" })
+
+        this.button.addEventListener("click", (e) => {
+            step.audio.play()
+            this.anim.play(); this.anim.reverse()
+        })
+    }
+}
+// info.init()
+
+
 
 let upDownAnim = getAnim(document.querySelector("main"),
     [
