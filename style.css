@@ -185,13 +185,41 @@ input[readonly] {
 
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 
-section.dates {
-    font-size: 1.1rem;
+.dates {
+    display: flex;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.25rem;
     justify-content: space-evenly;
-    /* row-gap: 0; */
+    align-items: center;
+    position: relative;
+    
+
 }
 
-section.dates>div {
+
+
+.dates.hvr {
+    /* display: flex; */
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 150%;
+}
+.dates.hvr div:last-of-type {
+    color: red;
+    color: hsl(161, 100%, 75%);
+    color: hsl(240, 100%, 75%);
+
+
+}
+
+.dates:hover .hvr {
+    display: flex;
+}
+
+
+
+/* section.dates>div {
     color: rgb(0, 0, 0);
     font-weight: 600;
     display: flex;
@@ -203,15 +231,42 @@ section.dates>div span:first-of-type {
     color: rgb(255, 136, 0);
 }
 
+
+.hvr.plus0:hover   {
+    height: auto;
+} */
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ----- ---------- ----------* END *---------- ---------- ----- */
 .hide {
     display: none;
 }
 
-
-
+/* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 @media screen and (width >=480px) {
     html {
         font-size: 16.5px;

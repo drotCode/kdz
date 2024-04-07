@@ -91,7 +91,7 @@ const ig = {
         })
     }
 }
-ig.init()
+// ig.init()
 
 const dates = {
     button: document.querySelector("button.dates"),
@@ -107,7 +107,7 @@ const dates = {
         })
     }
 }
-dates.init()
+// dates.init()
 
 const info = {
     button: document.querySelector("button.info"),
@@ -123,18 +123,18 @@ const info = {
         })
     }
 }
-info.init()
+// info.init()
 /* ---------- ----------> ANIMATIONS END <---------- ---------- */
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 /* ---------- ----------> ADDITIONS <---------- ---------- */
 
-const addDay = (gunSayisi) => new Date(Date.now() + 86400000 * gunSayisi).toLocaleDateString().slice(0, -5);
+const addDay = (gunSayisi) => new Date(Date.now() + 86400000 * gunSayisi).toLocaleDateString("tur-TR").slice(0, -5);
 
 const showVacDates = (e) => {
     let map = [0, 3, 7, 14, 28].map((x) => addDay(x))
-    map = [...map.slice(0, 3), map.slice(3).join(" - ")]
+    // map = [...map.slice(0, 3), map.slice(3).join(" - ")]
 
     document.querySelectorAll(".doseDate").forEach((el, idx) => {
         el.innerText = map[idx]
