@@ -24,7 +24,7 @@ html {
 
 body {
     background-color: hsl(190, 50%, 10%);
-    height: 95dvh;
+    height: 99dvh;
 }
 
 body * {
@@ -44,7 +44,7 @@ input:not([type="radio"]) {
 }
 
 nav {
-    height: 5vh;
+    height: 5%;
     background-color: rgb(255, 0, 217);
     display: flex;
     justify-content: space-evenly;
@@ -88,10 +88,10 @@ nav>section:hover>div {
 }
 
 .infoDiv {
-    height: 84vh;
-    width: 90vw;
-    max-width: 95vw;
-    max-height: 90%;
+    height: 90dvh;
+    width: 90dvw;
+    max-width: 90dvw;
+    max-height: 90dvh;
     overflow: auto;
     scrollbar-width: thin;
     scrollbar-color: teal #3f3f3f;
