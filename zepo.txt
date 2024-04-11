@@ -1,3 +1,116 @@
+
+
+const pages = [
+
+    ["isSevenDaysPassed", "7 Gün", "İlk aşıdan itibaren 7 gün geçti mi?", [
+        [true, "resultNoRig", ["7 gün geçti"],], // no Rig bc it may suppress active immunity from the vac
+        [false, "resultRig", ["7 gün geçmedi"],] // only Rig bc vac already started
+    ]],
+
+    ["isPetVacced", "Hayvan Aşı", "Kedi/Köpek'in 1 sene içinde Kuduz Aşısı var mı?", [
+        [true, "isPetFine", ["Kedi/Köpek son 1 senede kuduz aşısı olmuş"],],
+        [false, "isPetWatchBig", ["Kedi/Köpek son 1 senede kuduz aşısı olmamış"],]
+    ]],
+
+
+    ["isPetFineNoVac", "Aşıla ve Gözlem Altında", "Aşılamaya başla ve kedi/köpek'i gözlem altında tut. Kedi/Köpek 10 günü sağlıklı şekilde geçirdi mi?", [
+        [true, "resultNoProphylaxis", ["Gözlem Sorunsuz"],],
+        [false, "isSevenDaysPassed", ["Hayvan öldü/hasta/bilinmiyor"],],
+    ]],
+    ["isPetFine", "Gözlem Altında", "Aşı veya Ig yapılmaz. Kedi/Köpek'i 10 gün gözlem altında tutulur. Kedi/Köpek 10 günü sağlıklı şekilde geçirdi mi?", [
+        [true, "resultNoProphylaxis", ["Gözlem Sorunsuz"],],
+        [false, "resultVacPlusRig", ["Hayvan öldü/hasta/bilinmiyor"],]
+    ]],
+    ["isPetFineSmall", "Gözlem Altında", "Kedi/Köpek 10 günü sağlıklı şekilde geçirdi mi?", [
+        [true, "resultNoProphylaxis", ["Gözlem Sorunsuz"]],
+        [false, "resultVaccSmall", ["Hayvan öldü/hasta/bilinmiyor"]]
+    ]],
+
+
+    ["isPetWatchBig", "Gözlem İmkanı", "Kedi/Köpek'in 10 gün gözlemi yapılabilecek mi?", [
+        [true, "isPetFineNoVac", ["Gözlem Yapılacak"]],
+        [false, "resultVacPlusRig", ["Gözlem Yapılamayacak"]]
+    ]],
+    ["isPetWatchSmall", "Gözlem İmkanı", "Kedi/Köpek'in 10 gün gözlemi yapılabilecek mi?", [
+        [true, "isPetFineSmall", ["Gözlem Yapılacak"]],
+        [false, "resultVaccSmall", ["Gözlem Yapılamayacak"]]
+    ]],
+
+
+    ["isSmallWound", "Temas Kategorisi", "Yara hangi tarife uyuyor?", [
+        [true, "isPetWatchSmall", ["Çıplak derinin hafifçe sıyrılması (deri altına geçmeyen yaralanmalar)",
+            "Kanama olmadan küçük tırmalama veya zedeleme"],],
+        [false, "isPetVacced", ["Deriyi zedeleyen tek veya çok sayıda ısırma ve tırmalamalar",
+            "Mukozaların, açık cilt yaralarının hayvanın salyası ile temas etmesi",
+            "Lezyonun kafa, boyun, parmak uçları gibi sinir uçlarının yoğun olduğu bölgelerde olması"]],
+    ]],
+
+    ["resultNoRig", "Ig Yapılmaz", "Ig yapılmamalı. Aşılama sürdürülür.", []],
+    ["resultRig", "Ig Uygula", "Ig uygulanır. Aşılama sürdürülür.", []],
+    ["resultVaccSmall", "Aşıla", "Aşılamaya başla. Ig gerekli değil.", []],
+    ["resultNoProphylaxis", "Bitti", "Profilaksi bitti.", []],
+    ["resultVacPlusRig", "Aşı + Ig", "Aşılamaya başla ve Ig uygula", []],
+    ["resultVacc2dose", "2 doz aşı", "Toplam 2 doz aşı uygula (0. ve 3. günlerde)", []],
+    ["resultUnknown", "Bilmiyorum", "Cevabı Bilmiyorum :(", []], // not used
+
+    ["isInSixMonths", "6 Ay", "Son 6 ay içinde mi aşılanmış?", [
+        [true, "resultNoProphylaxis", ["6 ay içinde"]],
+        [false, "resultVacc2dose", ["6 aydan fazla olmuş"]]
+    ]],
+
+    ["whichRareCase", "Özel Durum", "Hangi durum var?", [
+        [false, "isSmallWound", ["Hiçbiri"]],
+        ["immDef", "resultVacPlusRig", ["İmmün Yetmezlik"],],
+        ["vaccedPatient", "isInSixMonths", ["Hasta daha önce de kuduza karşı aşılanmış"]],
+        ["catScratch", "resultNoProphylaxis", ["Provoke, küçük, kanamasız kedi tırmalaması"]],
+    ]],
+
+    ["isRiskyAnimal", "Hayvanlar", "Hayvan seçiniz", [
+        [true, "resultNoProphylaxis",
+            ["fare", "kirpi", "köstebek", "kuş", "sıçan", "sincap", "hamster", "kobay", "gerbil", "tavşan", "yılan", "kaplumbağa", "kertenkele", "tavuk", "horoz", "hindi"],],
+        [false, "resultVacPlusRig",
+            ["köpek", "kedi", "sığır", "koyun", "keçi", "at", "eşek", "kurt", "tilki", "çakal", "domuz", "ayı", "sansar", "kokarca", "gelincik", "maymun"],],
+    ]],
+
+    ["isBadExposure", "Temas Kategorisi", "Temas hangi kategoriye giriyor? ", [
+        [true, "isRiskyAnimal", ["Açık yaraya temas", "Mukozaya temas"]],
+        [false, "resultNoProphylaxis", ["Sağlam derinin yalanması, hayvana dokunma veya besleme", "Hayvanın etini, sütünü besin olarak tüketmek"]],
+    ]],
+
+    ["isCatDogWound", "Kedi/Köpek Yarası?", "Kedi/Köpek tarafından yaralanma mı?", [
+        [true, "whichRareCase", ["Kedi/Köpek Tarafından Yaralanma"]],
+        [false, "isBadExposure", ["Başka bir temas"]],
+    ]]
+
+]
+
+let pageObjects = []
+pages.forEach(([name,title,par,choices]) => {
+    let obj = {name,title,par,choices:[]}
+    choices.forEach(([value,nextPage,labels]) => {
+        let choice = {value,nextPage,labels}
+        obj.choices.push(choice)
+    })
+    pageObjects.push(obj)
+    
+})
+
+console.log(pageObjects);
+
+
+
+
+Konu: Temas Türü
+
+Soru: Hangi temas türü?
+
+
+
+
+
+
+
+
 const ig = {
     button: document.querySelector(".igBtn"),
     sec: document.querySelector("igSec"),

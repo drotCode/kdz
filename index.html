@@ -10,23 +10,21 @@
     <script src="script.js" defer></script>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings:
-                'FILL' 0,
-                'wght' 400,
-                'GRAD' 0,
-                'opsz' 24
-        }
-    </style>
-</head>
+    </head>
 
 <body>
 
     <nav>
 
+        <section class="menuSec ">
+            <button title="Bilgi" class="menuBtn"><span class="material-symbols-outlined " id="giMenu">menu</span></button>
+            <div class="menuDiv hide">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos voluptatum doloremque praesentium.
+            </div>
+        </section>
+
         <section class="infoSec ">
-            <button title="Bilgi" class="infoBtn material-symbols-outlined">info</button>
+            <button title="Bilgi" class="infoBtn"><span class="material-symbols-outlined " id="giInfo">info</span></button>
             <div class="infoDiv hide">
                 <h2>Temel</h2>
 
@@ -47,7 +45,7 @@
         </section>
 
         <section class="igSec">
-            <button title="Ig Doz Hesaplayıcı" class="igBtn material-symbols-outlined">calculate</button>
+            <button title="Ig Doz Hesaplayıcı" class="igBtn"><span class="material-symbols-outlined " id="giIg">calculate</span></button>
             <div class="igDiv hide ">
 
                 <h3>Kuduz Ig Hesap</h3>
@@ -69,7 +67,7 @@
         </section>
 
         <section class="dateSec" title="Doz tarihleri">
-            <button class="dateBtn material-symbols-outlined">calendar_month</button>
+            <button class="dateBtn"><span class="material-symbols-outlined " id="giDate">calendar_month</span></button>
             <div class="dateDiv hide">
 
                 <div class="">
@@ -100,11 +98,15 @@
 
     <main>
 
-        <article class="stepArt">
-            <p class="stepTitle">Lorem Ipsum</p>
-            <p class="stepPar">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit vitae necessitatibus?</p>
-            <section class="stepSec">
-                <button>Button</button>
+
+        <article class="stepArt" >
+                <p class="stepTitle">Lorem Ipsum</p>
+                <p class=" stepNote hide">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit vitae necessitatibus</p>
+                <p class="stepPar">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit vitae necessitatibus?</p>
+
+           
+            <section class="stepSec" id="stepSec">
+                <button>Lorem ipsum</button>
             </section>
         </article>
 
