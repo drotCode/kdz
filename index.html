@@ -10,48 +10,235 @@
     <script src="script.js" defer></script>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    </head>
+</head>
 
 <body>
 
     <nav>
 
-        <section class="menuSec ">
-            <button title="Bilgi" class="menuBtn"><span class="material-symbols-outlined " id="giMenu">menu</span></button>
-            <div class="menuDiv hide">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos voluptatum doloremque praesentium.
-            </div>
-        </section>
+        <button class="btn menu" title="Menü">
+            <span class="gi material-symbols-outlined">menu</span>
+        </button>
 
-        <section class="infoSec ">
-            <button title="Bilgi" class="infoBtn"><span class="material-symbols-outlined " id="giInfo">info</span></button>
-            <div class="infoDiv hide">
-                <h2>Temel</h2>
 
-                <p>Aşı >> Kuduz aşısı</p>
-                <p>Ig>>> Kuduz Immunglobulini</p>
-                <p>...</p>
-                <p>* Aksi belirtilmedikçe terimler kuduz profilaksisi ile ilgilidr.</p>
+        <button class="btn info" title="Bilgi">
+            <span class="gi material-symbols-outlined">info</span>
+        </button>
 
-                <h2>Tarihler</h2>
-                <p>Menüdeki tarihler 0. 3. 7. günlerde 1'er doz ve 14. - 28. günler arasında 1 doz - toplam 4 doz -
-                    şeklinde uygulanan aşı şemasının bugünden başlayan gg.aa şeklindeki tarihleridir.</p>
-                <br><br>
-                
-                <details>
-                    <summary>Sorumluluk Reddi</summary>
-                    <p>Bu sayfa eğitim ve eğlence amaçlıdır. Bu sayfadaki bilgiler Sağlık Bakanlığı Kuduz Rehberi baz
-                        alınarak hazırlanmışsa da bilgilerin doğruluğu garanti edilmemektedir. Tıbbı bilgi ve görüş
-                        niteliğinde değerlendirilmemelidir. Sağlık ile ilgili konularda doktorunuza ve resmi kaynaklara
-                        başvurunuz.</p>
+
+        <button class="btn rig" title="Ig Doz Hesaplayıcı">
+            <span class="gi material-symbols-outlined">calculate</span>
+        </button>
+
+        <button class="btn date" title="Aşı Tarihleri">
+            <span class="gi material-symbols-outlined">calendar_month</span>
+        </button>
+
+    </nav>
+
+
+
+    <main>
+
+        <article class="pops">
+
+            <section class="pop menu hide">
+
+                <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos voluptatum doloremque
+                    praesentium.
+                </p>
+
+            </section>
+
+            <section class="pop info hide">
+
+                <nav .infoDivNav>
+
+                    <a href="#infoStart"><button>başlangıç</button></a>
+                    <a href="#yaklasim"><button>yaklaşım</button></a>
+
+                    <a href="#yaraBakimi"><button>yarabakımı</button></a>
+
+                    <a href="#abProf"><button>ABprofilaksisi</button></a>
+
+                    <a href="#xx1"><button>xx1</button></a>
+                    <a href="#xx2"><button>xx2</button></a>
+                </nav>
+
+                <article class="infoArt">
+
+                    <section class="infoStart" id="infoStart">
+
+                        <h2 >Temel</h2>
+
+                        <p>Aşı >> Kuduz aşısı</p>
+                        <p>Ig>>> Kuduz Immunglobulini</p>
+                        <p>...</p>
+                        <p>* Aksi belirtilmedikçe terimler kuduz profilaksisi ile ilgilidr.</p>
+                        <p>Menüdeki tarihler 0. 3. 7. günlerde 1'er doz ve 14. - 28. günler arasında 1 doz - toplam
+                            4
+                            doz -
+                            şeklinde uygulanan aşı şemasının bugünden başlayan gg.aa şeklindeki tarihleridir.</p>
+                    </section>
+
                     
-                </details>
-            </div>
-        </section>
+                    <section class="yaklasim" id="yaklasim">
 
-        <section class="igSec">
-            <button title="Ig Doz Hesaplayıcı" class="igBtn"><span class="material-symbols-outlined " id="giIg">calculate</span></button>
-            <div class="igDiv hide ">
+                        <h2 > Temas Sonrası Yaklaşım </h2>
+                        <p> - Yara bakımı<br> - Antibiyotik profilaksisi<br> - Tetanoz profilaksisi<br> - Kuduz
+                            aşısı
+                            uygulaması<br> - Kuduz immünglobulin uygulaması </p>
+
+                    </section>
+
+                    <section class="yaraBakimi" id="yaraBakimi" >
+
+                        <h2>Yara Bakımı</h2>
+                        <p>Kuduz riskli temas profilaksisinde en önemli adım yara bakımıdır. İyi bir yara bakımı,
+                            kuduz
+                            virüsü
+                            geçişini azaltmadaki en etkili yöntemdir. Mümkün olan en kısa sürede yapılmalıdır. Tüm
+                            yaralanmalarda yara yeri derhal bol akarsu (basınçlı su veya hortum ucunun sıkılarak
+                            mümkün
+                            olduğu
+                            kadar jet akımın sağlanması şeklinde) ve sabunla iyice yıkanmalıdır. Sağlık
+                            merkezlerinde
+                            büyük
+                            boy
+                            enjektör ile serum fizyolojik kullanarak da yıkama işlemi yapılabilir.
+                            <br> - Virüs uzun süre ısırık bölgesinde kalabileceği için aradan geçen süreye
+                            bakılmaksızın
+                            yıkama
+                            işlemi mutlaka uygulanmalıdır.
+                            <br> - Yıkama işlemi bittikten sonra alkol veya iyotlu antiseptiklerden biri
+                            kullanılmalıdır.
+                            <br> - Mekanik olarak virüsün mümkün olduğu kadar uzaklaştırılması amaçlandığından,
+                            sadece
+                            antiseptik uygulama, bol su ve sabun ile yıkamanın yerini alamaz.
+                            <br> - Mümkün olduğu kadar dikiş ve benzeri girişim yapılmaması tercih edilir. Derin ve
+                            geniş
+                            yaralanmalarda kozmetik faktörler ve enfeksiyon riski değerlendirilmelidir. Kuduz
+                            profilaksisi
+                            yanı
+                            sıra dikiş de gerekiyorsa, virüsün sinir içine inokülasyon riskini en aza indirmek için
+                            kişinin
+                            klinik durumu uygun ise, yara çevresine ve içine kuduz immünglobulini yapıldıktan 2 saat
+                            sonra
+                            ve
+                            mümkün olduğunca az sayıda dikiş atılabilir. Yara bakımı yapan sağlık personeli müdahale
+                            esnasında
+                            standart enfeksiyon kontrol önlemlerini almalıdır.
+                        </p>
+                    </section>
+
+                    <section class="abProf" id="abProf">
+
+                        <h2 > Antibiyotik Profilaksisi </h2>
+                        <p>Tüm insan ısırıklarında antibiyotik profilaksisi verilmelidir. Hayvan ısırmalarında ise
+                            aşağıdaki
+                            durumlarda antibiyotik profilaksisi verilmelidir;
+                        <ul>
+
+                            <li>Yüzden ısırılmalar</li>
+                            <li>Elden ısırılmalar</li>
+                            <li>Kemik ve eklem penatrasyonu olasılığı olan ısırılmalar</li>
+                            <li>Protez ekleme yakın yaralar</li>
+                            <li>İmmünyetmezlikli kişiler (splenektomi ve diabet dahil)</li>
+                            <li>Genital bölge yaralanmaları</li>
+                            <li>Derin delinme yaraları (özellikle kedilerle olan)</li>
+                            <li>Kapatma gerektiren yaralar</li>
+                        </ul>
+                        <br>
+                        <br> Diğer yaralanmalarda ödem ve ezilme varlığında başvuru ilk sekiz saat içinde ise klinik
+                        bulgular olmasa bile antibiyotik profilaksisi uygulanır.
+                        <br>
+                        İlk sekiz saatten sonraki başvurularda klinik olarak enfeksiyon düşündüren bulgu yoksa
+                        antibiyotik
+                        vermeye gerek yoktur.
+
+                        </p>
+
+                        <p>
+                        <h3>Profilakside tercih edilecek antibiyotikler:</h3>
+                        <br>
+                        <br> Erişkinlerde:
+                        <br> Amoksisilin-klavulanat (875-125 mg, 2x1 po veya 500-125 mg, 3x1po)
+                        <br>Penisilin alerjisi varlığında;
+                        <br>• Klindamisin (300 mg, 4x1 po) + Trimetoprim/sulfametoksazol forte tablet (2x2 po)
+                        <br> • Doksisiklin (100 mg, 2x1 po) + metronidazol (500 mg, 3x1) ya da klindamisin
+                        (300mg-450
+                        mg,
+                        3x1)
+                        <br>• Gebelerde, penisilin alerjisinde klindamisin tercih edilmelidir. Makrolidler
+                        (Azitromisin
+                        500
+                        mg, 1x1 po, Klaritromisin 500 mg, 2x1 po) de kullanılabilir.
+                        <br>
+                        <br> Çocuklarda: Amoksisilin-klavulanat (45-100 mg/kg/gün, 2-3 doza bölünerek po)
+                        <br>Alternatif tedaviler;
+                        <br> o Doksisiklin (8 yaşından büyüklerde, 2-4 mg/kg/gün, 2 doza bölünerek po)
+                        <br>o Sefuroksim (10 mg/kg/gün, 2 doza bölünerek po) + metronidazol (30 mg/ kg/gün, 3 doza
+                        bölünerek
+                        po)
+                        <br>o Penisilin alerjisinde  Klaritromisin (15 mg/kg/gün, 2 doza bölünerek po)
+                        <br> Azitromisin (10 mg/kg/gün, tek dozda po)
+
+                        </p>
+                    </section>
+
+
+                    <section class="xx1" id="xx1">
+
+                        <h2>Dolor</h2>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus voluptate aliquid sint
+                            eveniet
+                            quisquam blanditiis ut cumque dolorem incidunt culpa aspernatur corporis molestiae
+                            quidem,
+                            reprehenderit molestias, voluptas in cum hic?
+                            Odio odit, cumque veritatis ducimus sint nobis, enim porro tempora impedit minima in
+                            ipsum
+                            repellat
+                            officiis, necessitatibus obcaecati minus? Natus similique doloribus maiores consequatur,
+                            ab
+                            voluptatum dolorum sed nesciunt quisquam.</p>
+                    </section>
+
+                    <section class="xx2"  id="xx2">
+
+                        <h2>Amet</h2>
+                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus voluptate aliquid sint
+                            eveniet
+                            quisquam blanditiis ut cumque dolorem incidunt culpa aspernatur corporis molestiae
+                            quidem,
+                            reprehenderit molestias, voluptas in cum hic?
+                            Odio odit, cumque veritatis ducimus sint nobis, enim porro tempora impedit minima in
+                            ipsum
+                            repellat
+                            officiis, necessitatibus obcaecati minus? Natus similique doloribus maiores consequatur,
+                            ab
+                            voluptatum dolorum sed nesciunt quisquam.</p>
+                    </section>
+
+                    <section class="disclaimer">
+
+                        <details>
+                            <summary>Sorumluluk Reddi</summary>
+                            <p>Bu sayfa eğitim ve eğlence amaçlıdır. Bu sayfadaki bilgiler Sağlık Bakanlığı Kuduz
+                                Rehberi
+                                baz
+                                alınarak hazırlanmışsa da bilgilerin doğruluğu garanti edilmemektedir. Tıbbı bilgi
+                                ve
+                                görüş
+                                niteliğinde değerlendirilmemelidir. Sağlık ile ilgili konularda doktorunuza ve resmi
+                                kaynaklara
+                                başvurunuz.</p>
+                        </details>
+                    </section>
+                </article>
+
+            </section>
+
+            <section class="pop rig hide">
 
                 <h3>Kuduz Ig Hesap</h3>
 
@@ -68,12 +255,11 @@
                     At Kaynaklı
                 </label>
 
-            </div>
-        </section>
 
-        <section class="dateSec" title="Doz tarihleri">
-            <button class="dateBtn"><span class="material-symbols-outlined " id="giDate">calendar_month</span></button>
-            <div class="dateDiv hide">
+            </section>
+
+            <section class="pop date hide" title="Doz tarihleri">
+
 
                 <div class="">
                     <!-- <span>1.Doz</span> -->
@@ -96,24 +282,23 @@
                     <span class="doseDate date4-2">00.00</span>
                 </div>
 
-            </div>
-        </section>
+            </section>
 
-    </nav>
+        </article>
 
-    <main>
+        <!--#region           --> <!-- MARK: STEP       -->
+        <article class="stepCont">
+            <h1 class="stepTitle">Lorem Ipsum</h1>
+            <p class="stepPar">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit vitae necessitatibus?</p>
+            <aside class="stepNote hide">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit vitae
+                necessitatibus</aside>
 
 
-        <article class="stepArt" >
-                <p class="stepTitle">Lorem Ipsum</p>
-                <p class=" stepNote hide">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit vitae necessitatibus</p>
-                <p class="stepPar">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit vitae necessitatibus?</p>
-
-           
-            <section class="stepSec" id="stepSec">
+            <section class="stepBtnCont">
                 <button>Lorem ipsum</button>
             </section>
         </article>
+        <!--#endregion           -->
 
     </main>
 

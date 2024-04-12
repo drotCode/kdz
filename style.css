@@ -15,35 +15,41 @@ input::-webkit-inner-spin-button {
 /*-------------------------------------------------------------------------- */
 /*-------------------------------------------------------------------------- */
 html {
-    background-color: hsl(275, 100%, 14%);
+    background-image: linear-gradient(0deg,hsl(190, 100%, 1%),hsl(190, 100%, 5%));
+    font-size: 16px;
+    line-height: 1.5;
+
     text-align: center;
     vertical-align: middle;
     overflow: hidden;
-    line-height: 1.5;
-    font-size: 16px;
+
+    --tealDark: hsl(190, 100%, 5%);
 
 }
 
 body {
-    background-color: hsl(190, 50%, 10%);
+    background-color: hsl(0, 0%, 10%);
     height: 100dvh;
+    width: min(100%, 1200px);
+    margin: auto;
+    position: relative;
+
 }
 
 body * {
     /**For Development */
-    /*border: 1px dotted red !important; */
+    /* border: 1px dotted red !important; */
 }
 
 /*---------- ---------- ---------- -------- ---------- ---------- ---------- */
 
 
+/* 
+TEAL    color: hsl(180, 100%, 25%);
+Other    color: hsl(190, 100%, 25%);
+*/
 
-
-
-
-/*                  #region MARK:NAV*/ 
-
-
+/*                  #region MARK:NAV*/
 
 input:not([type="radio"]) {
     text-align: center;
@@ -51,144 +57,163 @@ input:not([type="radio"]) {
     border: none;
     border-radius: 0.75rem;
     margin: 0.15rem 0.30rem;
-    
+
 }
 
-nav {
-    height: 5dvh;
-    background-color: rgb(255, 0, 217);
-    display: flex;
-    justify-content: space-evenly;
-    vertical-align: middle;
-    font-family: 'Courier New', Courier, monospace;
-    color: hsl(180, 100%, 25%);
-}
-
-nav>section {
-    background-color: rgb(0, 71, 71);
-    width: 4rem;
-    height: 100%;
+button {
     border: none;
-    flex-grow: 1;
-    z-index: 1;
-}
-
-nav>section>button {
-    height: 100%;
-    width: 100%;
-    border: none;
-    color: hsl(180, 100%, 24%);
-    background-color: hsl(190, 100%, 5%);
-    transition: 500ms;
-    
+    padding: 0.1rem 0.2rem
 }
 
 span.material-symbols-outlined {
     font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-  'GRAD' 0,
-  'opsz' 48;
-  font-size: 1.75rem;
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 48;
+    font-size: 1.75rem;
 }
 
-nav>section>button:hover {
-    color: hsl(180, 100%, 50%);
-    text-shadow: hsl(180, 100%, 100%) 0 0 1.5rem;
-    
-}
-
-nav>section>div {
-    padding: 2vh 4vw;
-    flex-direction: column;
-    position: absolute;
+nav {
+    height: 5dvh;
     display: flex;
 }
 
-.infoDiv {
-    width: 90vw;
-    max-width: 884px;
-    height: 84dvh;
-    max-height: 90dvh;
-    overflow: auto;
-    scrollbar-width: thin;
-    scrollbar-color: teal #3f3f3f;
-    resize: both;
-    font-size: 1rem;
-    background-color: #000d;
+nav button {
+    flex-grow: 1;
+    color: hsl(180, 100%, 25%);
+    background-color: hsl(190, 100%, 5%);
+    transition: 500ms;
 
-    color: rgb(96, 255, 144);
-    text-shadow: rgb(57, 255, 100) -2px -0px 15px;
+    &:hover {
+        color: hsl(180, 100%, 50%);
+        text-shadow: hsl(180, 100%, 100%) 0 0 1.5rem;
+    }
+    
+    &.on {
+        color: hsl(151, 100%, 50%);
+        text-shadow: hsl(180, 100%, 100%) 0 0 1.5rem;
+
+    }
+}
+nav button.on {
+    color: hsl(151, 100%, 50%);
+    text-shadow: hsl(180, 100%, 100%) 0 0 1.5rem;
+
 }
 
-.infoDiv p {
+/* MARK::after                POPS */
+
+.pop {
+    font-family: 'Courier New', Courier, monospace;
+
+    display: flex;
+    position: absolute;
+    z-index: 1;
+    flex-direction: column;
+    padding: 1vh 2vw;
+    background-color: #111111c9;
+    color: rgb(96, 255, 144);
+    text-shadow: rgb(57, 255, 100) -2px -0px 15px;
+
+    &.menu {
+        color: rgb(96, 255, 144);
+        text-shadow: rgb(57, 255, 100) -2px -0px 15px;
+        background-color: rgba(0, 0, 0, 0.918);
+    }
+
+    &.ig {
+        align-items: center;
+
+        & input:not([type="radio"]) {
+            width: 50%;
+            font-size: 1.25rem;
+            width: 40%;
+            height: 1.75rem;
+        }
+
+        & input:read-only {
+            background-color: rgb(211, 249, 255);
+        }
+    }
+
+
+    &.date {
+        right: 0.25rem;
+        text-align: right;
+        padding: 0;
+        color: rgb(255, 96, 160);
+        text-shadow: rgb(255, 57, 123) -2px -0px 16px;
+
+        & div:not(:last-of-type) {
+            font-weight: 600;
+        }
+
+        & div {
+            flex-direction: column;
+            display: flex;
+        }
+    }
+
+}
+
+.info.pop {
+    width: 90%;
+    height: 84%;
+
     text-align: left;
 }
 
-.igDiv {
+.info.pop article {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: teal #222;
+
+    &>section {
+        padding: 3rem 2rem;
+    }
+}
+
+.info.pop h1,
+.info.pop h2 {
+    text-align: center;
+    padding-bottom: 1rem;
+
+}
+
+.info.pop nav {
+    background-color: #3f3f3f;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    background-color: #000c;
-    right: 3.5rem;
-    
-    & input:not([type="radio"]) {
-        width: 50%;
-        font-size: 1.25rem;
-        width: 40%;
-        height: 1.75rem;
-    }
-    
-    & input:read-only {
-        background-color: rgb(211, 249, 255);
-    }
-}
 
-.dateDiv {
-    right: 0.25rem;
-    text-align: right;
-    padding: 0;
-    color: rgb(255, 96, 160);
-    text-shadow: rgb(255, 57, 123) -2px -0px 16px;
-    & div:not(:last-of-type) {
-        font-weight: 600;
+    & button {
+        color: aqua;
+        text-shadow: 0px 0px 1rem aqua;
+        background-color: #3f3f3f;
     }
-    & div {
-        flex-direction: column;
-        display: flex;
-    }
-    
-}
-.menuDiv {
-    color: rgb(96, 255, 144);
-    text-shadow: rgb(57, 255, 100) -2px -0px 15px;
-    background-color: #000c;
-
-    
 }
 
 /*          #endregion NAV*/
 
-/*#region         MARK: STEP        */
+/*#region                    MARK: STEP        */
 
 
 main {
     height: 90dvh;
-    width: min(100%, 1200px);
     margin: auto;
     overflow: hidden;
 }
 
-article {
+.stepCont {
     margin: auto;
     height: 90dvh;
     position: relative;
 }
 
-
 .stepTitle {
-    vertical-align: middle;
+    background-image: linear-gradient(270deg, hsl(190, 50%, 5%), hsl(190, 50%, 10%));
     height: 10dvh;
-    background-color: hsl(195, 74%, 12%);
-    background-image: linear-gradient( 270deg, hsl(190, 50%, 5%),hsl(190, 50%, 10%));
     text-transform: capitalize;
     font-size: 1.75rem;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -197,30 +222,23 @@ article {
     border-top: 3px solid black;
     border-bottom: 3px solid black;
     cursor: pointer;
-
     position: relative;
 
 }
 
-
-
-.stepNote  {
-    background-color: hsl(0, 0%, 4%);
-    background-image: linear-gradient( 0deg, hsl(190, 50%, 5%),hsl(190, 50%, 10%));
-
+.stepNote {
     color: #fc8625;
     position: absolute;
+    top: 10dvh;
+    padding: 0 1vw;
+    left: 0;
     z-index: 1;
     height: 30dvh;
-    padding: 1rem 4vw;
     overflow: auto;
-text-align: left;
+    text-align: left;
     scrollbar-color: hsl(190, 50%, 5%) hsl(190, 50%, 10%);
 
 }
-
-
-
 
 .stepPar {
     height: 30dvh;
@@ -228,58 +246,50 @@ text-align: left;
     background-color: teal;
     align-content: center;
     color: hsl(35, 100%, 64%);
-    background-image: linear-gradient( 270deg, hsl(190, 50%, 5%),hsl(190, 50%, 10%));
+    background-image: linear-gradient(270deg, hsl(190, 50%, 5%), hsl(190, 50%, 10%));
     border-bottom: 3px solid black;
-    
+
 }
 
 
-.stepSec {
+.stepBtnCont {
     height: 49.5dvh;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     background-color: #fff;
-    background-color: hsl(190, 100%, 5%);
-    background-image: linear-gradient( 270deg, hsl(190, 50%, 5%),hsl(190, 50%, 10%));
-    
     padding-bottom: 0.5px;
+
+    &>button {
+        background-image: linear-gradient(270deg, hsl(190, 50%, 5%), hsl(190, 50%, 10%));
+        color: #00bf00;
+        box-shadow: 0px 0px 1px 1px #00ee00;
+        border-bottom: 3px solid black;
+        cursor: pointer;
+        width: 100%;
+        font-size: 1.2rem;
+        align-items: center;
+        flex-grow: 1;
+        transition: 250ms;
+
+        &:hover {
+            color: #01eb01;
+            box-shadow: 0px 0px 4px 1px #00ee00;
+            background-image: linear-gradient(270deg, hsl(190, 50%, 5%), hsl(190, 50%, 10%));
+        }
+    }
+
 }
+
+
 
 .jsGrid {
     display: grid;
-    grid-template-columns: repeat(3,1fr);
+    grid-template-columns: repeat(3, 1fr);
     align-items: unset;
 }
 
-.stepSec>button {
-    
-    color: #404040;
-    border: none;
-    cursor: pointer;
-    
-    width: 100%;
-    font-size: 1.2rem;
-    padding: 0.25rem 0.5rem;
-    align-items: center;
-    flex-grow: 1;
-    
-    border-bottom: 3px solid black;
-    background-image: linear-gradient( 270deg, hsl(190, 50%, 5%),hsl(190, 50%, 10%));
-    color: #00bf00;
-    box-shadow: 0px 0px 1px 1px  #00ee00;
-    margin-bottom: 0px;
-    transition: 250ms;
-    /*height: 6vh; */
-}
-
-.stepSec>button:hover {
-    color: #01eb01;
-    box-shadow: 0px 0px 4px 1px  #00ee00;
-    background-image: linear-gradient( 270deg, hsl(190, 50%, 5%),hsl(190, 50%, 10%));
-    
-}
 /*#endregion            STEP        */
 
 
@@ -288,7 +298,7 @@ text-align: left;
 /*#region         MARK: UTIL        */
 
 .hide {
-    display: none;
+    display: none !important;
 }
 
 /*#endregion            UTIL        */
@@ -318,4 +328,5 @@ text-align: left;
         font-size: 18px;
     }
 }
+
 /*#endregion            MEDIA        */

@@ -1,36 +1,40 @@
 // #region              elements
 const step = {
-    art: document.querySelector(".stepArt"),
+    cont: document.querySelector(".stepCont"),
     title: document.querySelector(".stepTitle"),
     par: document.querySelector(".stepPar"),
     note: document.querySelector(".stepNote"),
-    sec: document.querySelector(".stepSec"),
-    audio: document.querySelector(".audio"),
-    audio2: document.querySelector(".audio2"),
+    btnCont: document.querySelector(".stepBtnCont"),
+    get btns() {return document.querySelectorAll(".stepBtnCont > *")} ,
+
+}
+
+const audio = {
+    main: document.querySelector(".audio"),
+    pop: document.querySelector(".audio2"),
 }
 // #endregion elements
+
+
 
 
 //                      #region adjust
 
 const adjust = {
     tooManyBtns() {
-        if (step.sec.children.length > 10) {
-            step.sec.classList.add("jsGrid")
-        } else if (step.sec.classList.includes("jsGrid")) { step.sec.classList.remove("jsGrid") }
+        if (step.btnCont.children.length > 10) {
+            step.btnCont.classList.add("jsGrid")
+        } else if (step.btnCont.classList.includes("jsGrid")) { step.btnCont.classList.remove("jsGrid") }
     },
     fontSize(label, button) { if (label.length > 50) { button.classList.add("font1rem") } },
-    extras(e) { mainAnim.play(), step.audio.play() },
+    extras(e) { mainAnim.play(), audio.main.play() },
 }
-// #endregion adjust
+//                                  #endregion adjust
 
 
 //                      #region animations
 
-
 let getAnim = (tar, fr, tm) => new Animation(new KeyframeEffect(tar, fr, tm))
-
-
 
 const hiding = (action, ...els) => {
     let hideArr = [1, "hide", "h", "on", true, "true"]
@@ -46,21 +50,7 @@ const hiding = (action, ...els) => {
 const mainAnim = {
     bool: true,
     play() {
-        let buttons = document.querySelectorAll(".stepSec > button");
-        let targets = [step.title, step.par, ...buttons]
-
-        targets.forEach((el) => {
-            el.animate([
-                { offset: "0%", translate: (this.bool = !this.bool) ? "100%" : "-100%", filter: "blur(3px)" },
-                { offset: "100%", translate: "", filter: "", },
-            ], { duration: 500, fill: "both", easing: "ease" })
-        })
-    }
-}
-const noteAnim = {
-    bool: true,
-    play() {
-        let targets = [step.note]
+        let targets = [step.title, step.par, ...step.btns]
 
         targets.forEach((el) => {
             el.animate([
@@ -71,21 +61,25 @@ const noteAnim = {
     }
 }
 
-// Nav button dropowns
-let navSecs = document.querySelectorAll("nav>section")
-navSecs.forEach(sec => {
-    sec.querySelector("button").addEventListener("click", (e) => {
-        hiding("toggle", sec.querySelector("div"))
-        step.audio2.play()
-
-    })
-});
 // title dropowns
 step.title.addEventListener("click", (e) => {
-    hiding("toggle",step.note)
+    hiding("toggle", step.note)
 })
 
-
+// buttons to targets
+let buttonPopMap = {
+    names: ["info", "date", "rig", "menu"],
+    match() {
+        this.names.forEach((name) => {
+            let bp = document.querySelectorAll("." + name)
+            bp[0].addEventListener("click", (e) => {
+                e.target.classList.toggle("on")
+                hiding("toggle", bp[1])
+            })
+        })
+    },
+}
+buttonPopMap.match()
 
 //                      #endregion animations
 
@@ -94,17 +88,14 @@ step.title.addEventListener("click", (e) => {
 
 const pageIt = (nameofThePage) => {
 
-    while (step.sec.children.item(0)) { step.sec.children.item(0).remove() }
+    while (step.btnCont.children.item(0)) { step.btnCont.children.item(0).remove() }
 
     let page = pageObjects.find(page => page.name == nameofThePage)
 
     step.title.innerText = page.title
     step.par.innerText = page.par
 
-    step.note.innerText = page.note
-    console.log(step.note);
-
-
+    step.note.innerText = page.note || ""
 
     if (!page.choices.length) { page.choices.push(restartChoice) }
 
@@ -113,17 +104,15 @@ const pageIt = (nameofThePage) => {
         choice.labels.forEach((label) => {
             let btn = document.createElement("button")
             btn.innerText = label
-            btn.classList.add("anim1")
+            btn.classList.add("generated")
 
-            btn.addEventListener("click", async (e) => {
-                step.audio.play()
+            btn.addEventListener("click", (e) => {
+                audio.main.play()
                 pageIt(choice.nextPage)
                 mainAnim.play()
 
-
-
             })
-            step.sec.append(btn)
+            step.btnCont.append(btn)
         })
 
     })
@@ -211,11 +200,34 @@ const notes = {
 
 }
 
+const notes2 = {
+    redBox: {
+        vacInjSite: `Aşı erişkinlerde deltoid bölgeye, küçük çocuklarda uyluğun anterolateral bölgesine kas içine uygulanır. 
+        Gluteal bölgeye aşı enjeksiyonu, yeterli antikor yanıtı oluşturmadığı için yapılmamalıdır.`,
+        vacAsap: `Temas sonrası aşılamaya olabildiğince erken başlanmalıdır.`,
+        neverTooLate: `Kuduzda inkübasyon süresi çok değişken olduğundan, riskli temas sonrasında aradan geçen süreye bakmaksızın temas kategorize edilerek uygun profilaksiye başlanmalıdır.`,
+        dontForgetNonPep: `Profilaksi gerektirmeyen durumlarda da (insan ısırıkları dahil) yara temizliği, antibiyotik tedavisi, tetanoz profilaksisi gibi ihtiyaç duyulan tedavi yaklaşımları ihmal edilmemelidir.`,
+        recordEveryCase: `Kuduz profilaksisi uygulansın ya da uygulanmasın tüm kuduz riskli temaslar mutlaka kayıt altına alınmalıdır.`,
+        avoidSuture: `Yaraya mümkün olduğu kadar dikiş ve benzeri girişim yapılmaması tercih edilir. Derin ve geniş yaralanmalarda, kozmetik faktörler ve enfeksiyon riski değerlendirilmelidir. Kuduz profilaksisi gerekiyorsa, virüsün sinir içine inokülasyon riskini en aza indirmek için yara çevresine ve içine kuduz immünglobulini yapıldıktan 2 saat sonra dikiş atılabilir.`,
+        abFollow: `Çocuk ve erişkinler için antibiyotik profilaksi süresi belirgin kirli olmayan yara durumunda 3 gün, kirli yara durumunda 5 gündür. 
+        İmmünsupresif hastalar dahil tüm hastalar 3 gün sonra tekrar değerlendirilmelidir.`,
+        justContinue: `Bir veya birkaç doz aşı yapıldıktan sonra, aşıya ara vererek yeniden başvuranlarda aşılama şemasına kalınan yerden devam edilir.`,
+        everyOnesEqual: `Bebek, çocuk, erişkin ve gebelerde kuduz bağışıklaması aynı şema ve dozlarla uygulanır.`,
+        superCase: `Kuduz riskli temas sonrası aşılaması devam eden hastanın bu sırada yeni bir riskli teması olmuşsa aşılama şeması aynı şekilde sürdürülür.
+        İkinci temasta immünglobulin endikasyonu varsa ilk doz aşıyı takip eden yedi gün içinde immünglobulin yapılır. Süre 7 günü geçmiş ise immünglobulin yapılmamalıdır.`,
+        rVacMustGoOn: `Aşılama sırasında viral ve bakteriyel enfeksiyon saptanan hastalar uygun şekilde tedavi edilir ve aşılama sürdürülür. Kullanılan ilaçlara devam edilir. `,
+        dontMix: `İmmünglobülin asla aşıyla aynı enjektörle ve İmmünglobülin asla aşıyla aynı anatomik bölgeye yapılmaz.`,
+        compartment: `İmmünglobülin yapılırken özellikle küçük yaralarda kompartman sendromu gelişmesi konusunda dikkatli olunmalıdır.`,
+
+    }
+}
+
 let pageObjects = [
     {
         name: "isSevenDaysPassed",
         title: "7 Gün",
         par: "İlk aşıdan itibaren 7 gün geçti mi?",
+        note: ``,
         choices: [
             {
                 value: true,
