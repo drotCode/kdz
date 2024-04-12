@@ -24,10 +24,9 @@ const adjust = {
     tooManyBtns() {
         if (step.btnCont.children.length > 10) {
             step.btnCont.classList.add("jsGrid")
-        } else if (step.btnCont.classList.includes("jsGrid")) { step.btnCont.classList.remove("jsGrid") }
+        } else if (step.btnCont.classList.contains("jsGrid")) { step.btnCont.classList.remove("jsGrid") }
     },
     fontSize(label, button) { if (label.length > 50) { button.classList.add("font1rem") } },
-    extras(e) { mainAnim.play(), audio.main.play() },
 }
 //                                  #endregion adjust
 
@@ -51,6 +50,7 @@ const mainAnim = {
     bool: true,
     play() {
         let targets = [step.title, step.par, ...step.btns]
+        audio.main.play()
 
         targets.forEach((el) => {
             el.animate([
@@ -63,6 +63,8 @@ const mainAnim = {
 
 // title dropowns
 step.title.addEventListener("click", (e) => {
+    e.target.classList.toggle("on")
+
     hiding("toggle", step.note)
 })
 
@@ -71,11 +73,12 @@ let buttonPopMap = {
     names: ["info", "date", "rig", "menu"],
     match() {
         this.names.forEach((name) => {
-            let bp = document.querySelectorAll("." + name)
-            bp[0].addEventListener("click", (e) => {
+            let span = document.querySelector("." + name + ">span")
+            let pop = document.querySelector("." + name + ".pop")
+            span.addEventListener("click", (e) => {
                 e.target.classList.toggle("on")
-                hiding("toggle", bp[1])
-            })
+                hiding("toggle", pop)
+            },true)
         })
     },
 }
@@ -94,8 +97,7 @@ const pageIt = (nameofThePage) => {
 
     step.title.innerText = page.title
     step.par.innerText = page.par
-
-    step.note.innerText = page.note || ""
+    step.note.innerText = page?.note || "not yok";
 
     if (!page.choices.length) { page.choices.push(restartChoice) }
 
@@ -107,7 +109,6 @@ const pageIt = (nameofThePage) => {
             btn.classList.add("generated")
 
             btn.addEventListener("click", (e) => {
-                audio.main.play()
                 pageIt(choice.nextPage)
                 mainAnim.play()
 
@@ -116,7 +117,7 @@ const pageIt = (nameofThePage) => {
         })
 
     })
-
+adjust.tooManyBtns()
 }
 //                      #endregion generator
 
@@ -135,10 +136,14 @@ const showVacDates = (e) => {
 showVacDates()
 
 const igFunc = () => {
-    let [kgEl, iuEl, humanEl,] = document.querySelectorAll(".igSec input")
-    document.querySelectorAll(".igSec").forEach((inp) => {
+    
+    let rigInputs = document.querySelectorAll(".pop.rig input")
+    let [kgInput, iuInput, humanChckBx,] = rigInputs 
+    
+
+    rigInputs.forEach((inp) => {
         inp.addEventListener("input", (e) => {
-            iuElvalue = (humanEl.checked ? 20 : 40) * kgElvalue
+            iuInput.value = (humanChckBx.checked ? 20 : 40) * kgInput.value
         })
     })
 }

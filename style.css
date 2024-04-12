@@ -15,7 +15,7 @@ input::-webkit-inner-spin-button {
 /*-------------------------------------------------------------------------- */
 /*-------------------------------------------------------------------------- */
 html {
-    background-image: linear-gradient(0deg,hsl(190, 100%, 1%),hsl(190, 100%, 5%));
+    background-image: linear-gradient(0deg, hsl(190, 100%, 1%), hsl(190, 100%, 5%));
     font-size: 16px;
     line-height: 1.5;
 
@@ -62,7 +62,9 @@ input:not([type="radio"]) {
 
 button {
     border: none;
-    padding: 0.1rem 0.2rem
+    padding: 0.1rem 0.2rem;
+    cursor: pointer;
+
 }
 
 span.material-symbols-outlined {
@@ -83,22 +85,23 @@ nav button {
     flex-grow: 1;
     color: hsl(180, 100%, 25%);
     background-color: hsl(190, 100%, 5%);
-    transition: 500ms;
 
-    &:hover {
-        color: hsl(180, 100%, 50%);
-        text-shadow: hsl(180, 100%, 100%) 0 0 1.5rem;
-    }
-    
-    &.on {
-        color: hsl(151, 100%, 50%);
-        text-shadow: hsl(180, 100%, 100%) 0 0 1.5rem;
+    & span {
+        width: 100%;
+        height: 100%;
+        transition: 500ms;
 
+        &:hover {
+            color: hsl(180, 100%, 50%);
+            text-shadow: hsl(180, 100%, 100%) 0 0 1.5rem;
+        }
+
+        &.on {
+            color: hsl(151, 100%, 50%);
+            text-shadow: hsl(180, 100%, 100%) 0 0 1.5rem;
+
+        }
     }
-}
-nav button.on {
-    color: hsl(151, 100%, 50%);
-    text-shadow: hsl(180, 100%, 100%) 0 0 1.5rem;
 
 }
 
@@ -111,8 +114,8 @@ nav button.on {
     position: absolute;
     z-index: 1;
     flex-direction: column;
-    padding: 1vh 2vw;
-    background-color: #111111c9;
+    /* padding: 1vh 2vw; */
+    background-color: #202224f1;
     color: rgb(96, 255, 144);
     text-shadow: rgb(57, 255, 100) -2px -0px 15px;
 
@@ -122,8 +125,10 @@ nav button.on {
         background-color: rgba(0, 0, 0, 0.918);
     }
 
-    &.ig {
+    &.rig {
         align-items: center;
+        right: 8rem;
+        padding:2rem;
 
         & input:not([type="radio"]) {
             width: 50%;
@@ -139,11 +144,13 @@ nav button.on {
 
 
     &.date {
-        right: 0.25rem;
+        position: absolute;
+        right: 0%;
         text-align: right;
-        padding: 0;
+        padding: 0.5rem 2rem;
         color: rgb(255, 96, 160);
         text-shadow: rgb(255, 57, 123) -2px -0px 16px;
+        background-color: unset;
 
         & div:not(:last-of-type) {
             font-weight: 600;
@@ -162,37 +169,45 @@ nav button.on {
     height: 84%;
 
     text-align: left;
-}
 
-.info.pop article {
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: teal #222;
+    & article {
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: teal #222;
 
-    &>section {
-        padding: 3rem 2rem;
+        &>section {
+            padding: 2rem 1rem;
+            & h1,
+            & h2 {
+                text-align: center;
+                padding-bottom: 1rem;
+            }
+        }
     }
-}
 
-.info.pop h1,
-.info.pop h2 {
-    text-align: center;
-    padding-bottom: 1rem;
 
-}
+    & nav {
+        display: flex;
+    background-color: #101216f1;
 
-.info.pop nav {
-    background-color: #3f3f3f;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-
-    & button {
-        color: aqua;
-        text-shadow: 0px 0px 1rem aqua;
-        background-color: #3f3f3f;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        & a {
+            text-transform: capitalize;
+            text-decoration: none;
+            flex-grow: 1;
+            color: aqua;
+            text-shadow: 0px 0px 5px aqua;
+        }
     }
+
 }
+
+
+
+
 
 /*          #endregion NAV*/
 
@@ -223,6 +238,11 @@ main {
     border-bottom: 3px solid black;
     cursor: pointer;
     position: relative;
+    &.on {
+        color: hsl(9, 100%, 59%);
+        text-shadow: 0 0rem 2rem hsl(9, 100%, 65%);
+        
+    }
 
 }
 
@@ -237,6 +257,7 @@ main {
     overflow: auto;
     text-align: left;
     scrollbar-color: hsl(190, 50%, 5%) hsl(190, 50%, 10%);
+    
 
 }
 
