@@ -76,6 +76,7 @@ let buttonPopMap = {
             let span = document.querySelector("." + name + ">span")
             let pop = document.querySelector("." + name + ".pop")
             span.addEventListener("click", (e) => {
+                audio.pop.play()
                 e.target.classList.toggle("on")
                 hiding("toggle", pop)
             },true)
@@ -527,7 +528,7 @@ let pageObjects = [
                 value: false,
                 nextPage: "resultVacPlusRig",
                 labels: [
-                    "köpek", "kedi", "sığır", "koyun", "keçi", "at", "eşek", "kurt", "tilki", "çakal", "domuz", "ayı", "sansar", "kokarca", "gelincik", "maymun"
+                    "köpek", "kedi", "sığır","inek", "koyun", "keçi", "at", "eşek", "kurt", "tilki", "çakal", "domuz", "ayı", "sansar", "kokarca", "gelincik", "maymun"
                 ]
             }
         ]
