@@ -1,3 +1,6 @@
+/* MARK: RESET */
+/*#region                                                          */
+
 * {
     margin: 0;
     padding: 0;
@@ -10,25 +13,37 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+/*#endregion            RESET        */
 
+/* MARK: HTML-BODY */
+/*#region                                                      */
 
-/*-------------------------------------------------------------------------- */
-/*-------------------------------------------------------------------------- */
 html {
-    background-image: linear-gradient(0deg, hsl(190, 100%, 1%), hsl(190, 100%, 5%));
     font-size: 16px;
     line-height: 1.5;
-
+    
     text-align: center;
     vertical-align: middle;
     overflow: hidden;
+    
+    background-image: linear-gradient(0deg, hsl(190, 100%, 1%), hsl(190, 100%, 5%));
 
-    --tealDark: hsl(190, 100%, 5%);
+    --bgi: linear-gradient(90deg,  hsl(190, 50%, 7%), hsl(190, 50%, 3%));
+    --bgi2: linear-gradient(90deg,  hsl(190, 50%, 8%), hsl(190, 50%,5%));
+
+
+    --bodyBg: #111;
+    --navBtnBg :  hsl(190, 100%, 5%);
+
+
+    --popBg: #202224f1;
+    --popClr: rgb(96, 255, 144);
+    --popTxtShdw: rgb(57, 255, 100) -2px -0px 15px;
 
 }
 
 body {
-    background-color: hsl(0, 0%, 10%);
+    background-color:var(--bodyBg);
     height: 100dvh;
     width: min(100%, 1200px);
     margin: auto;
@@ -40,16 +55,10 @@ body * {
     /**For Development */
     /* border: 1px dotted red !important; */
 }
+/*#endregion            HTML-BODY        */
 
-/*---------- ---------- ---------- -------- ---------- ---------- ---------- */
-
-
-/* 
-TEAL    color: hsl(180, 100%, 25%);
-Other    color: hsl(190, 100%, 25%);
-*/
-
-/*                  #region MARK:NAV*/
+/* MARK:NAV */
+/*#region                                                             */
 
 input:not([type="radio"]) {
     text-align: center;
@@ -64,6 +73,8 @@ button {
     border: none;
     padding: 0.1rem 0.2rem;
     cursor: pointer;
+    transition: 500ms;
+
 
 }
 
@@ -79,56 +90,100 @@ span.material-symbols-outlined {
 nav {
     height: 5dvh;
     display: flex;
+
+    align-items: center;
+
 }
 
 nav button {
+
+    height: 100%;
     flex-grow: 1;
     color: hsl(180, 100%, 25%);
-    background-color: hsl(190, 100%, 5%);
+    background-color: var(--navBtnBg);
+    display: flex;
+    align-items: center;
 
     & span {
         width: 100%;
         height: 100%;
-        transition: 500ms;
+        align-content: center;
 
-        &:hover {
+        /* &:hover {
             color: hsl(180, 100%, 50%);
             text-shadow: hsl(180, 100%, 100%) 0 0 1.5rem;
-        }
+        } */
 
         &.on {
             color: hsl(151, 100%, 50%);
             text-shadow: hsl(180, 100%, 100%) 0 0 1.5rem;
-
         }
     }
 
 }
 
-/* MARK::after                POPS */
+/* MARK:                                  POPS */
+/*#region      */
+
 
 .pop {
     font-family: 'Courier New', Courier, monospace;
 
     display: flex;
+    flex-direction: column;
     position: absolute;
     z-index: 1;
-    flex-direction: column;
-    /* padding: 1vh 2vw; */
-    background-color: #202224f1;
-    color: rgb(96, 255, 144);
-    text-shadow: rgb(57, 255, 100) -2px -0px 15px;
+    background-color: var(--popBg);
+    color: var(--popClr);
+    text-shadow:var(--popTxtShdw);
+
+    &.log {
+        width: 80%;
+        height: 96%;
+        left: 10%;
+        top: 2%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-evenly;  /* ??????? */
+        padding: 12% 3%;
+
+
+        /* & h2 {} */
+
+        & ol {
+            text-align: start;
+            list-style-position: outside;
+            padding: 0 2rem;
+            margin: auto;
+
+            & li {
+                padding: 1rem 0.2rem;
+            }
+
+        }
+
+        & button {
+            width: 50%;
+            height: 2rem;
+
+        }
+    }
 
     &.menu {
-        color: rgb(96, 255, 144);
-        text-shadow: rgb(57, 255, 100) -2px -0px 15px;
-        background-color: rgba(0, 0, 0, 0.918);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        width: 60%;
+        height: 80%;
+        left: 20%;
+        top: 10%;
     }
 
     &.rig {
         align-items: center;
         right: 8rem;
-        padding:2rem;
+        padding: 2rem;
 
         & input:not([type="radio"]) {
             width: 50%;
@@ -144,7 +199,6 @@ nav button {
 
 
     &.date {
-        position: absolute;
         right: 0%;
         text-align: right;
         padding: 0.5rem 2rem;
@@ -177,6 +231,7 @@ nav button {
 
         &>section {
             padding: 2rem 1rem;
+
             & h1,
             & h2 {
                 text-align: center;
@@ -188,13 +243,14 @@ nav button {
 
     & nav {
         display: flex;
-height: fit-content;
+        height: fit-content;
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
         text-align: center;
+
         & a {
-    background-color: #101216f1;
+            background-color: #101216f1;
 
             text-transform: capitalize;
             text-decoration: none;
@@ -207,13 +263,15 @@ height: fit-content;
 
 }
 
+/*#endregion      */
 
 
 
 
 /*          #endregion NAV*/
 
-/*#region                    MARK: STEP        */
+/* MARK: STEP */
+/*#region                                                           */
 
 
 main {
@@ -229,7 +287,8 @@ main {
 }
 
 .stepTitle {
-    background-image: linear-gradient(270deg, hsl(190, 50%, 5%), hsl(190, 50%, 10%));
+    background-image: var(--bgi);
+
     height: 10dvh;
     text-transform: capitalize;
     font-size: 1.75rem;
@@ -240,10 +299,11 @@ main {
     border-bottom: 3px solid black;
     cursor: pointer;
     position: relative;
+
     &.on {
         color: hsl(9, 100%, 59%);
         text-shadow: 0 0rem 2rem hsl(9, 100%, 65%);
-        
+
     }
 
 }
@@ -260,21 +320,21 @@ main {
     overflow: auto;
     text-align: left;
     scrollbar-color: hsl(190, 50%, 5%) hsl(190, 50%, 10%);
-    
+
 
 }
 
 .stepPar {
+    background-image: var(--bgi);
+
     height: 30dvh;
     font-size: 1.5rem;
     background-color: teal;
     align-content: center;
     color: hsl(35, 100%, 64%);
-    background-image: linear-gradient(270deg, hsl(190, 50%, 5%), hsl(190, 50%, 10%));
+
     border-bottom: 3px solid black;
-
 }
-
 
 .stepBtnCont {
     height: 49.5dvh;
@@ -286,7 +346,9 @@ main {
     padding-bottom: 0.5px;
 
     &>button {
-        background-image: linear-gradient(270deg, hsl(190, 50%, 5%), hsl(190, 50%, 10%));
+        background-image: var(--bgi2);
+
+
         color: #00bf00;
         box-shadow: 0px 0px 1px 1px #00ee00;
         border-bottom: 3px solid black;
@@ -300,13 +362,10 @@ main {
         &:hover {
             color: #01eb01;
             box-shadow: 0px 0px 4px 1px #00ee00;
-            background-image: linear-gradient(270deg, hsl(190, 50%, 5%), hsl(190, 50%, 10%));
         }
     }
 
 }
-
-
 
 .jsGrid {
     display: grid;
@@ -317,9 +376,8 @@ main {
 /*#endregion            STEP        */
 
 
-
-
-/*#region         MARK: UTIL        */
+/* MARK: UTIL */
+/*#region                                                           */
 
 .hide {
     display: none !important;
@@ -327,7 +385,8 @@ main {
 
 /*#endregion            UTIL        */
 
-/*#region         MARK: MEDIA        */
+/* MARK: MEDIA */
+/*#region                                                          */
 
 @media screen and (width >=480px) {
     html {
@@ -352,5 +411,7 @@ main {
         font-size: 18px;
     }
 }
+
+
 
 /*#endregion            MEDIA        */

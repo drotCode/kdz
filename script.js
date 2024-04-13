@@ -1,199 +1,3 @@
-// #region              elements
-const step = {
-    cont: document.querySelector(".stepCont"),
-    title: document.querySelector(".stepTitle"),
-    par: document.querySelector(".stepPar"),
-    note: document.querySelector(".stepNote"),
-    btnCont: document.querySelector(".stepBtnCont"),
-    get btns() {return document.querySelectorAll(".stepBtnCont > *")} ,
-
-}
-
-const audio = {
-    main: document.querySelector(".audio"),
-    pop: document.querySelector(".audio2"),
-}
-// #endregion elements
-
-
-
-
-//                      #region adjust
-
-const adjust = {
-    tooManyBtns() {
-        if (step.btnCont.children.length > 10) {
-            step.btnCont.classList.add("jsGrid")
-        } else if (step.btnCont.classList.contains("jsGrid")) { step.btnCont.classList.remove("jsGrid") }
-    },
-    fontSize(label, button) { if (label.length > 50) { button.classList.add("font1rem") } },
-}
-//                                  #endregion adjust
-
-
-//                      #region animations
-
-let getAnim = (tar, fr, tm) => new Animation(new KeyframeEffect(tar, fr, tm))
-
-const hiding = (action, ...els) => {
-    let hideArr = [1, "hide", "h", "on", true, "true"]
-    let unhideArr = [0, "unhide", "u", "off", false, "false", "show"]
-    let toggleArr = [-1, "toggle", "t", "alternate", "false", "show"]
-    els.forEach((el) => {
-        if (hideArr.includes(action)) { el.classList.add("hide") }
-        else if (unhideArr.includes(action)) { el.classList.remove("hide") }
-        else if (toggleArr.includes(action)) { el.classList.toggle("hide") } else console.warn("Unkown action")
-    })
-}
-
-const mainAnim = {
-    bool: true,
-    play() {
-        let targets = [step.title, step.par, ...step.btns]
-        audio.main.play()
-
-        targets.forEach((el) => {
-            el.animate([
-                { offset: "0%", translate: (this.bool = !this.bool) ? "100%" : "-100%", filter: "blur(3px)" },
-                { offset: "100%", translate: "", filter: "", },
-            ], { duration: 500, fill: "both", easing: "ease" })
-        })
-    }
-}
-
-// title dropowns
-step.title.addEventListener("click", (e) => {
-    e.target.classList.toggle("on")
-
-    hiding("toggle", step.note)
-})
-
-// buttons to targets
-let buttonPopMap = {
-    names: ["info", "date", "rig", "menu"],
-    match() {
-        this.names.forEach((name) => {
-            let span = document.querySelector("." + name + ">span")
-            let pop = document.querySelector("." + name + ".pop")
-            span.addEventListener("click", (e) => {
-                audio.pop.play()
-                e.target.classList.toggle("on")
-                hiding("toggle", pop)
-            },true)
-        })
-    },
-}
-buttonPopMap.match()
-
-//                      #endregion animations
-
-
-//                      #region generator
-
-const logger = {
-    logs : [ ],
-    pop: document.querySelector(".pop.log"),
-    list: document.querySelector(".logList"),
-    writeList (){
-        this.logs.forEach((log) => {
-            let logEl = document.createElement("div")
-            log.forEach((logItem) => {
-                let itemEl = document.createElement("p")
-                itemEl.innerText = logItem
-                logEl.append(itemEl)
-            })
-            this.list.append(logEl)
-        })
-    },
-    clear(){this.logs = []},
-    appear() {
-      this.writeList()
-      hiding("show",this.pop)  
-    },
-}
-
-const pageIt = (nameofThePage) => {
-
-    while (step.btnCont.children.item(0)) { step.btnCont.children.item(0).remove() }
-
-    let page = pageObjects.find(page => page.name == nameofThePage)
-
-    step.title.innerText = page.title
-    step.par.innerText = page.par
-    step.note.innerText = page?.note || "not yok";
-
-    if (!page.choices.length) { page.choices.push(restartChoice) }
-
-    if(nameofThePage.includes("result")){ logger.appear() }
-
-    page.choices.forEach((choice) => {
-
-        choice.labels.forEach((label) => {
-            let btn = document.createElement("button")
-            btn.innerText = label
-            btn.classList.add("generated")
-            let log = [page.title, page.par, label]
-            btn.addEventListener("click", (e) => {
-                logger.logs.push(log)
-                pageIt(choice.nextPage)
-                mainAnim.play()
-
-            })
-            step.btnCont.append(btn)
-        })
-
-    })
-adjust.tooManyBtns()
-
-
-
-
-}
-//                      #endregion generator
-
-
-//                      #region additions
-
-const hideParent = () => {
-    document.querySelector(".hideParent").addEventListener("click", (e) => {
-        hiding("hide",e.target.parentElement)
-    })
-}
-hideParent()
-
-const copyToClip = () => {
-    document.querySelector(".copyToClip").addEventListener("click", (e) => {
-        navigator.clipboard.writeText(logger.list.innerText )
-    })
-}
-copyToClip()
-
-const addDay = (gunSayisi) => new Date(Date.now() + 86400000 * gunSayisi).toLocaleDateString("tur-TR").slice(0, -5);
-
-const showVacDates = (e) => {
-    let map = [0, 3, 7, 14, 28].map((x) => addDay(x))
-
-    document.querySelectorAll(".doseDate").forEach((el, idx) => {
-        el.innerText = map[idx]
-    })
-}
-showVacDates()
-
-const igFunc = () => {
-    
-    let rigInputs = document.querySelectorAll(".pop.rig input")
-    let [kgInput, iuInput, humanChckBx,] = rigInputs 
-    
-
-    rigInputs.forEach((inp) => {
-        inp.addEventListener("input", (e) => {
-            iuInput.value = (humanChckBx.checked ? 20 : 40) * kgInput.value
-        })
-    })
-}
-igFunc()
-//                      #endregion additions
-
 
 //                      #region Data
 
@@ -452,48 +256,55 @@ let pageObjects = [
         title: "Ig Yapılmaz",
         par: "Ig yapılmamalı. Aşılama sürdürülür.",
         note: notes.rig.warnings,
-        choices: []
+        choices: [],
+        extras: { result: true },
     },
     {
         name: "resultRig",
         title: "Ig Uygula",
         par: "Ig uygulanır. Aşılama sürdürülür.",
         note: notes.rig,
-        choices: []
+        choices: [],
+        extras: { result: true },
     },
     {
         name: "resultVaccSmall",
         title: "Aşıla",
         par: "Aşılamaya başla. Ig gerekli değil.",
         note: notes.vac.schema,
-        choices: []
+        choices: [],
+        extras: { result: true },
     },
     {
         name: "resultNoProphylaxis",
         title: "Bitti",
         par: "Profilaksi bitti.",
         note: notes.noPEP.warnings,
-        choices: []
+        choices: [],
+        extras: { result: true },
     },
     {
         name: "resultVacPlusRig",
         title: "Aşı + Ig",
         par: "Aşılamaya başla ve Ig uygula",
         note: notes.rig.dose,
-        choices: []
+        choices: [],
+        extras: { result: true },
     },
     {
         name: "resultVacc2dose",
         title: "2 doz aşı",
         par: "Toplam 2 doz aşı uygula (0. ve 3. günlerde)",
         note: notes.vacc2dose,
-        choices: []
+        choices: [],
+        extras: { result: true },
     },
     {
         name: "resultUnknown",
         title: "Bilmiyorum",
         par: "Cevabı Bilmiyorum :(",
-        choices: []
+        choices: [],
+        extras: { result: true },
     },
     {
         name: "isInSixMonths",
@@ -571,7 +382,7 @@ let pageObjects = [
                 value: false,
                 nextPage: "resultVacPlusRig",
                 labels: [
-                    "köpek", "kedi", "sığır","inek", "koyun", "keçi", "at", "eşek", "kurt", "tilki", "çakal", "domuz", "ayı", "sansar", "kokarca", "gelincik", "maymun"
+                    "köpek", "kedi", "sığır", "inek", "koyun", "keçi", "at", "eşek", "kurt", "tilki", "çakal", "domuz", "ayı", "sansar", "kokarca", "gelincik", "maymun"
                 ]
             }
         ]
@@ -621,21 +432,307 @@ let pageObjects = [
                 ]
             }
         ]
+    },
+    {
+        name: "logs",
+        title: "Sorulara Verilen Cevaplar",
+        par: "",
+        note: "",
+        choices: [],
+        extras:{fns:[
+            () => {
+              step.par.innerText = logger.logs.join("\n")  
+            }
+        ]}
     }
 ]
 
+let firstPageName = "isCatDogWound"
+let restartChoice = { value: undefined, nextPage: firstPageName, labels: ["Baştan Başla"] }
+
+
+let seeLogsChoice = { value: undefined, nextPage: "logsPage", labels: ["Geçmişi Gör"] }
 
 
 
 //                      #endregion Data
 
-let firstPageName = "isCatDogWound"
-let restartChoice = { value: undefined, nextPage: firstPageName, labels: ["Baştan Başla"] }
-// let logChoice = { value: undefined, nextPage: firstPageName, labels: ["Baştan Başla"] }
+
+
+
+// #region              elements
+const step = {
+    cont: document.querySelector(".stepCont"),
+    title: document.querySelector(".stepTitle"),
+    par: document.querySelector(".stepPar"),
+    note: document.querySelector(".stepNote"),
+    btnCont: document.querySelector(".stepBtnCont"),
+    get btns() { return document.querySelectorAll(".stepBtnCont > *") },
+
+}
+
+const audio = {
+    main: document.querySelector(".audio"),
+    pop: document.querySelector(".audio2"),
+}
+// #endregion elements
+
+
+
+
+//                      #region adjust
+
+const adjust = {
+    tooManyBtns() {
+        if (step.btnCont.children.length > 10) {
+            step.btnCont.classList.add("jsGrid")
+        } else if (step.btnCont.classList.contains("jsGrid")) { step.btnCont.classList.remove("jsGrid") }
+    },
+    fontSize(label, button) { if (label.length > 50) { button.classList.add("font1rem") } },
+}
+//                                  #endregion adjust
+
+
+//                      #region animations
+
+let getAnim = (tar, fr, tm) => new Animation(new KeyframeEffect(tar, fr, tm))
+
+const hiding = (action, ...els) => {
+    let hideArr = [1, "hide", "h", "on", true, "true"]
+    let unhideArr = [0, "unhide", "u", "off", false, "false", "show"]
+    let toggleArr = [-1, "toggle", "t", "alternate", "false", "show"]
+    els.forEach((el) => {
+        if (hideArr.includes(action)) { el.classList.add("hide") }
+        else if (unhideArr.includes(action)) { el.classList.remove("hide") }
+        else if (toggleArr.includes(action)) { el.classList.toggle("hide") } else console.warn("Unkown action")
+    })
+}
+
+const mainAnim = {
+    bool: true,
+    play() {
+        let targets = [step.title, step.par, ...step.btns]
+        audio.main.play()
+
+        targets.forEach((el) => {
+            el.animate([
+                { offset: "0%", translate: (this.bool = !this.bool) ? "100%" : "-100%", filter: "blur(3px)" },
+                { offset: "100%", translate: "", filter: "", },
+            ], { duration: 500, fill: "both", easing: "ease" })
+        })
+    }
+}
+
+// title dropowns
+step.title.addEventListener("click", (e) => {
+    e.target.classList.toggle("on")
+
+    hiding("toggle", step.note)
+})
+
+
+let pointerlog = []
+// buttons(span) to popup link
+let buttonPopMap = {
+    names: ["info", "date", "rig", "menu"],
+    match() {
+        this.names.forEach((popupName) => {
+            let span = document.querySelector("." + popupName + ">span")
+            let pop = document.querySelector("." + popupName + ".pop")
+
+            span.addEventListener("click", (e) => {
+                audio.pop.play()
+                span.classList.toggle("on")
+                hiding("toggle", pop)
+            }, true)
+
+            // pop.setAttribute("draggable", "true")
+            pop.addEventListener("dragend", (e) => {
+                hiding("toggle", pop)
+                span.classList.toggle("on")
+
+            })
+
+
+        })
+    },
+}
+buttonPopMap.match()
+
+//                      #endregion animations
+
+
+//                      #region generator
+
+const logger = {
+    pop: document.querySelector(".pop.log"),
+    list: document.querySelector(".logList"),
+    logs: [],
+    log(par, choiceName) {
+        let newLog = [par, choiceName]
+        let logEl = document.createElement("liv")
+        newLog.forEach((item) => {
+            let itemEl = document.createElement("p")
+            itemEl.innerText = item
+            logEl.append(itemEl)
+        })
+        this.list.append(logEl)
+    },    
+    writeList() {
+        this.logs.forEach((log) => {
+            let logEl = document.createElement("li")
+            log.forEach((logItem) => {
+                let itemEl = document.createElement("p")
+                itemEl.innerText = logItem
+                logEl.append(itemEl)
+            })
+            this.list.append(logEl)
+        })
+    },
+    clearArray() { this.logs = [] },
+    clearElements() { while (this.list.children[0]) { this.list.children[0].remove() } },
+    appear() {
+        hiding("show", this.pop)
+    },
+}
+
+
+
+const clearButtons = () => {while (step.btnCont.children.item(0)) step.btnCont.children.item(0).remove()}
+
+const getPage = pageName => pageObjects.find(page => page.name == pageName)
+
+
+/**
+ * 
+ * @param {string} tag 
+ * @param {string} text 
+ * @param {string} event 
+ * @param {function} fn 
+ * @param {HTMLElement} parent 
+ */
+const myElement = (tag="div",text="",event = "click",fn = null,parent ) => {
+    let newEl = document.createElement(tag)
+    newEl.innerText = text
+    newEl.addEventListener(event, fn)
+    parent.append(newEl)
+}
+
+myElement()
+
+const prePagify = (nameofThePage) => {
+    clearButtons()
+    let page = getPage(nameofThePage)
+    if (!page.choices.length) { page.choices.push(restartChoice, seeLogsChoice) }
+
+    if (page?.extras) {
+        let extras = page.extras
+        if (extras?.result) {
+            step.par.style.height = "60%"
+            step.par.style.fontSize = "1rem"
+            step.par.style.border = "0.5rem solid green"
+        }
+        extras.fns?.forEach((fn) => fn())
+
+        pagify(page)
+    } else {
+        step.par.style = {}
+        pagify(page)
+    }
+}
+
+
+
+const pagify = (page) => {
+    ["title", "par", "note"].forEach(propName => step[propName].innerText = page[propName] || "")
+
+   page.choices.forEach((choice) => {
+
+        choice.labels.forEach((label) => {
+            let btn = document.createElement("button")
+            btn.innerText = label
+            let log = [page.par, label]
+            btn.addEventListener("click", (e) => {
+                logger.log(log)
+                prePagify(choice.nextPage)
+                mainAnim.play()
+
+            })
+            step.btnCont.append(btn)
+        })
+
+    })
+    adjust.tooManyBtns()
+
+}
+
+
+
+const next = () => {
+    
+
+
+
+
+    tpc()
+
+
+
+
+
+
+
+
+}
+
+//                      #endregion generator
+
+
+//                      #region additions
+
+const hideParent = () => {
+    document.querySelector(".hideParent").addEventListener("click", (e) => {
+        hiding("hide", e.target.parentElement)
+    })
+}
+hideParent()
+
+const copyToClip = () => {
+    document.querySelector(".copyToClip").addEventListener("click", (e) => {
+        navigator.clipboard.writeText(logger.list.innerText)
+    })
+}
+copyToClip()
+
+const addDay = (gunSayisi) => new Date(Date.now() + 86400000 * gunSayisi).toLocaleDateString("tur-TR").slice(0, -5);
+
+const showVacDates = (e) => {
+    let map = [0, 3, 7, 14, 28].map((x) => addDay(x))
+
+    document.querySelectorAll(".doseDate").forEach((el, idx) => {
+        el.innerText = map[idx]
+    })
+}
+showVacDates()
+
+const igFunc = () => {
+
+    let rigInputs = document.querySelectorAll(".pop.rig input")
+    let [kgInput, iuInput, humanChckBx,] = rigInputs
+
+
+    rigInputs.forEach((inp) => {
+        inp.addEventListener("input", (e) => {
+            iuInput.value = (humanChckBx.checked ? 20 : 40) * kgInput.value
+        })
+    })
+}
+igFunc()
+//                      #endregion additions
 
 
 
 /* ----- ---------- ----------* APP INIT */
 
-pageIt(firstPageName)
+prePagify(firstPageName)
 
