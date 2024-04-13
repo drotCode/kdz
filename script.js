@@ -90,6 +90,28 @@ buttonPopMap.match()
 
 //                      #region generator
 
+const logger = {
+    logs : [ ],
+    pop: document.querySelector(".pop.log"),
+    list: document.querySelector(".logList"),
+    writeList (){
+        this.logs.forEach((log) => {
+            let logEl = document.createElement("div")
+            log.forEach((logItem) => {
+                let itemEl = document.createElement("p")
+                itemEl.innerText = logItem
+                logEl.append(itemEl)
+            })
+            this.list.append(logEl)
+        })
+    },
+    clear(){this.logs = []},
+    appear() {
+      this.writeList()
+      hiding("show",this.pop)  
+    },
+}
+
 const pageIt = (nameofThePage) => {
 
     while (step.btnCont.children.item(0)) { step.btnCont.children.item(0).remove() }
@@ -102,14 +124,17 @@ const pageIt = (nameofThePage) => {
 
     if (!page.choices.length) { page.choices.push(restartChoice) }
 
+    if(nameofThePage.includes("result")){ logger.appear() }
+
     page.choices.forEach((choice) => {
 
         choice.labels.forEach((label) => {
             let btn = document.createElement("button")
             btn.innerText = label
             btn.classList.add("generated")
-
+            let log = [page.title, page.par, label]
             btn.addEventListener("click", (e) => {
+                logger.logs.push(log)
                 pageIt(choice.nextPage)
                 mainAnim.play()
 
@@ -119,11 +144,29 @@ const pageIt = (nameofThePage) => {
 
     })
 adjust.tooManyBtns()
+
+
+
+
 }
 //                      #endregion generator
 
 
 //                      #region additions
+
+const hideParent = () => {
+    document.querySelector(".hideParent").addEventListener("click", (e) => {
+        hiding("hide",e.target.parentElement)
+    })
+}
+hideParent()
+
+const copyToClip = () => {
+    document.querySelector(".copyToClip").addEventListener("click", (e) => {
+        navigator.clipboard.writeText(logger.list.innerText )
+    })
+}
+copyToClip()
 
 const addDay = (gunSayisi) => new Date(Date.now() + 86400000 * gunSayisi).toLocaleDateString("tur-TR").slice(0, -5);
 
@@ -583,10 +626,12 @@ let pageObjects = [
 
 
 
-let firstPageName = "isCatDogWound"
-let restartChoice = { value: undefined, nextPage: firstPageName, labels: ["Baştan Başla"] }
+
 //                      #endregion Data
 
+let firstPageName = "isCatDogWound"
+let restartChoice = { value: undefined, nextPage: firstPageName, labels: ["Baştan Başla"] }
+// let logChoice = { value: undefined, nextPage: firstPageName, labels: ["Baştan Başla"] }
 
 
 
