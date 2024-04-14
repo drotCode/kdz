@@ -449,7 +449,16 @@ let pageObjects = [
         par: "",
         note: "",
         paths: [restartPath],
-        extras: {}
+        extras: {
+            fns:[
+                () => {
+                    logger.logs.forEach(([q,a]) => {
+                        step.par.innerText += q + "\n" + a + "\n\n"
+                    })
+                    logger.clearArray()
+                }
+            ]
+        }
     }
 ]
 //                      #endregion DATA
@@ -569,7 +578,7 @@ const logger = {
     logs: [],
     log(par, choiceName) {
         let newLog = [par, choiceName]
-        let logEl = document.createElement("liv")
+        let logEl = document.createElement("li")
         newLog.forEach((item) => {
             let itemEl = document.createElement("p")
             itemEl.innerText = item
@@ -599,7 +608,7 @@ const logger = {
 
 
 
-const pagify = (pageName, newLog) => {
+const pagify = (pageName, logArr) => {
     let page = pageObjects.find(page => page.name == pageName)
     step.btnCont.style = {}
     page?.extras?.fns?.forEach((fn) => fn())
@@ -611,12 +620,15 @@ const pagify = (pageName, newLog) => {
     textProps.forEach(propName => step[propName].innerText = page[propName])
     if (!page.paths.length) { page.paths.push(restartPath, seeLogsPath) }
 
-    newLog.push(pageName)
 
     page.paths.forEach((choice) => {
 
         choice.labels.forEach((label) => {
-            const listenerFn = (e) => { pagify(choice.destinName, newLog), mainAnim.play() }
+            const listenerFn = (e) => {
+                logArr.push([pageName,label])
+                pagify(choice.destinName, logArr)
+                 mainAnim.play()
+             }
             myElement("button", label, "click", listenerFn, step.btnCont)
         })
     })
@@ -673,5 +685,5 @@ igFunc()
 
 /* ----- ---------- ----------* APP INIT */
 
-pagify(firstPageName, [])
+pagify(firstPageName, logger.logs)
 
