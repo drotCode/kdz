@@ -1,5 +1,34 @@
 
 
+const notes2 = {
+    redBox: {
+        vacInjSite: `Aşı erişkinlerde deltoid bölgeye, küçük çocuklarda uyluğun anterolateral bölgesine kas içine uygulanır. 
+        Gluteal bölgeye aşı enjeksiyonu, yeterli antikor yanıtı oluşturmadığı için yapılmamalıdır.`,
+        vacAsap: `Temas sonrası aşılamaya olabildiğince erken başlanmalıdır.`,
+        neverTooLate: `Kuduzda inkübasyon süresi çok değişken olduğundan, riskli temas sonrasında aradan geçen süreye bakmaksızın temas kategorize edilerek uygun profilaksiye başlanmalıdır.`,
+        dontForgetNonPep: `Profilaksi gerektirmeyen durumlarda da (insan ısırıkları dahil) yara temizliği, antibiyotik tedavisi, tetanoz profilaksisi gibi ihtiyaç duyulan tedavi yaklaşımları ihmal edilmemelidir.`,
+        recordEveryCase: `Kuduz profilaksisi uygulansın ya da uygulanmasın tüm kuduz riskli temaslar mutlaka kayıt altına alınmalıdır.`,
+        avoidSuture: `Yaraya mümkün olduğu kadar dikiş ve benzeri girişim yapılmaması tercih edilir. Derin ve geniş yaralanmalarda, kozmetik faktörler ve enfeksiyon riski değerlendirilmelidir. Kuduz profilaksisi gerekiyorsa, virüsün sinir içine inokülasyon riskini en aza indirmek için yara çevresine ve içine kuduz immünglobulini yapıldıktan 2 saat sonra dikiş atılabilir.`,
+        abFollow: `Çocuk ve erişkinler için antibiyotik profilaksi süresi belirgin kirli olmayan yara durumunda 3 gün, kirli yara durumunda 5 gündür. 
+        İmmünsupresif hastalar dahil tüm hastalar 3 gün sonra tekrar değerlendirilmelidir.`,
+        justContinue: `Bir veya birkaç doz aşı yapıldıktan sonra, aşıya ara vererek yeniden başvuranlarda aşılama şemasına kalınan yerden devam edilir.`,
+        everyOnesEqual: `Bebek, çocuk, erişkin ve gebelerde kuduz bağışıklaması aynı şema ve dozlarla uygulanır.`,
+        superCase: `Kuduz riskli temas sonrası aşılaması devam eden hastanın bu sırada yeni bir riskli teması olmuşsa aşılama şeması aynı şekilde sürdürülür.
+        İkinci temasta immünglobulin endikasyonu varsa ilk doz aşıyı takip eden yedi gün içinde immünglobulin yapılır. Süre 7 günü geçmiş ise immünglobulin yapılmamalıdır.`,
+        rVacMustGoOn: `Aşılama sırasında viral ve bakteriyel enfeksiyon saptanan hastalar uygun şekilde tedavi edilir ve aşılama sürdürülür. Kullanılan ilaçlara devam edilir. `,
+        dontMix: `İmmünglobülin asla aşıyla aynı enjektörle ve İmmünglobülin asla aşıyla aynı anatomik bölgeye yapılmaz.`,
+        compartment: `İmmünglobülin yapılırken özellikle küçük yaralarda kompartman sendromu gelişmesi konusunda dikkatli olunmalıdır.`,
+
+    }
+}
+
+const displayWithClass = (actionNum, ...els) => {
+    els.forEach((el) => {
+        if (actionNum == 0) { el.classList.add("hide") }
+        else if (actionNum == 1) { el.classList.remove("hide") }
+        else if (actionNum == 0) { el.classList.toggle("hide") } else throw new Error("Unkown action Number")
+    })
+}
 const pages = [
 
     ["isSevenDaysPassed", "7 Gün", "İlk aşıdan itibaren 7 gün geçti mi?", [

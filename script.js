@@ -1,6 +1,27 @@
+// #region                          ELEMENTS
+const step = {
+    cont: document.querySelector(".stepCont"),
+    title: document.querySelector(".stepTitle"),
+    par: document.querySelector(".stepPar"),
+    note: document.querySelector(".stepNote"),
+    btnCont: document.querySelector(".stepBtnCont"),
+    get btns() { return document.querySelectorAll(".stepBtnCont > *") },
 
-//                      #region Data
+}
 
+const audio = {
+    main: document.querySelector(".audio"),
+    pop: document.querySelector(".audio2"),
+}
+
+let firstPageName = "isCatDogWound"
+let restartPath = { value: undefined, destinName: firstPageName, labels: ["Baştan Başla"] }
+let seeLogsPath = { value: undefined, destinName: "logs", labels: ["Geçmişi Gör"] }
+// #endregion                    ELEMENTS
+
+
+
+//                      #region DATA
 
 const notes = {
     rig: {
@@ -48,32 +69,8 @@ const notes = {
     ,
     catDogWhy: `Kedi ve köpeklerde kuduz patogenezini araştıran çalışmalarda virüs santral sinir sisteminden tükrük bezlerine ulaştıktan sonra 10 gün içinde hastalık belirtileri ortaya çıkmakta ve hayvan ölmektedir. Bir başka deyişle ısıran hayvan salyasında virüs taşıyorsa 10 gün içinde ölmesi beklenir (Bu nedenle kedi ve köpeğin 10 gün gözlemi önerilir). Kedi ve köpek dışındaki hayvanlarda böyle bir süre verilemez ve gözlem önerilmez. `,
     vaccedPetDies: `Hayvanın  kuduz belirtisi göstermesi veya açıklanamayan bir nedenle ölümü halinde  hemen   (0., 3., 7. günlerde birer doz ve 14-28. günler arasında bir doz daha olmak üzere toplam 4 doz aşı ile birlikte immünglobulin başlanır. `
-
-
-
 }
 
-const notes2 = {
-    redBox: {
-        vacInjSite: `Aşı erişkinlerde deltoid bölgeye, küçük çocuklarda uyluğun anterolateral bölgesine kas içine uygulanır. 
-        Gluteal bölgeye aşı enjeksiyonu, yeterli antikor yanıtı oluşturmadığı için yapılmamalıdır.`,
-        vacAsap: `Temas sonrası aşılamaya olabildiğince erken başlanmalıdır.`,
-        neverTooLate: `Kuduzda inkübasyon süresi çok değişken olduğundan, riskli temas sonrasında aradan geçen süreye bakmaksızın temas kategorize edilerek uygun profilaksiye başlanmalıdır.`,
-        dontForgetNonPep: `Profilaksi gerektirmeyen durumlarda da (insan ısırıkları dahil) yara temizliği, antibiyotik tedavisi, tetanoz profilaksisi gibi ihtiyaç duyulan tedavi yaklaşımları ihmal edilmemelidir.`,
-        recordEveryCase: `Kuduz profilaksisi uygulansın ya da uygulanmasın tüm kuduz riskli temaslar mutlaka kayıt altına alınmalıdır.`,
-        avoidSuture: `Yaraya mümkün olduğu kadar dikiş ve benzeri girişim yapılmaması tercih edilir. Derin ve geniş yaralanmalarda, kozmetik faktörler ve enfeksiyon riski değerlendirilmelidir. Kuduz profilaksisi gerekiyorsa, virüsün sinir içine inokülasyon riskini en aza indirmek için yara çevresine ve içine kuduz immünglobulini yapıldıktan 2 saat sonra dikiş atılabilir.`,
-        abFollow: `Çocuk ve erişkinler için antibiyotik profilaksi süresi belirgin kirli olmayan yara durumunda 3 gün, kirli yara durumunda 5 gündür. 
-        İmmünsupresif hastalar dahil tüm hastalar 3 gün sonra tekrar değerlendirilmelidir.`,
-        justContinue: `Bir veya birkaç doz aşı yapıldıktan sonra, aşıya ara vererek yeniden başvuranlarda aşılama şemasına kalınan yerden devam edilir.`,
-        everyOnesEqual: `Bebek, çocuk, erişkin ve gebelerde kuduz bağışıklaması aynı şema ve dozlarla uygulanır.`,
-        superCase: `Kuduz riskli temas sonrası aşılaması devam eden hastanın bu sırada yeni bir riskli teması olmuşsa aşılama şeması aynı şekilde sürdürülür.
-        İkinci temasta immünglobulin endikasyonu varsa ilk doz aşıyı takip eden yedi gün içinde immünglobulin yapılır. Süre 7 günü geçmiş ise immünglobulin yapılmamalıdır.`,
-        rVacMustGoOn: `Aşılama sırasında viral ve bakteriyel enfeksiyon saptanan hastalar uygun şekilde tedavi edilir ve aşılama sürdürülür. Kullanılan ilaçlara devam edilir. `,
-        dontMix: `İmmünglobülin asla aşıyla aynı enjektörle ve İmmünglobülin asla aşıyla aynı anatomik bölgeye yapılmaz.`,
-        compartment: `İmmünglobülin yapılırken özellikle küçük yaralarda kompartman sendromu gelişmesi konusunda dikkatli olunmalıdır.`,
-
-    }
-}
 
 let pageObjects = [
     {
@@ -81,17 +78,17 @@ let pageObjects = [
         title: "7 Gün",
         par: "İlk aşıdan itibaren 7 gün geçti mi?",
         note: ``,
-        choices: [
+        paths: [
             {
                 value: true,
-                nextPage: "resultNoRig",
+                destinName: "resultNoRig",
                 labels: [
                     "7 gün geçti"
                 ]
             },
             {
                 value: false,
-                nextPage: "resultRig",
+                destinName: "resultRig",
                 labels: [
                     "7 gün geçmedi"
                 ]
@@ -103,17 +100,17 @@ let pageObjects = [
         title: "Hayvan Aşı",
         par: "Kedi/Köpek'in 1 sene içinde Kuduz Aşısı var mı?",
         note: notes.vaccedPetDies,
-        choices: [
+        paths: [
             {
                 value: true,
-                nextPage: "isPetFine",
+                destinName: "isPetFine",
                 labels: [
                     "Kedi/Köpek son 1 senede kuduz aşısı olmuş"
                 ]
             },
             {
                 value: false,
-                nextPage: "isPetWatchBig",
+                destinName: "isPetWatchBig",
                 labels: [
                     "Kedi/Köpek son 1 senede kuduz aşısı olmamış"
                 ]
@@ -124,17 +121,18 @@ let pageObjects = [
         name: "isPetFineNoVac",
         title: "Aşıla ve Gözlem Altında",
         par: "Aşılamaya başla ve kedi/köpek'i gözlem altında tut. Kedi/Köpek 10 günü sağlıklı şekilde geçirdi mi?",
-        choices: [
+        note: ``,
+        paths: [
             {
                 value: true,
-                nextPage: "resultNoProphylaxis",
+                destinName: "resultNoProphylaxis",
                 labels: [
                     "Gözlem Sorunsuz"
                 ]
             },
             {
                 value: false,
-                nextPage: "isSevenDaysPassed",
+                destinName: "isSevenDaysPassed",
                 labels: [
                     "Hayvan öldü/hasta/bilinmiyor"
                 ]
@@ -145,17 +143,18 @@ let pageObjects = [
         name: "isPetFine",
         title: "Gözlem Altında",
         par: "Aşı veya Ig yapılmaz. Kedi/Köpek'i 10 gün gözlem altında tutulur. Kedi/Köpek 10 günü sağlıklı şekilde geçirdi mi?",
-        choices: [
+        note: ``,
+        paths: [
             {
                 value: true,
-                nextPage: "resultNoProphylaxis",
+                destinName: "resultNoProphylaxis",
                 labels: [
                     "Gözlem Sorunsuz"
                 ]
             },
             {
                 value: false,
-                nextPage: "resultVacPlusRig",
+                destinName: "resultVacPlusRig",
                 labels: [
                     "Hayvan öldü/hasta/bilinmiyor"
                 ]
@@ -166,17 +165,18 @@ let pageObjects = [
         name: "isPetFineSmall",
         title: "Gözlem Altında",
         par: "Kedi/Köpek 10 günü sağlıklı şekilde geçirdi mi?",
-        choices: [
+        note: ``,
+        paths: [
             {
                 value: true,
-                nextPage: "resultNoProphylaxis",
+                destinName: "resultNoProphylaxis",
                 labels: [
                     "Gözlem Sorunsuz"
                 ]
             },
             {
                 value: false,
-                nextPage: "resultVaccSmall",
+                destinName: "resultVaccSmall",
                 labels: [
                     "Hayvan öldü/hasta/bilinmiyor"
                 ]
@@ -187,17 +187,18 @@ let pageObjects = [
         name: "isPetWatchBig",
         title: "Gözlem İmkanı",
         par: "Kedi/Köpek'in 10 gün gözlemi yapılabilecek mi?",
-        choices: [
+        note: ``,
+        paths: [
             {
                 value: true,
-                nextPage: "isPetFineNoVac",
+                destinName: "isPetFineNoVac",
                 labels: [
                     "Gözlem Yapılacak"
                 ]
             },
             {
                 value: false,
-                nextPage: "resultVacPlusRig",
+                destinName: "resultVacPlusRig",
                 labels: [
                     "Gözlem Yapılamayacak"
                 ]
@@ -209,17 +210,17 @@ let pageObjects = [
         title: "Gözlem İmkanı",
         par: "Kedi/Köpek'in 10 gün gözlemi yapılabilecek mi?",
         note: notes.catDogWhy,
-        choices: [
+        paths: [
             {
                 value: true,
-                nextPage: "isPetFineSmall",
+                destinName: "isPetFineSmall",
                 labels: [
                     "Gözlem Yapılacak"
                 ]
             },
             {
                 value: false,
-                nextPage: "resultVaccSmall",
+                destinName: "resultVaccSmall",
                 labels: [
                     "Gözlem Yapılamayacak"
                 ]
@@ -231,10 +232,10 @@ let pageObjects = [
         title: "Temas Kategorisi",
         par: "Yara hangi tarife uyuyor?",
         note: notes.vac.schema,
-        choices: [
+        paths: [
             {
                 value: true,
-                nextPage: "isPetWatchSmall",
+                destinName: "isPetWatchSmall",
                 labels: [
                     "Çıplak derinin hafifçe sıyrılması (deri altına geçmeyen yaralanmalar)",
                     "Kanama olmadan küçük tırmalama veya zedeleme"
@@ -242,7 +243,7 @@ let pageObjects = [
             },
             {
                 value: false,
-                nextPage: "isPetVacced",
+                destinName: "isPetVacced",
                 labels: [
                     "Deriyi zedeleyen tek veya çok sayıda ısırma ve tırmalamalar",
                     "Mukozaların, açık cilt yaralarının hayvanın salyası ile temas etmesi",
@@ -256,7 +257,7 @@ let pageObjects = [
         title: "Ig Yapılmaz",
         par: "Ig yapılmamalı. Aşılama sürdürülür.",
         note: notes.rig.warnings,
-        choices: [],
+        paths: [],
         extras: { result: true },
     },
     {
@@ -264,7 +265,7 @@ let pageObjects = [
         title: "Ig Uygula",
         par: "Ig uygulanır. Aşılama sürdürülür.",
         note: notes.rig,
-        choices: [],
+        paths: [],
         extras: { result: true },
     },
     {
@@ -272,7 +273,7 @@ let pageObjects = [
         title: "Aşıla",
         par: "Aşılamaya başla. Ig gerekli değil.",
         note: notes.vac.schema,
-        choices: [],
+        paths: [],
         extras: { result: true },
     },
     {
@@ -280,7 +281,7 @@ let pageObjects = [
         title: "Bitti",
         par: "Profilaksi bitti.",
         note: notes.noPEP.warnings,
-        choices: [],
+        paths: [],
         extras: { result: true },
     },
     {
@@ -288,7 +289,7 @@ let pageObjects = [
         title: "Aşı + Ig",
         par: "Aşılamaya başla ve Ig uygula",
         note: notes.rig.dose,
-        choices: [],
+        paths: [],
         extras: { result: true },
     },
     {
@@ -296,14 +297,15 @@ let pageObjects = [
         title: "2 doz aşı",
         par: "Toplam 2 doz aşı uygula (0. ve 3. günlerde)",
         note: notes.vacc2dose,
-        choices: [],
+        paths: [],
         extras: { result: true },
     },
     {
         name: "resultUnknown",
         title: "Bilmiyorum",
         par: "Cevabı Bilmiyorum :(",
-        choices: [],
+        note: ``,
+        paths: [],
         extras: { result: true },
     },
     {
@@ -311,17 +313,17 @@ let pageObjects = [
         title: "6 Ay",
         par: "Son 6 ay içinde mi aşılanmış?",
         note: notes.noPEP.warnings,
-        choices: [
+        paths: [
             {
                 value: true,
-                nextPage: "resultNoProphylaxis",
+                destinName: "resultNoProphylaxis",
                 labels: [
                     "6 ay içinde"
                 ]
             },
             {
                 value: false,
-                nextPage: "resultVacc2dose",
+                destinName: "resultVacc2dose",
                 labels: [
                     "6 aydan fazla olmuş"
                 ]
@@ -333,32 +335,31 @@ let pageObjects = [
         title: "Özel Durum",
         par: "Hangi durum var?",
         note: notes.noPEP.list,
-
-        choices: [
+        paths: [
             {
                 value: false,
-                nextPage: "isSmallWound",
+                destinName: "isSmallWound",
                 labels: [
                     "Hiçbiri"
                 ]
             },
             {
                 value: "immDef",
-                nextPage: "resultVacPlusRig",
+                destinName: "resultVacPlusRig",
                 labels: [
                     "İmmün Yetmezlik"
                 ]
             },
             {
                 value: "vaccedPatient",
-                nextPage: "isInSixMonths",
+                destinName: "isInSixMonths",
                 labels: [
                     "Hasta daha önce de kuduza karşı aşılanmış"
                 ]
             },
             {
                 value: "catScratch",
-                nextPage: "resultNoProphylaxis",
+                destinName: "resultNoProphylaxis",
                 labels: [
                     "Provoke, küçük, kanamasız kedi tırmalaması"
                 ]
@@ -370,17 +371,26 @@ let pageObjects = [
         title: "Hayvanlar",
         par: "Hayvan seçiniz",
         note: notes.noPEP.par,
-        choices: [
+        extras: {
+            fns: [
+                () => {
+                    step.btnCont.style.display = "grid"
+                    step.btnCont.style.gridTemplateColumns = "repeat(3, 1fr)"
+                    step.btnCont.style.alignItems = "unset"
+                }
+            ]
+        },
+        paths: [
             {
                 value: true,
-                nextPage: "resultNoProphylaxis",
+                destinName: "resultNoProphylaxis",
                 labels: [
                     "fare", "kirpi", "köstebek", "kuş", "sıçan", "sincap", "hamster", "kobay", "gerbil", "tavşan", "yılan", "kaplumbağa", "kertenkele", "tavuk", "horoz", "hindi"
                 ]
             },
             {
                 value: false,
-                nextPage: "resultVacPlusRig",
+                destinName: "resultVacPlusRig",
                 labels: [
                     "köpek", "kedi", "sığır", "inek", "koyun", "keçi", "at", "eşek", "kurt", "tilki", "çakal", "domuz", "ayı", "sansar", "kokarca", "gelincik", "maymun"
                 ]
@@ -392,10 +402,10 @@ let pageObjects = [
         title: "Temas Kategorisi",
         par: "Temas hangi kategoriye giriyor? ",
         note: notes.exposure2,
-        choices: [
+        paths: [
             {
                 value: true,
-                nextPage: "isRiskyAnimal",
+                destinName: "isRiskyAnimal",
                 labels: [
                     "Açık yaraya temas",
                     "Mukozaya temas"
@@ -403,7 +413,7 @@ let pageObjects = [
             },
             {
                 value: false,
-                nextPage: "resultNoProphylaxis",
+                destinName: "resultNoProphylaxis",
                 labels: [
                     "Sağlam derinin yalanması, hayvana dokunma veya besleme",
                     "Hayvanın etini, sütünü besin olarak tüketmek"
@@ -416,17 +426,17 @@ let pageObjects = [
         title: "Kedi/Köpek Yarası?",
         par: "Kedi/Köpek tarafından yaralanma mı?",
         note: notes.exposure1,
-        choices: [
+        paths: [
             {
                 value: true,
-                nextPage: "whichRareCase",
+                destinName: "whichRareCase",
                 labels: [
                     "Kedi/Köpek Tarafından Yaralanma"
                 ]
             },
             {
                 value: false,
-                nextPage: "isBadExposure",
+                destinName: "isBadExposure",
                 labels: [
                     "Başka bir temas"
                 ]
@@ -438,74 +448,47 @@ let pageObjects = [
         title: "Sorulara Verilen Cevaplar",
         par: "",
         note: "",
-        choices: [],
-        extras:{fns:[
-            () => {
-              step.par.innerText = logger.logs.join("\n")  
-            }
-        ]}
+        paths: [restartPath],
+        extras: {}
     }
 ]
+//                      #endregion DATA
 
-let firstPageName = "isCatDogWound"
-let restartChoice = { value: undefined, nextPage: firstPageName, labels: ["Baştan Başla"] }
-
-
-let seeLogsChoice = { value: undefined, nextPage: "logsPage", labels: ["Geçmişi Gör"] }
-
-
-
-//                      #endregion Data
-
-
-
-
-// #region              elements
-const step = {
-    cont: document.querySelector(".stepCont"),
-    title: document.querySelector(".stepTitle"),
-    par: document.querySelector(".stepPar"),
-    note: document.querySelector(".stepNote"),
-    btnCont: document.querySelector(".stepBtnCont"),
-    get btns() { return document.querySelectorAll(".stepBtnCont > *") },
-
-}
-
-const audio = {
-    main: document.querySelector(".audio"),
-    pop: document.querySelector(".audio2"),
-}
-// #endregion elements
-
-
-
-
-//                      #region adjust
-
-const adjust = {
-    tooManyBtns() {
-        if (step.btnCont.children.length > 10) {
-            step.btnCont.classList.add("jsGrid")
-        } else if (step.btnCont.classList.contains("jsGrid")) { step.btnCont.classList.remove("jsGrid") }
-    },
-    fontSize(label, button) { if (label.length > 50) { button.classList.add("font1rem") } },
-}
-//                                  #endregion adjust
-
-
-//                      #region animations
+//                      #region ANIMATIONS
 
 let getAnim = (tar, fr, tm) => new Animation(new KeyframeEffect(tar, fr, tm))
 
-const hiding = (action, ...els) => {
-    let hideArr = [1, "hide", "h", "on", true, "true"]
-    let unhideArr = [0, "unhide", "u", "off", false, "false", "show"]
-    let toggleArr = [-1, "toggle", "t", "alternate", "false", "show"]
-    els.forEach((el) => {
-        if (hideArr.includes(action)) { el.classList.add("hide") }
-        else if (unhideArr.includes(action)) { el.classList.remove("hide") }
-        else if (toggleArr.includes(action)) { el.classList.toggle("hide") } else console.warn("Unkown action")
-    })
+// HIDING POPS AT THE BEGINNING
+document.querySelectorAll(".hide").forEach((el) => {
+    el.setAttribute("data-hiddenByAnim", true)
+    el.animate([{ display: "none" }], { fill: "forwards" })
+})
+
+const fade = {
+    out(...els) {
+        els.forEach((el) => {
+            el.animate([{ display: "flex", opacity: 1 },
+            { display: "none", opacity: 0 },
+            ], { duration: 500, fill: "forwards" }
+            )
+            el.setAttribute("data-hiddenByAnim", true)
+        })
+    },
+    in(...els) {
+        els.forEach((el) => {
+            el.animate([{ display: "none", opacity: 0 },
+            { display: "flex", opacity: 1 },
+            ],
+                { duration: 500, fill: "forwards" })
+            el.setAttribute("data-hiddenByAnim", "")
+        })
+    },
+    toggle(...els) {
+        els.forEach((el) => {
+            let isHidden = el.getAttribute("data-hiddenByAnim")
+            isHidden ? fade.in(el) : fade.out(el)
+        })
+    },
 }
 
 const mainAnim = {
@@ -523,15 +506,24 @@ const mainAnim = {
     }
 }
 
-// title dropowns
+// title dropdowns
+let simpleFade = getAnim(step.note, [
+    { display: "flex", opacity: 1 },
+    { display: "none", opacity: 0 },
+],
+    { duration: 250, fill: "both" })
+
 step.title.addEventListener("click", (e) => {
     e.target.classList.toggle("on")
+    fade.toggle(step.note)
 
-    hiding("toggle", step.note)
+
+    // simpleFade.play()
+    // simpleFade.reverse()
+
+    // displayWithClass(-1, step.note)
 })
 
-
-let pointerlog = []
 // buttons(span) to popup link
 let buttonPopMap = {
     names: ["info", "date", "rig", "menu"],
@@ -543,26 +535,33 @@ let buttonPopMap = {
             span.addEventListener("click", (e) => {
                 audio.pop.play()
                 span.classList.toggle("on")
-                hiding("toggle", pop)
+                fade.toggle(pop)
             }, true)
-
-            // pop.setAttribute("draggable", "true")
-            pop.addEventListener("dragend", (e) => {
-                hiding("toggle", pop)
-                span.classList.toggle("on")
-
-            })
-
-
         })
     },
 }
 buttonPopMap.match()
 
-//                      #endregion animations
+//                      #endregion ANIMATIONS
 
 
 //                      #region generator
+
+/**
+ * 
+ * @param {string} tag 
+ * @param {string} text 
+ * @param {string} event 
+ * @param {function} fn 
+ * @param {HTMLElement} parent 
+ */
+const myElement = (tag = "div", text = "", event = "click", fn = null, parent = null) => {
+    let newEl = document.createElement(tag)
+    newEl.innerText = text
+    if (fn) { newEl.addEventListener(event, fn) }
+    parent?.append(newEl)
+    return newEl
+}
 
 const logger = {
     pop: document.querySelector(".pop.log"),
@@ -577,7 +576,7 @@ const logger = {
             logEl.append(itemEl)
         })
         this.list.append(logEl)
-    },    
+    },
     writeList() {
         this.logs.forEach((log) => {
             let logEl = document.createElement("li")
@@ -591,99 +590,38 @@ const logger = {
     },
     clearArray() { this.logs = [] },
     clearElements() { while (this.list.children[0]) { this.list.children[0].remove() } },
-    appear() {
-        hiding("show", this.pop)
+    appear() {fade.toggle(pop)
     },
 }
 
-
-
-const clearButtons = () => {while (step.btnCont.children.item(0)) step.btnCont.children.item(0).remove()}
-
-const getPage = pageName => pageObjects.find(page => page.name == pageName)
-
-
-/**
- * 
- * @param {string} tag 
- * @param {string} text 
- * @param {string} event 
- * @param {function} fn 
- * @param {HTMLElement} parent 
- */
-const myElement = (tag="div",text="",event = "click",fn = null,parent ) => {
-    let newEl = document.createElement(tag)
-    newEl.innerText = text
-    newEl.addEventListener(event, fn)
-    parent.append(newEl)
-}
-
-myElement()
-
-const prePagify = (nameofThePage) => {
-    clearButtons()
-    let page = getPage(nameofThePage)
-    if (!page.choices.length) { page.choices.push(restartChoice, seeLogsChoice) }
-
-    if (page?.extras) {
-        let extras = page.extras
-        if (extras?.result) {
-            step.par.style.height = "60%"
-            step.par.style.fontSize = "1rem"
-            step.par.style.border = "0.5rem solid green"
-        }
-        extras.fns?.forEach((fn) => fn())
-
-        pagify(page)
-    } else {
-        step.par.style = {}
-        pagify(page)
-    }
-}
+/* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 
 
 
-const pagify = (page) => {
-    ["title", "par", "note"].forEach(propName => step[propName].innerText = page[propName] || "")
 
-   page.choices.forEach((choice) => {
+const pagify = (pageName, newLog) => {
+    let page = pageObjects.find(page => page.name == pageName)
+    step.btnCont.style = {}
+    page?.extras?.fns?.forEach((fn) => fn())
+
+
+
+    while (step.btnCont.children.item(0)) step.btnCont.children.item(0).remove()
+    let textProps = ["title", "par", "note"]
+    textProps.forEach(propName => step[propName].innerText = page[propName])
+    if (!page.paths.length) { page.paths.push(restartPath, seeLogsPath) }
+
+    newLog.push(pageName)
+
+    page.paths.forEach((choice) => {
 
         choice.labels.forEach((label) => {
-            let btn = document.createElement("button")
-            btn.innerText = label
-            let log = [page.par, label]
-            btn.addEventListener("click", (e) => {
-                logger.log(log)
-                prePagify(choice.nextPage)
-                mainAnim.play()
-
-            })
-            step.btnCont.append(btn)
+            const listenerFn = (e) => { pagify(choice.destinName, newLog), mainAnim.play() }
+            myElement("button", label, "click", listenerFn, step.btnCont)
         })
-
     })
-    adjust.tooManyBtns()
-
 }
 
-
-
-const next = () => {
-    
-
-
-
-
-    tpc()
-
-
-
-
-
-
-
-
-}
 
 //                      #endregion generator
 
@@ -692,7 +630,8 @@ const next = () => {
 
 const hideParent = () => {
     document.querySelector(".hideParent").addEventListener("click", (e) => {
-        hiding("hide", e.target.parentElement)
+        fade.toggle(e.target.parentElement)
+
     })
 }
 hideParent()
@@ -734,5 +673,5 @@ igFunc()
 
 /* ----- ---------- ----------* APP INIT */
 
-prePagify(firstPageName)
+pagify(firstPageName, [])
 

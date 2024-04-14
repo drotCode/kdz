@@ -380,7 +380,7 @@ main {
 /*#region                                                           */
 
 .hide {
-    display: none !important;
+    /* display: none !important; */
 }
 
 /*#endregion            UTIL        */
