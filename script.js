@@ -458,12 +458,14 @@ let pageObjects = [
         Yukarıdaki başlığa tıklayarak, ilgili notu görebilirsiniz.
         En üstteki menüden iste aşı doz tarihlerini görebilir, Ig dozu hesaplayabilir veya ek bilgi edinebilirsiniz.`,
         note: `İlk sayfada not yok :P`,
-        meta: {fns:[
-            () => {
-            //  step.par.style.fontSize = "0.8rem"   
-            //  step.title.style.fontSize = "0.9rem"   
-            }
-        ]},
+        meta: {
+            fns: [
+                () => {
+                    //  step.par.style.fontSize = "0.8rem"   
+                    //  step.title.style.fontSize = "0.9rem"   
+                }
+            ]
+        },
         paths: [
             {
                 value: true,
@@ -545,7 +547,7 @@ step.title.addEventListener("click", (e) => {
 
 // buttons(span) to popup link
 let buttonPopMap = {
-    names: ["info", "date", "rig", "menu","log"],
+    names: ["info", "date", "rig", "menu", "log"],
     match() {
         this.names.forEach((popupName) => {
             let span = document.querySelector("." + popupName + ">span")
@@ -585,14 +587,14 @@ const myElement = (tag = "div", text = "", event = "click", fn = null, parent = 
 const logger = {
     pop: document.querySelector(".pop.log"),
     logs: [],
-    fn16(ques,answ){
-        this.pop.insertAdjacentHTML("afterbegin", 
-    `<div>
+    fn16(ques, answ) {
+        this.pop.insertAdjacentHTML("afterbegin",
+            `<div>
     <span>${new Date().toLocaleString("tur-TR")}</span>
     <p> ${ques}</p>
     <p>${answ}</p>
 </div>`
-    )
+        )
     }
 
 }
@@ -616,12 +618,12 @@ const pagify = (pageName, logArr = []) => {
     if (!page.paths.length) {
         page.paths.push(restartPath)
         console.log("I have no choice");
-        step.note.innerText = logArr.slice(2).map(([par,label]) => {
+        step.note.innerText = logArr.slice(2).map(([par, label]) => {
             return par + "\n" + label
         }).join("\n\n")
         logArr = []
 
-     }
+    }
 
 
     page.paths.forEach((path) => {
@@ -629,11 +631,11 @@ const pagify = (pageName, logArr = []) => {
         path.labels.forEach((label) => {
 
             const listenerFn = (e) => {
-                logArr.push([page.par,label])
-                logger.fn16(page.par,label)
+                logArr.push([page.par, label])
+                logger.fn16(page.par, label)
                 pagify(path.pageName, logArr)
-                 mainAnim.play()
-             }
+                mainAnim.play()
+            }
 
             myElement("button", label, "click", listenerFn, step.btnCont)
         })
@@ -691,7 +693,7 @@ igFunc()
 
 /* ----- ---------- ----------* APP INIT */
 
-pagify("welcome",[])
+pagify("welcome", [])
 
 
 
@@ -706,24 +708,24 @@ pagify("welcome",[])
 
 
 let records = []
-const fn1 = (pageName,record) => {
+const fn1 = (pageName, record) => {
     let page = pageObjects.find(page => page.name == pageName)
     let paths = page.paths
-    if (paths.length >  0) {
-         paths.forEach((path) => {
+    if (paths.length > 0) {
+        paths.forEach((path) => {
             let pageName = path.pageName
             record.push(pageName)
-            fn1(pageName,record)
+            fn1(pageName, record)
         })
     } else {
-         records.push(record)
-        
+        records.push(record)
+
     }
-    
+
 }
 
 
-fn1(firstPageName,[])
+fn1(firstPageName, [])
 
 
 // console.log(records);
@@ -741,26 +743,94 @@ fn1(firstPageName,[])
 --infoPopNavBg
 */
 
-/* document.documentElement.style.setProperty('--bgi', 'none')
-document.documentElement.style.setProperty('--bgi2', 'none')
-document.documentElement.style.setProperty('--bodyBg', 'none')
-document.documentElement.style.setProperty('--navBtnBg', 'none')
-document.documentElement.style.setProperty('--popBg', 'none')
-document.documentElement.style.setProperty('--popClr', 'none')
-document.documentElement.style.setProperty('--popTxtShdw', 'none')
-document.documentElement.style.setProperty('--logDivBg', 'none')
-document.documentElement.style.setProperty('--datePopBg', 'none')
-document.documentElement.style.setProperty('--infoPopNavBg', 'none') */
-// document.documentElement.style.setProperty('--your-variable', '#YOURCOLOR')
+const changeCssVars = () => {
+    document.documentElement.style.setProperty('--bgi', 'none')
+    document.documentElement.style.setProperty('--bgi2', 'none')
+    document.documentElement.style.setProperty('--bodyBg', 'none')
+    document.documentElement.style.setProperty('--navBtnBg', 'none')
+    document.documentElement.style.setProperty('--popBg', 'none')
+    document.documentElement.style.setProperty('--popClr', 'none')
+    document.documentElement.style.setProperty('--popTxtShdw', 'none')
+    document.documentElement.style.setProperty('--logDivBg', 'none')
+    document.documentElement.style.setProperty('--datePopBg', 'none')
+    document.documentElement.style.setProperty('--infoPopNavBg', 'none')
 
-
-/* const factorial = (num) => {
-    if (num == 1) {
-        return num
-    } else {
-        return num * factorial(num - 1)
-    }
 }
 
-let res =  factorial(3)
-console.log(res); */
+const removeBgImages = () => {
+    document.querySelectorAll("*").forEach((el) => {
+        el.style.backgroundImage = "unset"
+    })
+}
+
+const addBgImages = () => {
+    document.querySelectorAll("*").forEach((el) => {
+        el.style.backgroundImage = "initial"
+    })
+}
+
+
+
+// document.documentElement.style.setProperty('--your-variable', '#YOURCOLOR')
+
+cssVars = {
+    dark: {
+        "--bgi": "linear-gradient(90deg, hsl(190, 50%, 7%), hsl(190, 50%, 3%))",
+        "--bgi2": "linear-gradient(90deg, hsl(190, 50%, 8%), hsl(190, 50%, 5%))",
+        "--bodyBg": "hsl(0, 0%, 7%)",
+        "--navBtnBg": "hsl(192, 100%, 5%)",
+        "--popBg": "#202224f1",
+        "--popClr": "hsl(138, 100%, 69%)",
+        "--popTxtShdw": "hsl(133, 100%, 61%) -2px -0px 15px",
+        "--logDivBg": "hsla(120, 100%, 47%, 0.067)",
+        "--datePopBg": "hsla(0, 0%, 7%, 0.333)",
+        "--infoPopNavBg": "hsl(210, 14%, 9%)",
+    },
+    light: {
+        "--bgi": "linear-gradient(90deg, hsl(190, 50%, 97%), hsl(190, 50%, 93%))",
+        "--bgi2": "linear-gradient(90deg, hsl(190, 50%, 98%), hsl(190, 50%, 95%))",
+        "--bodyBg": "hsl(0, 0%, 97%)",
+        "--navBtnBg": "hsl(192, 100%, 95%)",
+        "--popBg": "#202224f1",
+        "--popClr": "hsl(138, 100%, 19%)",
+        "--popTxtShdw": "hsl(133, 100%, 61%) -2px -0px 15px",
+        "--logDivBg": "hsla(120, 100%, 47%, 0.067)",
+        "--datePopBg": "hsla(0, 0%, 7%, 0.333)",
+        "--infoPopNavBg": "hsl(210, 14%, 99%)",
+    },
+    applyLight() {
+        Object.entries(this.light).forEach(([key, value]) => {
+            document.documentElement.style.setProperty(key, value)
+        })
+    }
+
+}
+
+
+/**
+ *  Applies CSS to element(s)
+ * @param {string} bg - background color
+ * @param {string} text - color
+ * @param {string} border - border color
+ * @param {string} bgImage - background image
+ * @param {objects} els - HTML elements
+ */
+const setColors = (bg = null, text = null, border = null, bgImage=null,...els) => {
+    els.forEach((el) => {
+        let style = el.style
+        if (bg ?? false) { style.backgroundColor = bg }
+        if (text ?? false) { style.color = text }
+        if (border ?? false) { style.borderColor = border }
+        if (bgImage ?? false) { style.backgroundImage = bgImage }
+    })
+}
+
+
+const resetColors = () => {
+    let allEls = document.querySelectorAll("*")
+    setColors("#ccc", "#111", "#111", "none",...allEls)
+}
+
+
+
+

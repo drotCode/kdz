@@ -25,12 +25,29 @@ h6 {
     font-weight: 400;
 }
 
-h6 {font-size: 1.25rem;}
-h5 {font-size: 1.50rem;}
-h4 {font-size: 1.75rem;}
-h3 {font-size: 2.00rem;}
-h2 {font-size: 2.25rem;}
-h1 {font-size: 2.5rem;}
+h6 {
+    font-size: 1.25rem;
+}
+
+h5 {
+    font-size: 1.50rem;
+}
+
+h4 {
+    font-size: 1.75rem;
+}
+
+h3 {
+    font-size: 2.00rem;
+}
+
+h2 {
+    font-size: 2.25rem;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
 
 button,
 input {
@@ -51,29 +68,37 @@ html {
     vertical-align: middle;
     overflow: hidden;
 
-    background-image: linear-gradient(0deg, hsl(190, 100%, 1%), hsl(190, 100%, 5%));
 
 
     --bgi: linear-gradient(90deg, hsl(190, 50%, 7%), hsl(190, 50%, 3%));
     --bgi2: linear-gradient(90deg, hsl(190, 50%, 8%), hsl(190, 50%, 5%));
-
-
-    --bodyBg: #111;
-    --navBtnBg: hsl(190, 100%, 5%);
-
-
+    --bodyBg: hsl(0, 0%, 7%);
+    --navBtnBg: hsl(192, 100%, 5%);
     --popBg: #202224f1;
-    --popClr: rgb(96, 255, 144);
-    --popTxtShdw: rgb(57, 255, 100) -2px -0px 15px;
-
-    --logDivBg: #0e01;
-    --datePopBg: #1115;
-
-    --infoPopNavBg: #131619;
+    --popClr: hsl(138, 100%, 69%);
+    --popTxtShdw: hsl(133, 100%, 61%) -2px -0px 15px;
+    --logDivBg: hsla(120, 100%, 47%, 0.067);
+    --datePopBg: hsla(0, 0%, 7%, 0.333);
+    --infoPopNavBg: hsl(210, 14%, 9%);
 
 
 
 
+    background-image: var(--bgi);
+
+    --navBtnClr:hsl(180, 100%, 25%);
+    --iconClr:hsl(151, 100%, 50%);
+    --iconTextShadow : hsl(180, 100%, 100%) 0 0 1.5rem;
+    --popBoxShadow: 0 3px 8px 2px rgba(21, 255, 169, 0.3);
+
+    --dateColor:hsl(336, 100%, 69%);
+    --dateTextShadow:hsl(340, 100%, 61%) -2px -0px 16px;
+
+    --infoPopNavClr: aqua;
+    --infoPopTextShadow: 0px 0px 5px aqua;
+
+
+    
 
 }
 
@@ -136,7 +161,7 @@ nav button {
 
     height: 100%;
     flex-grow: 1;
-    color: hsl(180, 100%, 25%);
+    color: var(--navBtnClr);
     background-color: var(--navBtnBg);
     display: flex;
     align-items: center;
@@ -146,14 +171,9 @@ nav button {
         height: 100%;
         align-content: center;
 
-        /* &:hover {
-            color: hsl(180, 100%, 50%);
-            text-shadow: hsl(180, 100%, 100%) 0 0 1.5rem;
-        } */
-
         &.on {
-            color: hsl(151, 100%, 50%);
-            text-shadow: hsl(180, 100%, 100%) 0 0 1.5rem;
+            color: var(--iconClr);
+            text-shadow: var(--iconTextShadow);
         }
     }
 
@@ -165,7 +185,7 @@ nav button {
 
 .pop {
     font-family: 'Courier New', Courier, monospace;
-
+;
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -173,7 +193,7 @@ nav button {
     background-color: var(--popBg);
     color: var(--popClr);
     text-shadow: var(--popTxtShdw);
-    box-shadow: 0 3px 8px 2px rgba(21, 255, 169, 0.3);
+    box-shadow: var(--popBoxShadow);
 
 
     &.log {
@@ -226,7 +246,7 @@ nav button {
         right: 20%;
         padding: 10%;
 
-        & :where(h1,h2,h3,h4,h5,h6){
+        & :where(h1, h2, h3, h4, h5, h6) {
             margin-bottom: 20%;
             text-decoration: underline;
         }
@@ -248,8 +268,8 @@ nav button {
         right: 0%;
         text-align: right;
         padding: 0.5rem 2rem;
-        color: hsl(336, 100%, 69%);
-        text-shadow: hsl(340, 100%, 61%) -2px -0px 16px;
+        color: var(--dateColor);
+        text-shadow: var(--dateTextShadow);
         background-color: var(--datePopBg);
         box-shadow: none;
 
@@ -267,7 +287,7 @@ nav button {
         width: 100%;
         height: 84%;
 
-  
+
 
         & article {
             overflow-y: auto;
@@ -278,7 +298,8 @@ nav button {
                 margin: auto;
                 padding: 4dvh 0;
 
-                & p, & li {
+                & p,
+                & li {
                     text-align: left;
                 }
 
@@ -305,8 +326,8 @@ nav button {
                 text-transform: capitalize;
                 text-decoration: none;
                 flex-grow: 1;
-                color: aqua;
-                text-shadow: 0px 0px 5px aqua;
+                color: var(--infoPopNavClr);
+                text-shadow: var(--infoPopTextShadow);
                 padding: 4px;
             }
         }
@@ -471,4 +492,3 @@ main {
 
 
 /*#endregion            MEDIA        */
-
