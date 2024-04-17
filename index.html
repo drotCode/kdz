@@ -16,21 +16,28 @@
 
     <nav>
 
-        <button class="btn menu" title="Menü">
+        <button  class="btn menu" title="Menü">
             <span class="gi material-symbols-outlined">menu</span>
         </button>
 
-
-        <button class="btn info" title="Bilgi">
-            <span class="gi material-symbols-outlined">info</span>
+        <button  class="btn log" title="log">
+            <span class="gi material-symbols-outlined">history</span>
         </button>
 
 
-        <button class="btn rig" title="Ig Doz Hesaplayıcı">
+        <button  class="btn info" title="Bilgi">
+            <span class="gi material-symbols-outlined">
+                <!-- info -->
+                quick_reference
+            </span>
+        </button>
+
+
+        <button  class="btn rig" title="Ig Doz Hesaplayıcı">
             <span class="gi material-symbols-outlined">calculate</span>
         </button>
 
-        <button class="btn date" title="Aşı Tarihleri">
+        <button  class="btn date" title="Aşı Tarihleri">
             <span class="gi material-symbols-outlined">calendar_month</span>
         </button>
 
@@ -40,51 +47,25 @@
 
     <main>
 
-        <article class="pops" >
+        <article class="pops">
 
-            <section class="pop log hide" data-display="flex" >
+            <section class="pop menu hide" data-display="flex">
 
-                <h2 class="">Cevaplar</h2>
-                <ol class="logList">
-                    <li>
-                        <p>
-                            Lorem ipsum dolor sit amet.
-                            <p>Lorem ipsum dolor sit.</p>
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Sapiente, eius ea? At, cumque!
-                            <p>Laborum temporibus ipsum necessitatibus.</p>
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Asperiores mollitia porro atque rerum!
-                            <p>Sed optio explicabo sunt.</p>
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            Voluptatum at illum repellendus mollitia?
-                            <p>Animi tenetur quasi soluta.</p>
-                        </p>
-                    </li>
-                </ol>
-
-                <button class="copyToClip">Panoya Kopyala</button>
-                <button class="hideParent" data-display="flex" arent">Kapat</button>
-
-            </section>
-            <section class="pop menu hide" data-display="flex" >
-
-                <p> Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dignissimos voluptatum doloremque
-                    praesentium.
-                </p>
+                <!-- <button class="themeChangeBtn">Tema Değiştir</button> -->
 
             </section>
 
-            <section class="pop info hide" data-display="flex" >
+
+            <section class="pop log hide" data-display="flex">
+                <div>
+                    <span>***</span>
+                    <p>**</p>
+                    <p>*</p>
+                </div>
+
+            </section>
+
+            <section class="pop info hide" data-display="flex">
 
                 <nav class="infoNav">
 
@@ -96,14 +77,16 @@
                     <a href="#abProf">AB profilaksisi</a>
 
                     <a href="#asi">Aşı</a>
-                    <a href="#Ig">Ig</a>
+                    <a href="#rigNote">Ig</a>
+                    <a href="#td">Tetanoz Profilaksisi</a>
+                    <a href="#devNote">Geliştirici Notu</a>
                 </nav>
 
                 <article class="infoArt">
 
                     <section class="infoStart" id="infoStart">
 
-                        <h2>Temel</h2>
+                        <h4>Başlangıç</h4>
 
                         <p>Aşı >> Kuduz aşısı</p>
                         <p>Ig>>> Kuduz Immunglobulini</p>
@@ -118,7 +101,7 @@
 
                     <section class="yaklasim" id="yaklasim">
 
-                        <h2> Temas Sonrası Yaklaşım </h2>
+                        <h4> Temas Sonrası Yaklaşım </h4>
                         <p> - Yara bakımı<br> - Antibiyotik profilaksisi<br> - Tetanoz profilaksisi<br> - Kuduz
                             aşısı
                             uygulaması<br> - Kuduz immünglobulin uygulaması </p>
@@ -127,7 +110,7 @@
 
                     <section class="yaraBakimi" id="yaraBakimi">
 
-                        <h2>Yara Bakımı</h2>
+                        <h4>Yara Bakımı</h4>
                         <p>Kuduz riskli temas profilaksisinde en önemli adım yara bakımıdır. İyi bir yara bakımı,
                             kuduz
                             virüsü
@@ -167,7 +150,7 @@
 
                     <section class="abProf" id="abProf">
 
-                        <h2> Antibiyotik Profilaksisi </h2>
+                        <h4> Antibiyotik Profilaksisi </h4>
                         <p>Tüm insan ısırıklarında antibiyotik profilaksisi verilmelidir. Hayvan ısırmalarında ise
                             aşağıdaki
                             durumlarda antibiyotik profilaksisi verilmelidir;
@@ -193,11 +176,11 @@
                         </p>
 
                         <p>
-                        <h3>Profilakside tercih edilecek antibiyotikler:</h3>
+                        <h5>Profilakside tercih edilecek antibiyotikler:</h5>
                         <br>
-                        <br> Erişkinlerde:
-<br>
-<br> Amoksisilin-klavulanat (875-125 mg, 2x1 po veya 500-125 mg, 3x1po)
+                        <h6> Erişkinlerde:</h6>
+                        <br>
+                        <br> Amoksisilin-klavulanat (875-125 mg, 2x1 po veya 500-125 mg, 3x1po)
                         <br>Penisilin alerjisi varlığında;
                         <br>• Klindamisin (300 mg, 4x1 po) + Trimetoprim/sulfametoksazol forte tablet (2x2 po)
                         <br> • Doksisiklin (100 mg, 2x1 po) + metronidazol (500 mg, 3x1) ya da klindamisin
@@ -209,8 +192,9 @@
                         500
                         mg, 1x1 po, Klaritromisin 500 mg, 2x1 po) de kullanılabilir.
                         <br>
-<br>
-<br> Çocuklarda: Amoksisilin-klavulanat (45-100 mg/kg/gün, 2-3 doza bölünerek po)
+                        <br>
+                        <h6>Çocuklarda:</h6> 
+                         Amoksisilin-klavulanat (45-100 mg/kg/gün, 2-3 doza bölünerek po)
                         <br>Alternatif tedaviler;
                         <br> o Doksisiklin (8 yaşından büyüklerde, 2-4 mg/kg/gün, 2 doza bölünerek po)
                         <br>o Sefuroksim (10 mg/kg/gün, 2 doza bölünerek po) + metronidazol (30 mg/ kg/gün, 3 doza
@@ -225,7 +209,7 @@
 
                     <section class="asi" id="asi">
 
-                        <h2>Kuduz Aşı Uygulaması</h2>
+                        <h4>Kuduz Aşı Uygulaması</h4>
                         <p>Aşı erişkinlerde deltoid bölgeye, küçük çocuklarda uyluğun anterolateral
                             bölgesine kas içine uygulanır.
                             <br>
@@ -269,9 +253,9 @@
                         </p>
                     </section>
 
-                    <section class="Ig" id="Ig">
+                    <section class="rigNote" id="rigNote">
 
-                        <h2>İmmünglobülin Uygulaması</h2>
+                        <h4>İmmünglobülin Uygulaması</h4>
                         <p>
                             Heterolog (at kaynaklı) olanlarda 40 IU/kg, insan kaynaklı olanlar için 20
                             IU/kg olarak yapılmalıdır. Dozun artırılmasının hiçbir yararı yoktur ve hatta antikor
@@ -314,28 +298,82 @@
                         </p>
                     </section>
 
+                    <section class="td" id="td">
+                        <h4>Tetanoz Profilaksisi</h4>
+                        <p>Tüm hastalar tetanoz profilaksisi yönünden değerlendirilmelidir. Yaralanma sonrasında yara
+                            bakımı ile birlikte tetanoz profilaksi yaklaşımı Tablo 2’de önerildiği gibi yapılmalıdır.
+                            Profilakside gerektiğinde tetanoz immünglobulini kullanılır. İnsan kaynaklı tetanoz
+                            immünglobulini 250 IU, IM yoldan uygulanır, at kaynaklı immünglobulin kullanılacaksa
+                            1500-3000 IU, IM olarak yapılabilir. </p>
+                        <img src="./src/tdTablo.PNG" alt="tetanoz profilaksisi tablosu">
+                    </section>
+
+
+                    <section class="DevNote" id="devNote">
+                        <h4>Geliştirici Notu</h4>
+                        <h4>Profilaksi Belirsizliği</h4>
+                        <p>Sağlık Bakanlığı’nın Kuduz Profilaksi Rehberi(2019) sayfa 15’te geçen,
+                            “Son 6 (altı) ay içinde tam doz kuduz temas sonrası profilaksi uygulanmış kişilerde
+                            profilaksi gerekmez. Yüz bölgesinden yaralanma ve bağışıklığı baskılanmış kişilerde süreye
+                            bakılmaksızın profilaksi uygulanır.”
+                            ifadesinin değişmesi gerektiğini düşünüyorum.
+                            Çünkü,
+                            “profilaksi uygulanır” denmekte ama nasıl bir profilaksi uygulanacağı belirtilmiyor: 2 doz
+                            aşı? 4 doz aşı, +Ig... ?
+                            <br>
+
+                            Yüz bölgesinden yaralanma ve bağışıklığı baskılanmış
+                            ifadesi
+                            <br>
+                            “hem bağışıklığı baskılanmış hem de yüz bölgesinden yaralanmış” anlamında ise;
+                            “yüz bölgesi” ifadesi gereksiz,
+                            çünkü “bağışıklığı baskılanmış” kişilerde zaten “IG + AŞI (4 veya 5 doz )”ı tedavisi
+                            öneriliyor.
+                            <br>
+                            “bağışıklığı baskılanmış kişi VEYA yüz bölgesinden yaralanmış kişi” anlamında ise;
+                            “yüz bölgesinden yaralanmış kişi” ve “bağışıklığı baskılanmış kişi” aynı kategoride
+                            değerlendirilerek kitabın geri kalanı ile çelişki oluşturuyor.
+                            Çünkü; “bağışıklığı baskılanmış kişi”de kesinlikle “IG + AŞI (4 veya 5 doz )” önerilirken,
+                            yüz(diğer kısımlarda baş-boyun ifadeleri yer alıyor, yüz için ek bilgi yok) yaralanmalarında
+                            ise
+                            “hiç kuduz profilaksisi uygulanmaması”([hayvan aşılı + gözlem sonucu sağlıklı] ise ) dahil
+                            olmak üzere farklı yaklaşımlar öneriliyor.
+                            <br>
+                            O yüzden bu ifadeyi yok sayıp
+                            immünyetmezlik durumunda direkt olarak [IG + AŞI] önerilirken,
+                            baş-boyun-(yüz) yaralarında ise, yara Kategori 3 yaralanma olarak kabul edilerek
+                            ilerlenecektir.
+                        </p>
+                        <h4>Tetanoz Aşısı</h4>
+                        <p>
+                            Rehberde tetanoz profilaksisi açısından vakalar 2 gruba ayrılmış:
+                            1. Kategori 2
+                            2. Kategori 3 ve 4
+                            Dahas sonra ise 1. grubun bazıları da 2. gruba dahil edilmiş. Yani ilk grupta pek kimse
+                            kalmamış. Bu durumda;
+                            önceden 3 doz aşısı olmamış kişilere Td + TIg (Td 3 doza tamamlanması önerilir);
+                            3 doz aşısı olan ve son dozun üzerinden 5 yıl geçenlere Td yapılması.
+                            3 doz aşısı olan ve son dozu 5 yıl içinde olanlara ise tetanoz profilaksisi yapılmamsı doğru
+                            uygulama gibi duruyor.
+
+
+                        </p>
+                    </section>
+
                     <section class="disclaimer">
 
                         <details>
                             <summary>Sorumluluk Reddi</summary>
-                            <p>Bu sayfa eğitim ve eğlence amaçlıdır. Bu sayfadaki bilgiler Sağlık Bakanlığı Kuduz
-                                Rehberi
-                                baz
-                                alınarak hazırlanmışsa da bilgilerin doğruluğu garanti edilmemektedir. Tıbbı bilgi
-                                ve
-                                görüş
-                                niteliğinde değerlendirilmemelidir. Sağlık ile ilgili konularda doktorunuza ve resmi
-                                kaynaklara
-                                başvurunuz.</p>
+                            <p>Bu sayfa eğitim ve eğlence amaçlıdır. Bu sayfadaki bilgiler Sağlık Bakanlığı Kuduz Rehberi baz alınarak hazırlanmışsa da bilgilerin doğruluğu garanti edilmemektedir. Tıbbı bilgi ve görüş niteliğinde değerlendirilmemelidir. Sağlık ile ilgili konularda doktorunuza ve resmi kaynaklara başvurunuz.</p>
                         </details>
                     </section>
                 </article>
 
             </section>
 
-            <section class="pop rig hide" data-display="flex" >
+            <section class="pop rig hide" data-display="flex">
 
-                <h3>Kuduz Ig Hesap</h3>
+                <h5>Kuduz Ig Hesap</h5>
 
                 <input name="kg" id="kg" type="number" max="200" min="0" step="5" placeholder="kg">
                 <input class="iu" id="ui" type="number" readonly placeholder="IU">
@@ -353,7 +391,7 @@
 
             </section>
 
-            <section class="pop date hide" data-display="flex"  title="Doz tarihleri">
+            <section class="pop date hide" data-display="flex" title="Doz tarihleri">
 
 
                 <div class="">
@@ -383,9 +421,10 @@
 
         <!--#region           --> <!-- MARK: STEP       -->
         <article class="stepCont">
-            <h1 class="stepTitle">Lorem Ipsum</h1>
-            <p class="stepPar">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit vitae necessitatibus?</p>
-            <aside class="stepNote hide" data-display="flex" >Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit vitae
+            <h3 class="stepTitle">Lorem Ipsum</h3>
+            <h6 class="stepPar">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fugit vitae necessitatibus?</h6>
+            <aside class="stepNote hide" data-display="flex">Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Fugit vitae
                 necessitatibus</aside>
 
 
@@ -400,7 +439,7 @@
 
 
 </body>
-<audio class="audio" src="ds-7-map-select-2.mp3"></audio>
-<audio class="audio2" src="ds-6-map-select-1.mp3"></audio>
+<audio class="audio" src="./src/ds-7-map-select-2.mp3"></audio>
+<audio class="audio2" src="src/ds-6-map-select-1.mp3"></audio>
 
 </html>

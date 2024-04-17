@@ -15,8 +15,8 @@ const audio = {
 }
 
 let firstPageName = "isCatDogWound"
-let restartPath = { value: undefined, destinName: firstPageName, labels: ["Baştan Başla"] }
-let seeLogsPath = { value: undefined, destinName: "logs", labels: ["Geçmişi Gör"] }
+let restartPath = { value: undefined, pageName: firstPageName, labels: ["Baştan Başla"] }
+let seeLogsPath = { value: undefined, pageName: "logs", labels: ["Geçmişi Gör"] }
 // #endregion                    ELEMENTS
 
 
@@ -56,7 +56,7 @@ const notes = {
        - Son 6 (altı) ay içinde tam doz kuduz temas sonrası profilaksi uygulanmış kişilerde profilaksi gerekmez. `,
 
         warnings: {
-            immDefandFace: `Yüz bölgesinden yaralanma ve bağışıklığı baskılanmış kişilerde süreye bakılmaksızın proflaksi uygulanır.`,
+            immDefandFace: `Yüz bölgesinden yaralanma ve bağışıklığı baskılanmış kişilerde süreye bakılmaksızın profilaksi uygulanır.`,
             otherTreatments: `Profilaksi gerektirmeyen durumlarda da (insan ısırıkları dahil) yara temizliği, antibiyotik tedavisi, tetanoz profilaksisi gibi ihtiyaç duyulan tedavi yaklaşımları ihmal edilmemelidir.`,
             record: `Kuduz profilaksisi uygulansın ya da uygulanmasın tüm kuduz riskli temaslar mutlaka kayıt altına alınmalıdır.`
         }
@@ -77,18 +77,18 @@ let pageObjects = [
         name: "isSevenDaysPassed",
         title: "7 Gün",
         par: "İlk aşıdan itibaren 7 gün geçti mi?",
-        note: ``,
+        note: `Süre 7 günü geçmiş ise immünglobulin yapılmamalıdır.`,
         paths: [
             {
                 value: true,
-                destinName: "resultNoRig",
+                pageName: "resultVacGoesOnNoRig",
                 labels: [
                     "7 gün geçti"
                 ]
             },
             {
                 value: false,
-                destinName: "resultRig",
+                pageName: "resultRig",
                 labels: [
                     "7 gün geçmedi"
                 ]
@@ -99,18 +99,18 @@ let pageObjects = [
         name: "isPetVacced",
         title: "Hayvan Aşı",
         par: "Kedi/Köpek'in 1 sene içinde Kuduz Aşısı var mı?",
-        note: notes.vaccedPetDies,
+        note: `Geliştici Notu: "Bütün aşıları tam" denilen hayvan "kuduz aşısı hariç bütün aşıları tam" çıkabiliyor. Hayvan aşı kartını kontrol etmeniz önerilir. `,
         paths: [
             {
                 value: true,
-                destinName: "isPetFine",
+                pageName: "isPetFine",
                 labels: [
                     "Kedi/Köpek son 1 senede kuduz aşısı olmuş"
                 ]
             },
             {
                 value: false,
-                destinName: "isPetWatchBig",
+                pageName: "isPetWatchBig",
                 labels: [
                     "Kedi/Köpek son 1 senede kuduz aşısı olmamış"
                 ]
@@ -120,19 +120,20 @@ let pageObjects = [
     {
         name: "isPetFineNoVac",
         title: "Aşıla ve Gözlem Altında",
-        par: "Aşılamaya başla ve kedi/köpek'i gözlem altında tut. Kedi/Köpek 10 günü sağlıklı şekilde geçirdi mi?",
-        note: ``,
+        par: "Aşılamaya başla ve kedi/köpek'i gözlem altında tut.\nKedi/Köpek 10 günü sağlıklı şekilde geçirdi mi?",
+        note: `Hayvanın	hastalık	belirtisi	göstermesi	dahil,	herhangi	bir	nedenle	ölümü,	kaçması	yada	ortanan	kaybolması	durumunda, ilk	doz	aşıdan	sonra	en	geç	7	gün	içinde	immunglobulin	yapılır.
+        `,
         paths: [
             {
                 value: true,
-                destinName: "resultNoProphylaxis",
+                pageName: "resultNoProphylaxis",
                 labels: [
                     "Gözlem Sorunsuz"
                 ]
             },
             {
                 value: false,
-                destinName: "isSevenDaysPassed",
+                pageName: "isSevenDaysPassed",
                 labels: [
                     "Hayvan öldü/hasta/bilinmiyor"
                 ]
@@ -142,19 +143,19 @@ let pageObjects = [
     {
         name: "isPetFine",
         title: "Gözlem Altında",
-        par: "Aşı veya Ig yapılmaz. Kedi/Köpek'i 10 gün gözlem altında tutulur. Kedi/Köpek 10 günü sağlıklı şekilde geçirdi mi?",
+        par: "Aşı veya Ig yapılmaz. Kedi/Köpek'i 10 gün gözlem altında tutulur.\nKedi/Köpek 10 günü sağlıklı şekilde geçirdi mi?",
         note: ``,
         paths: [
             {
                 value: true,
-                destinName: "resultNoProphylaxis",
+                pageName: "resultNoProphylaxis",
                 labels: [
                     "Gözlem Sorunsuz"
                 ]
             },
             {
                 value: false,
-                destinName: "resultVacPlusRig",
+                pageName: "resultVacPlusRig",
                 labels: [
                     "Hayvan öldü/hasta/bilinmiyor"
                 ]
@@ -169,14 +170,14 @@ let pageObjects = [
         paths: [
             {
                 value: true,
-                destinName: "resultNoProphylaxis",
+                pageName: "resultNoProphylaxis",
                 labels: [
                     "Gözlem Sorunsuz"
                 ]
             },
             {
                 value: false,
-                destinName: "resultVaccSmall",
+                pageName: "resultVaccSmall",
                 labels: [
                     "Hayvan öldü/hasta/bilinmiyor"
                 ]
@@ -187,18 +188,18 @@ let pageObjects = [
         name: "isPetWatchBig",
         title: "Gözlem İmkanı",
         par: "Kedi/Köpek'in 10 gün gözlemi yapılabilecek mi?",
-        note: ``,
+        note: `Geliştiric Notu: Hayvanın gözlemi yapılamayacaksa Ig uygulaması gerekli olacaktır.`,
         paths: [
             {
                 value: true,
-                destinName: "isPetFineNoVac",
+                pageName: "isPetFineNoVac",
                 labels: [
                     "Gözlem Yapılacak"
                 ]
             },
             {
                 value: false,
-                destinName: "resultVacPlusRig",
+                pageName: "resultVacPlusRig",
                 labels: [
                     "Gözlem Yapılamayacak"
                 ]
@@ -209,18 +210,18 @@ let pageObjects = [
         name: "isPetWatchSmall",
         title: "Gözlem İmkanı",
         par: "Kedi/Köpek'in 10 gün gözlemi yapılabilecek mi?",
-        note: notes.catDogWhy,
+        note: `Hayvanın	hastalık	belirtisi	göstermesi	dahil,	herhangi	bir	nedenle	ölümü,	kaçması	yada	ortanan	kaybolması	durumunda, temas	sonrası	aşı	profilaksisi	uygulanır:\n0.,	3.,	7.	günlerde	birer	doz	ve	14-28.	günler	arasında	bir	doz	daha	olmak	üzere	toplam	4	doz \n*İmmunglobulin	uygulamasına	gerek	yoktur.`,
         paths: [
             {
                 value: true,
-                destinName: "isPetFineSmall",
+                pageName: "isPetFineSmall",
                 labels: [
                     "Gözlem Yapılacak"
                 ]
             },
             {
                 value: false,
-                destinName: "resultVaccSmall",
+                pageName: "resultVaccSmall",
                 labels: [
                     "Gözlem Yapılamayacak"
                 ]
@@ -231,11 +232,11 @@ let pageObjects = [
         name: "isSmallWound",
         title: "Temas Kategorisi",
         par: "Yara hangi tarife uyuyor?",
-        note: notes.vac.schema,
+        note: `Geliştici Notu: Kanama olmadan ifadesi bence yeterince belirli değil. Eğer yara üzerinde olan, akmayan kan; kanama olarak kabul edilecekse bu tarife uyan durum çok çok nadir.`,
         paths: [
             {
                 value: true,
-                destinName: "isPetWatchSmall",
+                pageName: "isPetWatchSmall",
                 labels: [
                     "Çıplak derinin hafifçe sıyrılması (deri altına geçmeyen yaralanmalar)",
                     "Kanama olmadan küçük tırmalama veya zedeleme"
@@ -243,7 +244,7 @@ let pageObjects = [
             },
             {
                 value: false,
-                destinName: "isPetVacced",
+                pageName: "isPetVacced",
                 labels: [
                     "Deriyi zedeleyen tek veya çok sayıda ısırma ve tırmalamalar",
                     "Mukozaların, açık cilt yaralarının hayvanın salyası ile temas etmesi",
@@ -253,77 +254,77 @@ let pageObjects = [
         ]
     },
     {
-        name: "resultNoRig",
+        name: "resultVacGoesOnNoRig",
         title: "Ig Yapılmaz",
-        par: "Ig yapılmamalı. Aşılama sürdürülür.",
+        par: "Ig yapılmamalıdır. Aşılaya devam edilir.",
         note: notes.rig.warnings,
         paths: [],
-        extras: { result: true },
+        meta: { result: true },
     },
     {
         name: "resultRig",
         title: "Ig Uygula",
-        par: "Ig uygulanır. Aşılama sürdürülür.",
+        par: "Kuduz Immunglobulini gerekli şekilde uygulanır. Aşılaya devam edilir.",
         note: notes.rig,
         paths: [],
-        extras: { result: true },
+        meta: { result: true },
     },
     {
         name: "resultVaccSmall",
         title: "Aşıla",
-        par: "Aşılamaya başla. Ig gerekli değil.",
+        par: "Aşılamaya başlanır. Immunglobulin gerekli değil.",
         note: notes.vac.schema,
         paths: [],
-        extras: { result: true },
+        meta: { result: true },
     },
     {
         name: "resultNoProphylaxis",
-        title: "Bitti",
-        par: "Profilaksi bitti.",
-        note: notes.noPEP.warnings,
+        title: "Son",
+        par: "Sona ulaştınız. Kuduz profilaksisi tamamlandı.",
+        note: `Profilaksi gerektirmeyen durumlarda da (insan ısırıkları dahil) yara temizliği, antibiyotik tedavisi, tetanoz profilaksisi gibi ihtiyaç duyulan tedavi yaklaşımları ihmal edilmemelidir.\nKuduz profilaksisi uygulansın ya da uygulanmasın tüm kuduz riskli temaslar mutlaka kayıt altına alınmalıdır.`,
         paths: [],
-        extras: { result: true },
+        meta: { result: true },
     },
     {
         name: "resultVacPlusRig",
         title: "Aşı + Ig",
         par: "Aşılamaya başla ve Ig uygula",
-        note: notes.rig.dose,
+        note: `İmmünglobülin Uygulaması Heterolog (at kaynaklı) olanlarda 40 IU/kg, insan kaynaklı olanlar için 20 IU/kg olarak yapılmalıdır.\nDozun artırılmasının hiçbir yararı yoktur ve hatta antikor yanıtını baskılayabilir`,
         paths: [],
-        extras: { result: true },
+        meta: { result: true },
     },
     {
         name: "resultVacc2dose",
         title: "2 doz aşı",
         par: "Toplam 2 doz aşı uygula (0. ve 3. günlerde)",
-        note: notes.vacc2dose,
+        note: `Daha önce, herhangi bir nedenle (temas öncesi veya temas sonrası profilaksi) hücre kültür aşılarıyla tam doz  aşılaması yapılan sağlıklı kişilere (geçen süreye bakılmaksızın),\nEn az iki aralıklı doz yapılmış olan ve bunu belgeleyen immün sistemi normal bireylere\n aşılama 0. ve 3. günde olmak üzere toplam iki doz aşı yapılır. İmmünglobülin yapmaya gerek yoktur.\nGeliştirici Notu: 3 doz da tam sayılıyor, bkz. sss`,
         paths: [],
-        extras: { result: true },
+        meta: { result: true },
     },
     {
         name: "resultUnknown",
         title: "Bilmiyorum",
         par: "Cevabı Bilmiyorum :(",
-        note: ``,
+        note: `Bir bilene sorun`,
         paths: [],
-        extras: { result: true },
+        meta: { result: true },
     },
     {
         name: "isInSixMonths",
         title: "6 Ay",
         par: "Son 6 ay içinde mi aşılanmış?",
-        note: notes.noPEP.warnings,
+        note: `Son 6 (altı) ay içinde tam doz kuduz temas sonrası profilaksi uygulanmış kişilerde profilaksi gerekmez. Yüz bölgesinden yaralanma ve bağışıklığı baskılanmış kişilerde süreye bakılmaksızın proflaksi uygulanır.(???)`,
         paths: [
             {
                 value: true,
-                destinName: "resultNoProphylaxis",
+                pageName: "resultNoProphylaxis",
                 labels: [
                     "6 ay içinde"
                 ]
             },
             {
                 value: false,
-                destinName: "resultVacc2dose",
+                pageName: "resultVacc2dose",
                 labels: [
                     "6 aydan fazla olmuş"
                 ]
@@ -334,32 +335,39 @@ let pageObjects = [
         name: "whichRareCase",
         title: "Özel Durum",
         par: "Hangi durum var?",
-        note: notes.noPEP.list,
+        note: `Temas sonrası kuduz profilaksisi gerektirmeyen durumlar
+        - Ülkemizde ve dünyada güncel verilerle fare, sıçan, sincap, hamster, kobay, gerbil, tavşan, yabani tavşan ısırıklarında insana kuduz geçiçi gösterilmemiştir. Bu nedenle hayvan sağlığı ile ilgili kurumlar özel bir veri bildirmedikçe, bu tür hayvan ısırıklarında, 
+        - Güncel verilerle, ülkemizde eve giren yarasaların ısırığı veya evde yarasa bulunması durumunda (doğal ortamdaki mağaralarda olan yarasa teması vaka temelli değerlendirilir), 
+        - Soğukkanlı hayvanlar (yılan, kertenkele, kaplumbağa vb.) tarafından ısırılma durumunda, - Kümes hayvanları ısırıklarında, - Sağlam derinin yalanması, hayvana dokunma veya besleme, 
+        - Bilinen ve halen sağlam bir kedi veya köpek tarafından 10 günden daha önce ısırılma veya temas durumunda,
+         - Daha sonra kuduz olduğu anlaşılan bir hayvanı beslemiş olmak, sağlam derinin hayvanın kan, süt, idrar ve/veya feçesiyle temas etmiş olması, pişmiş etini yemek, kaynatılmış veya pastörize edilmiş sütünü içmek veya bu sütle yapılan süt ürünlerini tüketmek, 
+         - Kuduz hastasına rutin bakım yapan riskli teması olmayan sağlık personeline (müköz membran veya bütünlüğü bozulmuş deri teması, ısırma vs.), 
+         - Kedi temaslarında; çıplak derinin hafifçe sıyrılması (deri altına geçmeyen yaralanmalar), kanama olmadan küçük tırmalama veya zedeleme şeklinde yaralanmaya sebep olan, provakasyon ile olmuş ısırılma dışı kedi temasları`,
         paths: [
             {
                 value: false,
-                destinName: "isSmallWound",
+                pageName: "isSmallWound",
                 labels: [
                     "Hiçbiri"
                 ]
             },
             {
                 value: "immDef",
-                destinName: "resultVacPlusRig",
+                pageName: "resultVacPlusRig",
                 labels: [
                     "İmmün Yetmezlik"
                 ]
             },
             {
                 value: "vaccedPatient",
-                destinName: "isInSixMonths",
+                pageName: "isInSixMonths",
                 labels: [
                     "Hasta daha önce de kuduza karşı aşılanmış"
                 ]
             },
             {
                 value: "catScratch",
-                destinName: "resultNoProphylaxis",
+                pageName: "resultNoProphylaxis",
                 labels: [
                     "Provoke, küçük, kanamasız kedi tırmalaması"
                 ]
@@ -370,8 +378,8 @@ let pageObjects = [
         name: "isRiskyAnimal",
         title: "Hayvanlar",
         par: "Hayvan seçiniz",
-        note: notes.noPEP.par,
-        extras: {
+        note: ` Kuduz Profilaksisi Gerektirmeyen Temaslar Ülkemizde ve dünyada güncel verilerle fare, sıçan, sincap, hamster, kobay, gerbil, tavşan, yabani tavşan ısırıklarında ve kuduz şüphesi ile ölmüş hayvanın pişirilmiş et ve süt ürünlerinin tüketilmesi ile insana kuduz geçişi gösterilmemiştir, proflaksi gerekli değildir. Çiğ et ve/veya süt tüketimi ile bugüne kadar gösterilmiş insana geçiş yoktur, bu nedenle hayvan sağlığı ile ilgili kurumlar özel bir veri bildirmedikçe, bu durumlarda profilaksi gerekli değildir. `,
+        meta: {
             fns: [
                 () => {
                     step.btnCont.style.display = "grid"
@@ -383,14 +391,14 @@ let pageObjects = [
         paths: [
             {
                 value: true,
-                destinName: "resultNoProphylaxis",
+                pageName: "resultNoProphylaxis",
                 labels: [
                     "fare", "kirpi", "köstebek", "kuş", "sıçan", "sincap", "hamster", "kobay", "gerbil", "tavşan", "yılan", "kaplumbağa", "kertenkele", "tavuk", "horoz", "hindi"
                 ]
             },
             {
                 value: false,
-                destinName: "resultVacPlusRig",
+                pageName: "resultVacPlusRig",
                 labels: [
                     "köpek", "kedi", "sığır", "inek", "koyun", "keçi", "at", "eşek", "kurt", "tilki", "çakal", "domuz", "ayı", "sansar", "kokarca", "gelincik", "maymun"
                 ]
@@ -401,11 +409,11 @@ let pageObjects = [
         name: "isBadExposure",
         title: "Temas Kategorisi",
         par: "Temas hangi kategoriye giriyor? ",
-        note: notes.exposure2,
+        note: `Temas Sonrası Yaklaşım;- Yara bakımı, - Antibiyotik profilaksisi, - Tetanoz profilaksisi, - Kuduz aşısı uygulaması, - Kuduz immünglobulin uygulaması basamaklarını kapsar`,
         paths: [
             {
                 value: true,
-                destinName: "isRiskyAnimal",
+                pageName: "isRiskyAnimal",
                 labels: [
                     "Açık yaraya temas",
                     "Mukozaya temas"
@@ -413,7 +421,7 @@ let pageObjects = [
             },
             {
                 value: false,
-                destinName: "resultNoProphylaxis",
+                pageName: "resultNoProphylaxis",
                 labels: [
                     "Sağlam derinin yalanması, hayvana dokunma veya besleme",
                     "Hayvanın etini, sütünü besin olarak tüketmek"
@@ -425,18 +433,18 @@ let pageObjects = [
         name: "isCatDogWound",
         title: "Kedi/Köpek Yarası?",
         par: "Kedi/Köpek tarafından yaralanma mı?",
-        note: notes.exposure1,
+        note: `Kuduza yakalanma ihtimali olan hayvanların ısırıkları, yeri ne olursa olsun kuduz için risk oluşturur. Açık yara, kesi, müköz membranların tükrük, salya ve diğer nöral doku, hayvanlarda kullanılan canlı oral aşı yemleri gibi potansiyel enfekte olabilecek materyalle teması ve tırmalama da ısırık dışı kuduz riskli temas olarak kabul edilir.`,
         paths: [
             {
                 value: true,
-                destinName: "whichRareCase",
+                pageName: "whichRareCase",
                 labels: [
                     "Kedi/Köpek Tarafından Yaralanma"
                 ]
             },
             {
                 value: false,
-                destinName: "isBadExposure",
+                pageName: "isBadExposure",
                 labels: [
                     "Başka bir temas"
                 ]
@@ -444,22 +452,29 @@ let pageObjects = [
         ]
     },
     {
-        name: "logs",
-        title: "Sorulara Verilen Cevaplar",
-        par: "",
-        note: "",
-        paths: [restartPath],
-        extras: {
-            fns:[
-                () => {
-                    logger.logs.forEach(([q,a]) => {
-                        step.par.innerText += q + "\n" + a + "\n\n"
-                    })
-                    logger.clearArray()
-                }
-            ]
-        }
-    }
+        name: "welcome",
+        title: "Kuduz Profilaksi Algoritması",
+        par: `Uygun seçeneklere tıklayarak ilerleyiniz.
+        Yukarıdaki başlığa tıklayarak, ilgili notu görebilirsiniz.
+        En üstteki menüden iste aşı doz tarihlerini görebilir, Ig dozu hesaplayabilir veya ek bilgi edinebilirsiniz.`,
+        note: `İlk sayfada not yok :P`,
+        meta: {fns:[
+            () => {
+            //  step.par.style.fontSize = "0.8rem"   
+            //  step.title.style.fontSize = "0.9rem"   
+            }
+        ]},
+        paths: [
+            {
+                value: true,
+                pageName: firstPageName,
+                labels: [
+                    "Başla"
+                ]
+            },
+        ]
+    },
+
 ]
 //                      #endregion DATA
 
@@ -478,7 +493,7 @@ const fade = {
         els.forEach((el) => {
             el.animate([{ display: "flex", opacity: 1 },
             { display: "none", opacity: 0 },
-            ], { duration: 500, fill: "forwards" }
+            ], { duration: 250, fill: "forwards" }
             )
             el.setAttribute("data-hiddenByAnim", true)
         })
@@ -488,7 +503,7 @@ const fade = {
             el.animate([{ display: "none", opacity: 0 },
             { display: "flex", opacity: 1 },
             ],
-                { duration: 500, fill: "forwards" })
+                { duration: 250, fill: "forwards" })
             el.setAttribute("data-hiddenByAnim", "")
         })
     },
@@ -515,6 +530,7 @@ const mainAnim = {
     }
 }
 
+
 // title dropdowns
 let simpleFade = getAnim(step.note, [
     { display: "flex", opacity: 1 },
@@ -525,17 +541,11 @@ let simpleFade = getAnim(step.note, [
 step.title.addEventListener("click", (e) => {
     e.target.classList.toggle("on")
     fade.toggle(step.note)
-
-
-    // simpleFade.play()
-    // simpleFade.reverse()
-
-    // displayWithClass(-1, step.note)
 })
 
 // buttons(span) to popup link
 let buttonPopMap = {
-    names: ["info", "date", "rig", "menu"],
+    names: ["info", "date", "rig", "menu","log"],
     match() {
         this.names.forEach((popupName) => {
             let span = document.querySelector("." + popupName + ">span")
@@ -554,7 +564,7 @@ buttonPopMap.match()
 //                      #endregion ANIMATIONS
 
 
-//                      #region generator
+//                      #region GENERATOR
 
 /**
  * 
@@ -574,74 +584,72 @@ const myElement = (tag = "div", text = "", event = "click", fn = null, parent = 
 
 const logger = {
     pop: document.querySelector(".pop.log"),
-    list: document.querySelector(".logList"),
     logs: [],
-    log(par, choiceName) {
-        let newLog = [par, choiceName]
-        let logEl = document.createElement("li")
-        newLog.forEach((item) => {
-            let itemEl = document.createElement("p")
-            itemEl.innerText = item
-            logEl.append(itemEl)
-        })
-        this.list.append(logEl)
-    },
-    writeList() {
-        this.logs.forEach((log) => {
-            let logEl = document.createElement("li")
-            log.forEach((logItem) => {
-                let itemEl = document.createElement("p")
-                itemEl.innerText = logItem
-                logEl.append(itemEl)
-            })
-            this.list.append(logEl)
-        })
-    },
-    clearArray() { this.logs = [] },
-    clearElements() { while (this.list.children[0]) { this.list.children[0].remove() } },
-    appear() {fade.toggle(pop)
-    },
+    fn16(ques,answ){
+        this.pop.insertAdjacentHTML("afterbegin", 
+    `<div>
+    <span>${new Date().toLocaleString("tur-TR")}</span>
+    <p> ${ques}</p>
+    <p>${answ}</p>
+</div>`
+    )
+    }
+
 }
 
 /* ---------- ---------- ---------- -------- ---------- ---------- ---------- */
 
 
+const pagify = (pageName, logArr = []) => {
 
-
-const pagify = (pageName, logArr) => {
     let page = pageObjects.find(page => page.name == pageName)
-    step.btnCont.style = {}
-    page?.extras?.fns?.forEach((fn) => fn())
+    document.querySelectorAll(".stepCont *").forEach((el) => {
+        el.style = {}
+    })
 
 
 
     while (step.btnCont.children.item(0)) step.btnCont.children.item(0).remove()
     let textProps = ["title", "par", "note"]
     textProps.forEach(propName => step[propName].innerText = page[propName])
-    if (!page.paths.length) { page.paths.push(restartPath, seeLogsPath) }
+
+    if (!page.paths.length) {
+        page.paths.push(restartPath)
+        console.log("I have no choice");
+        step.note.innerText = logArr.slice(2).map(([par,label]) => {
+            return par + "\n" + label
+        }).join("\n\n")
+        logArr = []
+
+     }
 
 
-    page.paths.forEach((choice) => {
+    page.paths.forEach((path) => {
 
-        choice.labels.forEach((label) => {
+        path.labels.forEach((label) => {
+
             const listenerFn = (e) => {
-                logArr.push([pageName,label])
-                pagify(choice.destinName, logArr)
+                logArr.push([page.par,label])
+                logger.fn16(page.par,label)
+                pagify(path.pageName, logArr)
                  mainAnim.play()
              }
+
             myElement("button", label, "click", listenerFn, step.btnCont)
         })
     })
+    page?.meta?.fns?.forEach((fn) => fn())
+
 }
 
 
-//                      #endregion generator
+//                      #endregion GENERATOR
 
 
 //                      #region additions
 
 const hideParent = () => {
-    document.querySelector(".hideParent").addEventListener("click", (e) => {
+    document.querySelector(".hideParent")?.addEventListener("click", (e) => {
         fade.toggle(e.target.parentElement)
 
     })
@@ -649,7 +657,7 @@ const hideParent = () => {
 hideParent()
 
 const copyToClip = () => {
-    document.querySelector(".copyToClip").addEventListener("click", (e) => {
+    document.querySelector(".copyToClip")?.addEventListener("click", (e) => {
         navigator.clipboard.writeText(logger.list.innerText)
     })
 }
@@ -659,7 +667,6 @@ const addDay = (gunSayisi) => new Date(Date.now() + 86400000 * gunSayisi).toLoca
 
 const showVacDates = (e) => {
     let map = [0, 3, 7, 14, 28].map((x) => addDay(x))
-
     document.querySelectorAll(".doseDate").forEach((el, idx) => {
         el.innerText = map[idx]
     })
@@ -670,7 +677,6 @@ const igFunc = () => {
 
     let rigInputs = document.querySelectorAll(".pop.rig input")
     let [kgInput, iuInput, humanChckBx,] = rigInputs
-
 
     rigInputs.forEach((inp) => {
         inp.addEventListener("input", (e) => {
@@ -685,5 +691,76 @@ igFunc()
 
 /* ----- ---------- ----------* APP INIT */
 
-pagify(firstPageName, logger.logs)
+pagify("welcome",[])
 
+
+
+
+
+
+
+
+
+
+
+
+
+let records = []
+const fn1 = (pageName,record) => {
+    let page = pageObjects.find(page => page.name == pageName)
+    let paths = page.paths
+    if (paths.length >  0) {
+         paths.forEach((path) => {
+            let pageName = path.pageName
+            record.push(pageName)
+            fn1(pageName,record)
+        })
+    } else {
+         records.push(record)
+        
+    }
+    
+}
+
+
+fn1(firstPageName,[])
+
+
+// console.log(records);
+
+/* 
+--bgi
+--bgi2
+--bodyBg
+--navBtnBg
+--popBg
+--popClr
+--popTxtShdw
+--logDivBg
+--datePopBg
+--infoPopNavBg
+*/
+
+/* document.documentElement.style.setProperty('--bgi', 'none')
+document.documentElement.style.setProperty('--bgi2', 'none')
+document.documentElement.style.setProperty('--bodyBg', 'none')
+document.documentElement.style.setProperty('--navBtnBg', 'none')
+document.documentElement.style.setProperty('--popBg', 'none')
+document.documentElement.style.setProperty('--popClr', 'none')
+document.documentElement.style.setProperty('--popTxtShdw', 'none')
+document.documentElement.style.setProperty('--logDivBg', 'none')
+document.documentElement.style.setProperty('--datePopBg', 'none')
+document.documentElement.style.setProperty('--infoPopNavBg', 'none') */
+// document.documentElement.style.setProperty('--your-variable', '#YOURCOLOR')
+
+
+/* const factorial = (num) => {
+    if (num == 1) {
+        return num
+    } else {
+        return num * factorial(num - 1)
+    }
+}
+
+let res =  factorial(3)
+console.log(res); */

@@ -5,12 +5,37 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+    scrollbar-width: thin;
+    scrollbar-color: teal #111;
 }
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 400;
+}
+
+h6 {font-size: 1.25rem;}
+h5 {font-size: 1.50rem;}
+h4 {font-size: 1.75rem;}
+h3 {font-size: 2.00rem;}
+h2 {font-size: 2.25rem;}
+h1 {font-size: 2.5rem;}
+
+button,
+input {
+    font-size: 1rem;
+    border: none;
 }
 
 /*#endregion            RESET        */
@@ -21,33 +46,44 @@ input::-webkit-inner-spin-button {
 html {
     font-size: 16px;
     line-height: 1.5;
-    
+
     text-align: center;
     vertical-align: middle;
     overflow: hidden;
-    
+
     background-image: linear-gradient(0deg, hsl(190, 100%, 1%), hsl(190, 100%, 5%));
 
-    --bgi: linear-gradient(90deg,  hsl(190, 50%, 7%), hsl(190, 50%, 3%));
-    --bgi2: linear-gradient(90deg,  hsl(190, 50%, 8%), hsl(190, 50%,5%));
+
+    --bgi: linear-gradient(90deg, hsl(190, 50%, 7%), hsl(190, 50%, 3%));
+    --bgi2: linear-gradient(90deg, hsl(190, 50%, 8%), hsl(190, 50%, 5%));
 
 
     --bodyBg: #111;
-    --navBtnBg :  hsl(190, 100%, 5%);
+    --navBtnBg: hsl(190, 100%, 5%);
 
 
     --popBg: #202224f1;
     --popClr: rgb(96, 255, 144);
     --popTxtShdw: rgb(57, 255, 100) -2px -0px 15px;
 
+    --logDivBg: #0e01;
+    --datePopBg: #1115;
+
+    --infoPopNavBg: #131619;
+
+
+
+
+
 }
 
 body {
-    background-color:var(--bodyBg);
+    background-color: var(--bodyBg);
     height: 100dvh;
     width: min(100%, 1200px);
     margin: auto;
     position: relative;
+
 
 }
 
@@ -55,6 +91,7 @@ body * {
     /**For Development */
     /* border: 1px dotted red !important; */
 }
+
 /*#endregion            HTML-BODY        */
 
 /* MARK:NAV */
@@ -84,7 +121,7 @@ span.material-symbols-outlined {
         'wght' 400,
         'GRAD' 0,
         'opsz' 48;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
 }
 
 nav {
@@ -135,39 +172,43 @@ nav button {
     z-index: 1;
     background-color: var(--popBg);
     color: var(--popClr);
-    text-shadow:var(--popTxtShdw);
+    text-shadow: var(--popTxtShdw);
+    box-shadow: 0 3px 8px 2px rgba(21, 255, 169, 0.3);
+
 
     &.log {
+        font-family: 'Courier New', Courier, monospace;
         width: 80%;
-        height: 96%;
+        height: 80%;
         left: 10%;
-        top: 2%;
+        top: 5%;
         display: flex;
         align-items: center;
         flex-direction: column;
-        justify-content: space-evenly;  /* ??????? */
-        padding: 12% 3%;
+        padding: 0.4rem;
+        overflow-y: auto;
 
+        &>div {
+            width: 100%;
+            padding: 0.2rem;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--logDivBg);
+            font-size: 0.85rem;
+            margin-bottom: 1dvh;
+            text-align: left;
+            font-weight: 600;
 
-        /* & h2 {} */
-
-        & ol {
-            text-align: start;
-            list-style-position: outside;
-            padding: 0 2rem;
-            margin: auto;
-
-            & li {
-                padding: 1rem 0.2rem;
+            & p+p {
+                font-weight: 400;
             }
 
+            & :first-child {
+                text-align: center;
+                font-size: 0.8rem;
+            }
         }
 
-        & button {
-            width: 50%;
-            height: 2rem;
-
-        }
     }
 
     &.menu {
@@ -182,29 +223,35 @@ nav button {
 
     &.rig {
         align-items: center;
-        right: 8rem;
-        padding: 2rem;
+        right: 20%;
+        padding: 10%;
+
+        & :where(h1,h2,h3,h4,h5,h6){
+            margin-bottom: 20%;
+            text-decoration: underline;
+        }
 
         & input:not([type="radio"]) {
-            width: 50%;
-            font-size: 1.25rem;
-            width: 40%;
+            font-size: 1rem;
+            width: 60%;
             height: 1.75rem;
         }
 
         & input:read-only {
-            background-color: rgb(211, 249, 255);
+            filter: invert();
         }
     }
 
 
     &.date {
+        display: contents;
         right: 0%;
         text-align: right;
         padding: 0.5rem 2rem;
-        color: rgb(255, 96, 160);
-        text-shadow: rgb(255, 57, 123) -2px -0px 16px;
-        background-color: #1116;
+        color: hsl(336, 100%, 69%);
+        text-shadow: hsl(340, 100%, 61%) -2px -0px 16px;
+        background-color: var(--datePopBg);
+        box-shadow: none;
 
         & div:not(:last-of-type) {
             font-weight: 600;
@@ -216,52 +263,59 @@ nav button {
         }
     }
 
-}
+    &.info {
+        width: 100%;
+        height: 84%;
 
-.info.pop {
-    width: 100%;
-    height: 84%;
+  
 
-    text-align: left;
+        & article {
+            overflow-y: auto;
 
-    & article {
-        overflow-y: auto;
-        scrollbar-width: thin;
-        scrollbar-color: teal #111;
 
-        &>section {
-            padding: 2rem 1rem;
+            &>section {
+                width: min(720px, 90%);
+                margin: auto;
+                padding: 4dvh 0;
 
-            & h1,
-            & h2 {
-                text-align: center;
-                padding-bottom: 1rem;
+                & p, & li {
+                    text-align: left;
+                }
+
+
+                & img {
+                    width: 80%;
+                    filter: hue-rotate(170deg);
+                }
             }
         }
-    }
 
 
-    & nav {
-        display: flex;
-        height: fit-content;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
+        & nav {
+            display: flex;
+            height: fit-content;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
 
-        & a {
-            background-color: #101216f1;
+            & a {
+                background-color: var(--infoPopNavBg);
 
-            text-transform: capitalize;
-            text-decoration: none;
-            flex-grow: 1;
-            color: aqua;
-            text-shadow: 0px 0px 5px aqua;
-            padding: 4px;
+                text-transform: capitalize;
+                text-decoration: none;
+                flex-grow: 1;
+                color: aqua;
+                text-shadow: 0px 0px 5px aqua;
+                padding: 4px;
+            }
         }
+
     }
 
 }
+
+
 
 /*#endregion      */
 
@@ -284,6 +338,10 @@ main {
     margin: auto;
     height: 90dvh;
     position: relative;
+
+    &>* {
+        padding: 2%;
+    }
 }
 
 .stepTitle {
@@ -291,7 +349,6 @@ main {
 
     height: 10dvh;
     text-transform: capitalize;
-    font-size: 1.75rem;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     align-content: center;
     color: hsl(9, 100%, 64%);
@@ -309,30 +366,28 @@ main {
 }
 
 .stepNote {
-    background-color: #111;
+    background-color: #111111e5;
+    width: 100%;
+    margin: auto;
     color: #fc8625;
     position: absolute;
     top: 10dvh;
-    padding: 0 1vw;
+    padding: 0 2vw;
     left: 0;
     z-index: 1;
     height: 30dvh;
     overflow: auto;
     text-align: left;
     scrollbar-color: hsl(190, 50%, 5%) hsl(190, 50%, 10%);
-
-
 }
 
 .stepPar {
     background-image: var(--bgi);
 
     height: 30dvh;
-    font-size: 1.5rem;
     background-color: teal;
     align-content: center;
     color: hsl(35, 100%, 64%);
-
     border-bottom: 3px solid black;
 }
 
@@ -343,6 +398,8 @@ main {
     justify-content: space-evenly;
     align-items: center;
     background-color: #fff;
+    padding: 0;
+
     padding-bottom: 0.5px;
 
     &>button {
@@ -354,7 +411,6 @@ main {
         border-bottom: 3px solid black;
         cursor: pointer;
         width: 100%;
-        font-size: 1.2rem;
         align-items: center;
         flex-grow: 1;
         transition: 250ms;
@@ -390,28 +446,29 @@ main {
 
 @media screen and (width >=480px) {
     html {
-        font-size: 16.5px;
+        font-size: 17px;
     }
 }
 
 @media screen and (width >=720px) {
     html {
-        font-size: 17px;
+        font-size: 18px;
     }
 }
 
 @media screen and (width >=1080px) {
     html {
-        font-size: 17.5px;
+        font-size: 19px;
     }
 }
 
 @media screen and (width >=1440px) {
     html {
-        font-size: 18px;
+        font-size: 20px;
     }
 }
 
 
 
 /*#endregion            MEDIA        */
+
