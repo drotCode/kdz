@@ -545,23 +545,31 @@ step.title.addEventListener("click", (e) => {
     fade.toggle(step.note)
 })
 
+
 // buttons(span) to popup link
 let buttonPopMap = {
-    names: ["info", "date", "rig", "menu", "log"],
+    names: ["info", "date", "rig", "log"],
     match() {
         this.names.forEach((popupName) => {
             let span = document.querySelector("." + popupName + ">span")
             let pop = document.querySelector("." + popupName + ".pop")
 
-            span.addEventListener("click", (e) => {
-                audio.pop.play()
-                span.classList.toggle("on")
-                fade.toggle(pop)
-            }, true)
+            const togglePopAndSpan = () => { audio.pop.play(); span.classList.toggle("on"); fade.toggle(pop); }
+            span.addEventListener("click", (e) => { togglePopAndSpan() }, true)
+
+
+            let allinside = Array.from(document.querySelectorAll("." + popupName + " *"))
+            document.body.addEventListener("click", ({ target }) => {
+                if (!allinside.includes(target) && span.classList.contains("on") && popupName !== "date") {
+                    togglePopAndSpan()
+
+                }
+            })
         })
     },
 }
 buttonPopMap.match()
+
 
 //                      #endregion ANIMATIONS
 
@@ -815,7 +823,7 @@ cssVars = {
  * @param {string} bgImage - background image
  * @param {objects} els - HTML elements
  */
-const setColors = (bg = null, text = null, border = null, bgImage=null,...els) => {
+const setColors = (bg = null, text = null, border = null, bgImage = null, ...els) => {
     els.forEach((el) => {
         let style = el.style
         if (bg ?? false) { style.backgroundColor = bg }
@@ -828,7 +836,7 @@ const setColors = (bg = null, text = null, border = null, bgImage=null,...els) =
 
 const resetColors = () => {
     let allEls = document.querySelectorAll("*")
-    setColors("#ccc", "#111", "#111", "none",...allEls)
+    setColors("#ccc", "#111", "#111", "none", ...allEls)
 }
 
 
