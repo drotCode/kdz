@@ -339,7 +339,10 @@ main {
     align-items: unset;
 }
 .hide {
-    /* display: none !important; */
+    display: none;
+}
+.hideImportant {
+    display: none !important;
 }
 @media screen and (width >=480px) {
     html {
